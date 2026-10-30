@@ -19,7 +19,7 @@ Open the app and hit **+ Add**. Before showing you a single field, it asks which
   <figcaption>25 presets, filtered by category. Custom/Other is there for anything not listed.</figcaption>
 </figure>
 
-Twenty-five providers ship with the app, grouped into Cloud, Specialist, Self-hosted and Enterprise. The bottom-left tile — **Custom / Other** — is the escape hatch for private endpoints.
+Twenty-five providers ship with the app, grouped into Cloud, Specialist, Self-hosted and Enterprise. The first tile — **Custom / Other** — is the escape hatch for private endpoints.
 
 ## Step 2 — The form configures itself
 
