@@ -166,6 +166,23 @@ Replication doubles storage and adds inter-region transfer. On AWS, replicating 
 
 The rule of thumb: **compute your egress-to-storage ratio first.** Below 30%, buy the cheapest storage. Above 100%, buy the cheapest egress. Everything else is marketing.
 
+## Where this model meets your actual bill
+
+Everything above assumes a workload profile. Your real numbers live in your bucket — and the **request** side is the one nobody looks at, even though it is easy to measure.
+
+S3 Explorer is the desktop client we build. It connects to 25 S3-compatible providers with a read-only key and keeps a **local request-metrics dashboard**: requests per category, error rate, an hourly distribution, and a cost estimate with a monthly projection, priced from the provider's own request rates.
+
+<figure>
+  <img src="/screenshots/s3-request-metrics.webp" alt="S3 Explorer request metrics dashboard: 250 requests, $0.0011 cost, $0.03 monthly projection, requests by category with LIST at 87.6%, index efficiency gauge showing 135 requests saved, and an hourly distribution chart" width="1500" height="690" loading="lazy">
+  <figcaption>The request-metrics dashboard: cost estimate, monthly projection, request mix, and the index efficiency that counts the LIST calls the local index avoided.</figcaption>
+</figure>
+
+That is a real session against a MinIO endpoint: 250 requests, of which **87.6% were LIST** — the exact request type this article prices at $5 per million on AWS. The local index answered 135 of those listings without touching the bucket, and the dashboard turns that into money ($0.0007 on 250 requests — multiply by your real volume before dismissing it).
+
+Requests are one half of the bill. For the egress half, read your provider's usage report, then come back to the scenario that matches your ratio.
+
+> **Run the numbers on your own buckets.** Connect a read-only key and the dashboard shows what your workload actually costs per month. [Download S3 Explorer →](https://s3explorer.accessdevops.com/)
+
 ## Sources
 
 List prices captured 30 October 2026: [AWS S3](https://aws.amazon.com/s3/pricing/), [Google Cloud Storage](https://cloud.google.com/storage/pricing), [Cloudflare R2](https://developers.cloudflare.com/r2/pricing/), [Backblaze B2](https://www.backblaze.com/cloud-storage/pricing), [Wasabi](https://wasabi.com/pricing/), [DigitalOcean Spaces](https://www.digitalocean.com/pricing/spaces-object-storage), [OVHcloud Object Storage](https://www.ovhcloud.com/en/public-cloud/object-storage/).
