@@ -75,8 +75,8 @@
   /* mono is the brand's technical signal — labels and metadata only */
   .label {
     font-family: 'JetBrains Mono', ui-monospace, monospace;
-    font-size: .75rem;
-    letter-spacing: .09em;
+    font-size: .8rem;
+    letter-spacing: .07em;
     text-transform: uppercase;
     color: hsl(var(--muted-foreground));
   }
@@ -94,7 +94,7 @@
 
   /* article list: rules, not floating cards */
   .entry {
-    display: block; padding: 1.5rem 0;
+    padding: 1.5rem 0;
     border-top: 1px solid hsl(var(--border));
   }
   .entry:hover h2 { color: hsl(var(--primary)); }

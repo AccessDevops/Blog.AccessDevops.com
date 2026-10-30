@@ -14,7 +14,7 @@ videoDuration: "PT30S"
     <source src="/videos/s3explorer-teaser.mp4" type="video/mp4">
     Your browser does not support embedded video.
   </video>
-  <figcaption>30 seconds, no voiceover — from pick-provider to request-metrics dashboard. Every frame is a real capture of the session below.</figcaption>
+  <figcaption>30-second overview. The app screens in it are real captures from the session below; the rest is title cards.</figcaption>
 </figure>
 
 Most S3 clients assume you already know your endpoint format, your addressing mode and which fields are optional. S3 Explorer takes the opposite route: you pick your provider from a list, and the connection form configures itself.
