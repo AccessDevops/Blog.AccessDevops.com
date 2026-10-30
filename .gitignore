@@ -12,3 +12,7 @@ assets-src/fonts-inline.css
 .chrome-tmp
 vp*.png
 assets-src/vp.html
+.ct*
+.chrome-tmp
+rt_*.png
+t_*.png
