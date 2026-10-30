@@ -76,7 +76,7 @@ const readTime = (post: any) => Math.max(1, Math.round(words(post.body) / 220));
       <div>
         <p class="text-[15px] font-semibold">S3 Explorer</p>
         <p class="mt-1 max-w-[46ch] text-sm leading-relaxed text-muted-foreground">
-          The desktop S3 client these articles are tested with. Windows, macOS, Linux — local request metrics, no telemetry.
+          The desktop S3 client these articles are tested with. Windows, macOS, Linux — with a per-request metrics view built in.
         </p>
       </div>
       <a href="https://s3explorer.accessdevops.com" class="btn shrink-0">See S3 Explorer</a>
