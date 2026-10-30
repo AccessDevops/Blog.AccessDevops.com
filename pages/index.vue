@@ -12,7 +12,26 @@ useSeoMeta({
   twitterCard: 'summary_large_image',
   twitterImage: `${SITE}/og-image.png`,
 });
-useHead({ link: [{ rel: 'canonical', href: `${SITE}/` }] });
+const siteLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: 'AccessDevOps Blog',
+  url: `${SITE}/`,
+  inLanguage: 'en',
+  publisher: {
+    '@type': 'Organization',
+    name: 'AccessDevOps',
+    url: 'https://accessdevops.com',
+    sameAs: ['https://cbarange.com', 'https://s3explorer.accessdevops.com'],
+  },
+};
+useHead({
+  link: [
+    { rel: 'canonical', href: `${SITE}/` },
+    { rel: 'alternate', type: 'application/rss+xml', title: 'AccessDevOps Blog RSS', href: `${SITE}/rss.xml` },
+  ],
+  script: [{ type: 'application/ld+json', innerHTML: JSON.stringify(siteLd) }],
+});
 const fmt = (d: string) => new Date(d).toLocaleDateString('en-GB', { year: 'numeric', month: 'short', day: 'numeric' });
 </script>
 <template>

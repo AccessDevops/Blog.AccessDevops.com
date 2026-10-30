@@ -19,11 +19,25 @@ useSeoMeta({
   twitterImage: `${SITE}/og-image.png`,
 });
 const jsonld = {
-  '@context': 'https://schema.org', '@type': 'BlogPosting',
-  headline: post.value.title, description: post.value.description, datePublished: post.value.date,
-  mainEntityOfPage: url,
-  author: { '@type': 'Person', name: author, url: 'https://cbarange.com' },
-  publisher: { '@type': 'Organization', name: 'AccessDevOps', url: 'https://accessdevops.com' },
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'BlogPosting',
+      headline: post.value.title,
+      description: post.value.description,
+      datePublished: post.value.date,
+      mainEntityOfPage: url,
+      author: { '@type': 'Person', name: author, url: 'https://cbarange.com' },
+      publisher: { '@type': 'Organization', name: 'AccessDevOps', url: 'https://accessdevops.com' },
+    },
+    {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE}/` },
+        { '@type': 'ListItem', position: 2, name: post.value.title, item: url },
+      ],
+    },
+  ],
 };
 useHead({
   link: [{ rel: 'canonical', href: url }],
