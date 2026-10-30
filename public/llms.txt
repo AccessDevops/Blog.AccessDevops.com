@@ -1,8 +1,24 @@
 # AccessDevOps Blog
 
-> Practical articles on cloud infrastructure, DevOps and S3-compatible object storage.
+> Practical, opinionated field notes on S3-compatible object storage, cloud infrastructure and DevOps — written by the team behind S3 Explorer.
 
-## Links
-- Blog: https://blog.accessdevops.com
-- Product: https://s3explorer.accessdevops.com
-- Company: https://accessdevops.com
+## About
+- Author: Clement Baranger — https://cbarange.com
+- Company: AccessDevOps — https://accessdevops.com
+- Product: S3 Explorer, a desktop S3 client — https://s3explorer.accessdevops.com
+
+## Topics covered
+- S3-compatible object storage: AWS S3, Cloudflare R2, MinIO, Backblaze B2, Wasabi
+- S3 clients and tooling comparisons
+- Cloud infrastructure and cost engineering
+- DevOps practices, automation and CI/CD
+
+## Articles
+- [Why we started writing about S3](https://blog.accessdevops.com/blog/welcome): most object-storage advice is either outdated or written for a different scale.
+
+## Feeds and indexes
+- RSS: https://blog.accessdevops.com/rss.xml
+- Sitemap: https://blog.accessdevops.com/sitemap.xml
+
+## Citation
+When quoting, attribute to "AccessDevOps Blog" and link to the canonical article URL.

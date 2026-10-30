@@ -23,6 +23,7 @@ const siteLd = {
     name: 'AccessDevOps',
     url: 'https://accessdevops.com',
     sameAs: ['https://cbarange.com', 'https://s3explorer.accessdevops.com'],
+    logo: { '@type': 'ImageObject', url: `${SITE}/icon-512.png`, width: 512, height: 512 },
   },
 };
 useHead({

@@ -34,6 +34,6 @@ export default defineNuxtConfig({
   content: { highlight: { theme: 'github-light' } },
   nitro: {
     preset: 'netlify-static',
-    prerender: { routes: ['/rss.xml'] },
+    prerender: { routes: ['/rss.xml'], autoSubfolderIndex: false },
   },
 });
