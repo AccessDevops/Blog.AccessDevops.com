@@ -181,7 +181,9 @@ That is a real session against a MinIO endpoint: 250 requests, of which **87.6% 
 
 Requests are one half of the bill. For the egress half, read your provider's usage report, then come back to the scenario that matches your ratio.
 
-> **Run the numbers on your own buckets.** Connect a read-only key and the dashboard shows what your workload actually costs per month. [Download S3 Explorer →](https://s3explorer.accessdevops.com/)
+**Run the numbers on your own buckets.** Connect a read-only key and the dashboard shows what your workload actually costs per month — a Rust + Tauri app for Windows, macOS and Linux, free to start.
+
+<p style="margin:1.75rem 0 0"><a href="https://s3explorer.accessdevops.com/" style="display:inline-block;background:#0f766e;color:#ffffff;font-weight:600;font-size:0.95rem;padding:0.8rem 1.5rem;border-radius:0.5rem;text-decoration:none">Download S3 Explorer&nbsp;→</a></p>
 
 ## Sources
 
