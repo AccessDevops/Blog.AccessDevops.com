@@ -31,7 +31,7 @@
   <line x1="364" y1="201" x2="404" y2="201" stroke="#B42318" stroke-width="1.25"/>
   <polygon points="404,201 397,197.5 397,204.5" fill="#B42318"/>
   <text x="414" y="198" class="t r">DENIED</text>
-  <text x="414" y="213" class="t d">action absent from the list</text>
+  <text x="414" y="213" class="t d">action not listed</text>
 
   <!-- gate 3 -->
   <rect x="34" y="248" width="330" height="76" rx="7" fill="#F8FAFC" stroke="#E2E8F0"/>
