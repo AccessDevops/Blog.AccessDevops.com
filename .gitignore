@@ -7,3 +7,8 @@ dist
 .DS_Store
 shot_*.png
 node_modules.bak
+assets-src/*-inline.html
+assets-src/fonts-inline.css
+.chrome-tmp
+vp*.png
+assets-src/vp.html

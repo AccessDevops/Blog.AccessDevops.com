@@ -1,0 +1,53 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:#0B0F0E;overflow:hidden}
+  .canvas{position:relative;width:1200px;height:630px;overflow:hidden;background:#0B0F0E;color:#EDE8DF;font-family:'Inter',sans-serif}
+  .grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.045) 1px,transparent 1px);background-size:64px 64px;-webkit-mask-image:radial-gradient(ellipse 90% 80% at 25% 15%,#000 20%,transparent 78%)}
+  .glow{position:absolute;width:820px;height:820px;border-radius:50%;background:radial-gradient(circle,rgba(38,208,181,.20),transparent 62%);top:-360px;right:-240px}
+  .glow2{position:absolute;width:620px;height:620px;border-radius:50%;background:radial-gradient(circle,rgba(15,118,110,.16),transparent 65%);bottom:-320px;left:-180px}
+  .wrap{position:absolute;inset:0;padding:62px 70px;display:flex;flex-direction:column;justify-content:space-between}
+  .top{display:flex;align-items:center;gap:14px}
+  .mark{width:46px;height:46px;border-radius:13px;background:linear-gradient(140deg,#5FE8D2,#0F766E);display:flex;align-items:center;justify-content:center;font-family:'Source Serif 4',Georgia,serif;font-weight:700;font-size:27px;color:#06231E;box-shadow:0 8px 24px rgba(38,208,181,.28)}
+  .brand{font-family:'JetBrains Mono',monospace;font-size:19px;letter-spacing:.10em;color:#EDE8DF}
+  .brand b{color:#26D0B5;font-weight:500}
+  .badge{margin-left:auto;font-family:'JetBrains Mono',monospace;font-size:14px;letter-spacing:.16em;color:#26D0B5;border:1px solid rgba(38,208,181,.45);padding:8px 16px;border-radius:999px;background:rgba(38,208,181,.08)}
+  h1{font-family:'Source Serif 4',Georgia,serif;font-weight:700;font-size:80px;line-height:1.02;letter-spacing:-.025em;max-width:1000px}
+  h1 em{font-style:normal;color:#26D0B5}
+  .sub{margin-top:24px;font-size:26px;color:#A8B6B0;max-width:840px;line-height:1.4;font-weight:400}
+  .bot{display:flex;align-items:center;gap:18px;font-family:'JetBrains Mono',monospace;font-size:17px;color:#8A9691}
+  .rule{width:54px;height:2px;background:#26D0B5;border-radius:2px}
+  .url{color:#D8D2C7}
+  .tag{color:#6C7A74}
+</style>
+</head>
+<body>
+<div class="canvas">
+  <div class="grid"></div>
+  <div class="glow"></div>
+  <div class="glow2"></div>
+  <div class="wrap">
+    <div class="top">
+      <div class="mark">A</div>
+      <div class="brand">Access<b>DevOps</b></div>
+      <div class="badge">BLOG</div>
+    </div>
+    <div class="mid">
+      <h1>Field notes on <em>S3</em>,<br>Cloud &amp; DevOps.</h1>
+      <p class="sub">Practical guides for engineers running object storage at scale.</p>
+    </div>
+    <div class="bot">
+      <div class="rule"></div>
+      <div class="url">blog.accessdevops.com</div>
+      <div class="tag">·</div>
+      <div class="tag">S3 · Cloud · DevOps</div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

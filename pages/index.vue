@@ -1,6 +1,18 @@
 <script setup lang="ts">
 const { data: posts } = await useAsyncData('posts', () => queryContent('blog').sort({ date: -1 }).find());
-useSeoMeta({ title: 'AccessDevOps Blog — Cloud, DevOps & S3', description: 'Field notes on cloud infrastructure, DevOps and S3-compatible object storage.' });
+const SITE = 'https://blog.accessdevops.com';
+useSeoMeta({
+  title: 'AccessDevOps Blog — S3, Cloud & DevOps Guides',
+  description: 'Field notes on cloud infrastructure, DevOps and S3-compatible object storage — practical guides for engineers.',
+  ogTitle: 'AccessDevOps Blog — S3, Cloud & DevOps Guides',
+  ogDescription: 'Practical guides for engineers running object storage at scale.',
+  ogImage: `${SITE}/og-image.png`,
+  ogUrl: `${SITE}/`,
+  ogType: 'website',
+  twitterCard: 'summary_large_image',
+  twitterImage: `${SITE}/og-image.png`,
+});
+useHead({ link: [{ rel: 'canonical', href: `${SITE}/` }] });
 const fmt = (d: string) => new Date(d).toLocaleDateString('en-GB', { year: 'numeric', month: 'short', day: 'numeric' });
 </script>
 <template>

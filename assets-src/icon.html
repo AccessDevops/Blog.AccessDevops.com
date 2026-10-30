@@ -1,0 +1,21 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,700&display=swap" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:#0B0F0E;overflow:hidden}
+  .canvas{position:relative;width:512px;height:512px;overflow:hidden;background:#0B0F0E;display:flex;align-items:center;justify-content:center}
+  .glow{position:absolute;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(38,208,181,.26),transparent 60%);top:-220px;right:-200px}
+  .sq{position:relative;width:420px;height:420px;border-radius:96px;background:linear-gradient(145deg,#123B35,#0A1411);border:2px solid rgba(38,208,181,.34);box-shadow:0 24px 70px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.07);display:flex;align-items:center;justify-content:center}
+  .a{font-family:'Source Serif 4',Georgia,serif;font-weight:700;font-size:262px;line-height:1;background:linear-gradient(180deg,#6BEDD8,#0F9E86);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;transform:translateY(-6px)}
+</style>
+</head>
+<body>
+<div class="canvas">
+  <div class="glow"></div>
+  <div class="sq"><div class="a">A</div></div>
+</div>
+</body>
+</html>
