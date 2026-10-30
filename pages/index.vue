@@ -37,14 +37,21 @@ const fmt = (d: string) => new Date(d).toLocaleDateString('en-GB', { year: 'nume
 </script>
 <template>
   <section>
-    <h1 class="mb-3 font-serif text-4xl font-bold tracking-tight">Notes on cloud, DevOps and object storage.</h1>
-    <p class="mb-14 max-w-[58ch] text-lg text-muted-foreground">Field notes on infrastructure, automation and S3 — the trade-offs, the gotchas, and the small wins that save hours. Written by the team behind AccessDevOps and S3 Explorer.</p>
-    <ul class="border-t border-border">
-      <li v-for="post in posts" :key="post._path" class="border-b border-border">
-        <NuxtLink :to="post._path" class="group block py-8">
-          <div class="font-mono text-[13px] uppercase tracking-wider text-muted-foreground">{{ fmt(post.date) }}<span v-if="post.tags?.length"> · {{ post.tags.join(' · ') }}</span></div>
-          <h2 class="mt-2 font-serif text-2xl font-bold group-hover:text-primary">{{ post.title }}</h2>
-          <p class="mt-2 text-muted-foreground">{{ post.description }}</p>
+    <h1 class="display max-w-[22ch]">Field notes on S3, cloud and DevOps.</h1>
+    <p class="lede mt-5 max-w-[58ch]">
+      The trade-offs, the gotchas and the numbers behind object storage — written by the team that builds
+      S3 Explorer. No vendor spin, no 10× claims.
+    </p>
+
+    <ul class="mt-14">
+      <li v-for="post in posts" :key="post._path">
+        <NuxtLink :to="post._path" class="entry">
+          <div class="label flex flex-wrap items-center gap-x-3 gap-y-1">
+            <time>{{ fmt(post.date) }}</time>
+            <template v-if="post.tags?.length"><span class="opacity-60">·</span><span>{{ post.tags.join(' · ') }}</span></template>
+          </div>
+          <h2 class="mt-2.5 text-[1.35rem] font-semibold leading-snug tracking-[-0.022em]">{{ post.title }}</h2>
+          <p class="mt-2 max-w-[68ch] text-[15px] leading-relaxed text-muted-foreground">{{ post.description }}</p>
         </NuxtLink>
       </li>
     </ul>

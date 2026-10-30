@@ -1,19 +1,159 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&family=JetBrains+Mono:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* ------------------------------------------------------------------
+   Design tokens — aligned on S3 Explorer / accessdevops.com
+   One neutral family (slate) · one accent (blue) · flat surfaces.
+   ------------------------------------------------------------------ */
 @layer base {
   :root {
-    --background: 40 33% 98%; --foreground: 0 0% 10%; --muted: 40 10% 94%;
-    --muted-foreground: 40 4% 38%; --border: 40 10% 88%;
-    --primary: 175 77% 26%; --primary-foreground: 0 0% 98%;
+    --background: 0 0% 100%;
+    --foreground: 222.2 47.4% 11.2%;
+    --card: 0 0% 100%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --border: 214.3 31.8% 91.4%;
+    --primary: 221.2 83.2% 53.3%;
+    --primary-foreground: 210 40% 98%;
+    --ring: 221.2 83.2% 53.3%;
+
+    /* two radii, two roles — never one radius on everything */
+    --r-sm: 6px;
+    --r-md: 10px;
   }
+
   @media (prefers-color-scheme: dark) {
     :root {
-      --background: 160 10% 6%; --foreground: 40 15% 90%; --muted: 160 8% 11%;
-      --muted-foreground: 40 5% 66%; --border: 160 8% 16%;
-      --primary: 170 70% 50%; --primary-foreground: 160 30% 8%;
+      --background: 222.2 84% 4.9%;
+      --foreground: 210 40% 98%;
+      --card: 222.2 84% 4.9%;
+      --muted: 217.2 32.6% 17.5%;
+      --muted-foreground: 215 20.2% 65.1%;
+      --border: 217.2 32.6% 17.5%;
+      --primary: 217.2 91.2% 59.8%;
+      --primary-foreground: 222.2 47.4% 11.2%;
+      --ring: 224.3 76.3% 48%;
     }
   }
-  body { @apply bg-background text-foreground font-sans antialiased; }
+
+  html { -webkit-text-size-adjust: 100%; }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-feature-settings: "cv11", "ss01";
+  }
+
+  h1, h2, h3 { text-wrap: balance; }
+  p { text-wrap: pretty; }
+  ::selection { background: hsl(var(--primary) / .22); }
+
+  :focus-visible {
+    outline: 2px solid hsl(var(--ring));
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+  }
+}
+
+@layer components {
+  /* size and weight carry hierarchy — not colour, not gradients */
+  .display {
+    font-size: clamp(2.1rem, 4.6vw, 2.75rem);
+    line-height: 1.04;
+    letter-spacing: -0.035em;
+    font-weight: 650;
+  }
+  .lede {
+    font-size: 1.0625rem;
+    line-height: 1.6;
+    color: hsl(var(--muted-foreground));
+  }
+  /* mono is the brand's technical signal — labels and metadata only */
+  .label {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: .75rem;
+    letter-spacing: .09em;
+    text-transform: uppercase;
+    color: hsl(var(--muted-foreground));
+  }
+
+  /* one primary action per view; everything else is a quiet link */
+  .btn {
+    display: inline-flex; align-items: center; gap: .5rem;
+    background: hsl(var(--primary)); color: hsl(var(--primary-foreground));
+    font-weight: 600; font-size: .9375rem;
+    padding: .7rem 1.15rem; border-radius: var(--r-sm);
+    transition: background-color .15s ease, transform .06s ease;
+  }
+  .btn:hover { background: hsl(var(--primary) / .88); }
+  .btn:active { transform: scale(.98); }
+
+  /* article list: rules, not floating cards */
+  .entry {
+    display: block; padding: 1.5rem 0;
+    border-top: 1px solid hsl(var(--border));
+  }
+  .entry:hover h2 { color: hsl(var(--primary)); }
+  .entry h2 { transition: color .15s ease; }
+}
+
+/* ------------------------------------------------------------------
+   Prose — constrained measure, hairline figures, no decoration
+   ------------------------------------------------------------------ */
+.prose {
+  --tw-prose-body: hsl(var(--foreground));
+  --tw-prose-headings: hsl(var(--foreground));
+  --tw-prose-links: hsl(var(--primary));
+  --tw-prose-bold: hsl(var(--foreground));
+  --tw-prose-counters: hsl(var(--muted-foreground));
+  --tw-prose-bullets: hsl(var(--border));
+  --tw-prose-hr: hsl(var(--border));
+  --tw-prose-quotes: hsl(var(--muted-foreground));
+  --tw-prose-quote-borders: hsl(var(--border));
+  --tw-prose-captions: hsl(var(--muted-foreground));
+  --tw-prose-th-borders: hsl(var(--border));
+  --tw-prose-td-borders: hsl(var(--border));
+  font-size: 1.0625rem;
+  line-height: 1.68;
+}
+.prose :where(h2) {
+  font-size: 1.45rem; font-weight: 650; letter-spacing: -0.022em;
+  margin-top: 3rem; margin-bottom: .9rem; line-height: 1.2;
+}
+.prose :where(h3) { font-size: 1.1rem; font-weight: 600; letter-spacing: -0.01em; margin-top: 2rem; }
+.prose :where(a) { text-decoration-thickness: 1px; text-underline-offset: 3px; }
+.prose :where(strong) { font-weight: 600; }
+.prose :where(blockquote) {
+  border-left: 2px solid hsl(var(--border));
+  padding-left: 1.1rem; font-style: normal;
+}
+.prose :where(code)::before, .prose :where(code)::after { content: ""; }
+.prose :where(code) {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: .875em;
+  background: hsl(var(--muted));
+  padding: .15em .38em; border-radius: 4px;
+}
+.prose :where(pre) {
+  background: hsl(var(--muted));
+  border: 1px solid hsl(var(--border));
+  border-radius: var(--r-md);
+  font-size: .85em;
+}
+.prose :where(table) { font-size: .9375rem; }
+.prose :where(thead th) { font-weight: 600; font-size: .8125rem; letter-spacing: .02em; }
+.prose :where(figure) { margin: 2.25rem 0; }
+.prose :where(figcaption) {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: .75rem; line-height: 1.5;
+  margin-top: .7rem; color: hsl(var(--muted-foreground));
+}
+.prose :where(img, video) {
+  border: 1px solid hsl(var(--border));
+  border-radius: var(--r-md);
 }

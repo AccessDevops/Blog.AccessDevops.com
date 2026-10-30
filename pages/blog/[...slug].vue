@@ -69,14 +69,17 @@ useHead({
 </script>
 <template>
   <article v-if="post">
-    <header class="mb-10">
-      <div class="font-mono text-[13px] uppercase tracking-wider text-muted-foreground">{{ post.date }} · {{ post.author }}</div>
-      <h1 class="mt-3 font-serif text-4xl font-bold tracking-tight">{{ post.title }}</h1>
+    <header class="mb-10 border-b border-border pb-8">
+      <div class="label flex flex-wrap items-center gap-x-3">
+        <time>{{ post.date }}</time><span class="opacity-50">·</span><span>{{ post.author }}</span>
+      </div>
+      <h1 class="display mt-4">{{ post.title }}</h1>
+      <p class="lede mt-4 max-w-[62ch]">{{ post.description }}</p>
     </header>
-    <ContentRenderer :value="post" class="prose prose-stone max-w-none dark:prose-invert prose-headings:font-serif prose-headings:tracking-tight prose-a:text-primary" />
-    <footer class="mt-14 flex flex-wrap justify-between gap-4 border-t border-border pt-6 text-sm text-muted-foreground">
-      <span>Tags: {{ (post.tags || []).join(', ') || 'none' }}</span>
-      <NuxtLink to="/" class="text-primary hover:underline">← All articles</NuxtLink>
+    <ContentRenderer :value="post" class="prose max-w-none" />
+    <footer class="mt-16 flex flex-wrap items-center justify-between gap-4 border-t border-border pt-6">
+      <span class="label">{{ (post.tags || []).join(' · ') || 'untagged' }}</span>
+      <NuxtLink to="/" class="link text-sm">← All articles</NuxtLink>
     </footer>
   </article>
 </template>
