@@ -1,0 +1,9 @@
+provider,Backup & archive,Application data,Media distribution,Cross-region DR
+AWS S3,278.40,683.00,2081.96,561.20
+Google GCS,260.04,741.44,2678.00,527.48
+Cloudflare R2,158.82,315.60,193.80,313.50
+Backblaze B2,71.17,71.17,86.78,142.34
+Wasabi,81.82,81.82,40.91,163.64
+DO Spaces,204.80,225.28,296.96,409.60
+OVHcloud,160.77,160.77,80.38,321.54
+MinIO (self-hosted),55.00,55.00,55.00,55.00

@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 392" width="100%" role="img" aria-label="Backup &amp; archive">
+<text x="0" y="26" font-family="Inter,system-ui,sans-serif" font-size="19" font-weight="600" fill="#111827">Backup &amp; archive</text>
+<text x="0" y="50" font-family="Inter,system-ui,sans-serif" font-size="13" fill="#6b7280">10 TB stored, 5% served per month</text>
+<text x="0" y="89" font-family="Inter,system-ui,sans-serif" font-size="13.5" fill="#111827">AWS S3</text>
+<rect x="250" y="77" width="410.0" height="18" rx="4" fill="#0f766e" opacity="0.85"/>
+<text x="668.0" y="91" font-family="ui-monospace,JetBrains Mono,monospace" font-size="12.5" fill="#111827">$278</text>
+<text x="0" y="123" font-family="Inter,system-ui,sans-serif" font-size="13.5" fill="#111827">Google GCS</text>
+<rect x="250" y="111" width="383.0" height="18" rx="4" fill="#0f766e" opacity="0.85"/>
+<text x="641.0" y="125" font-family="ui-monospace,JetBrains Mono,monospace" font-size="12.5" fill="#111827">$260</text>
+<text x="0" y="157" font-family="Inter,system-ui,sans-serif" font-size="13.5" fill="#111827">DO Spaces</text>
+<rect x="250" y="145" width="301.6" height="18" rx="4" fill="#0f766e" opacity="0.85"/>
+<text x="559.6" y="159" font-family="ui-monospace,JetBrains Mono,monospace" font-size="12.5" fill="#111827">$205</text>
+<text x="0" y="191" font-family="Inter,system-ui,sans-serif" font-size="13.5" fill="#111827">OVHcloud</text>
+<rect x="250" y="179" width="236.8" height="18" rx="4" fill="#0f766e" opacity="0.85"/>
+<text x="494.8" y="193" font-family="ui-monospace,JetBrains Mono,monospace" font-size="12.5" fill="#111827">$161</text>
+<text x="0" y="225" font-family="Inter,system-ui,sans-serif" font-size="13.5" fill="#111827">Cloudflare R2</text>
+<rect x="250" y="213" width="233.9" height="18" rx="4" fill="#0f766e" opacity="0.85"/>
+<text x="491.9" y="227" font-family="ui-monospace,JetBrains Mono,monospace" font-size="12.5" fill="#111827">$159</text>
+<text x="0" y="259" font-family="Inter,system-ui,sans-serif" font-size="13.5" fill="#111827">Wasabi</text>
+<rect x="250" y="247" width="120.5" height="18" rx="4" fill="#0f766e" opacity="0.85"/>
+<text x="378.5" y="261" font-family="ui-monospace,JetBrains Mono,monospace" font-size="12.5" fill="#111827">$82</text>
+<text x="0" y="293" font-family="Inter,system-ui,sans-serif" font-size="13.5" fill="#111827">Backblaze B2</text>
+<rect x="250" y="281" width="104.8" height="18" rx="4" fill="#0f766e" opacity="0.85"/>
+<text x="362.8" y="295" font-family="ui-monospace,JetBrains Mono,monospace" font-size="12.5" fill="#111827">$71</text>
+<text x="0" y="327" font-family="Inter,system-ui,sans-serif" font-size="13.5" fill="#111827">MinIO (self-hosted)</text>
+<rect x="250" y="315" width="81.0" height="18" rx="4" fill="#26d0b5" opacity="1"/>
+<text x="339.0" y="329" font-family="ui-monospace,JetBrains Mono,monospace" font-size="12.5" fill="#111827">$55</text>
+<text x="0" y="382" font-family="Inter,system-ui,sans-serif" font-size="11.5" fill="#6b7280">Monthly cost, USD. List prices, 2026-10-30. Lower is better.</text>
+</svg>
