@@ -14,6 +14,7 @@
 - DevOps practices, automation and CI/CD
 
 ## Articles
+- [When two policies allow and the request still fails](https://blog.accessdevops.com/blog/bucket-policy-allow-still-denied): the five-gate IAM evaluation order that explains why S3 returns AccessDenied when both policies say Allow, and where the hidden deny lives.
 - [S3 Explorer walkthrough: zero to browsing in 5 minutes](https://blog.accessdevops.com/blog/s3-explorer-walkthrough): a real session against a local S3 endpoint — provider presets, connection test, bucket browsing, object metadata and the request-metrics dashboard.
 - [The real cost of S3: 8 providers compared, egress included](https://blog.accessdevops.com/blog/s3-total-cost-of-ownership): storage, egress, requests and replication modelled across four workloads, with five charts and a reproducible script.
 - [Why we started writing about S3](https://blog.accessdevops.com/blog/welcome): most object-storage advice is either outdated or written for a different scale.
