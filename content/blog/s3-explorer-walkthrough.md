@@ -10,7 +10,7 @@ videoDuration: "PT30S"
 ---
 
 <figure class="clip">
-  <video controls playsinline preload="metadata" poster="/videos/s3-explorer-teaser-poster.webp" width="1080" height="1920" style="width:100%;height:auto;border-radius:16px;background:#0B0F0E;display:block">
+  <video controls playsinline preload="metadata" poster="/videos/s3-explorer-teaser-poster.webp" width="1080" height="1920">
     <source src="/videos/s3explorer-teaser.mp4" type="video/mp4">
     Your browser does not support embedded video.
   </video>

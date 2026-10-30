@@ -2,12 +2,13 @@ export default defineNuxtConfig({
   compatibilityDate: '2025-01-01',
   modules: ['@nuxt/content', '@nuxtjs/sitemap', '@nuxtjs/tailwindcss'],
   site: { url: 'https://blog.accessdevops.com', name: 'AccessDevOps Blog' },
-  css: ['~/assets/css/tailwind.css'],
+  css: ['~/assets/css/fonts.css', '~/assets/css/tailwind.css'],
   app: {
     head: {
       htmlAttrs: { lang: 'en' },
       meta: [
-        { name: 'theme-color', content: '#0B0F0E' },
+        { name: 'theme-color', content: '#020817', media: '(prefers-color-scheme: dark)' },
+        { name: 'theme-color', content: '#ffffff', media: '(prefers-color-scheme: light)' },
         { name: 'author', content: 'Clement Baranger' },
         { name: 'robots', content: 'index, follow, max-image-preview:large' },
         { property: 'og:site_name', content: 'AccessDevOps Blog' },
@@ -22,6 +23,8 @@ export default defineNuxtConfig({
         { name: 'twitter:image', content: 'https://blog.accessdevops.com/og-image.png' },
       ],
       link: [
+        { rel: 'preload', as: 'font', type: 'font/woff2', href: '/fonts/Inter-400-latin.woff2', crossorigin: 'anonymous' },
+        { rel: 'preload', as: 'font', type: 'font/woff2', href: '/fonts/Inter-600-latin.woff2', crossorigin: 'anonymous' },
         { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' },
         { rel: 'icon', type: 'image/png', sizes: '32x32', href: '/favicon-32.png' },
         { rel: 'icon', sizes: 'any', href: '/favicon.ico' },

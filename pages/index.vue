@@ -34,26 +34,49 @@ useHead({
   script: [{ type: 'application/ld+json', innerHTML: JSON.stringify(siteLd) }],
 });
 const fmt = (d: string) => new Date(d).toLocaleDateString('en-GB', { year: 'numeric', month: 'short', day: 'numeric' });
+const words = (n: any): number => {
+  if (!n) return 0;
+  if (typeof n === 'string') return n.trim().split(/\s+/).filter(Boolean).length;
+  if (Array.isArray(n)) return n.reduce((a: number, x: any) => a + words(x), 0);
+  if (n.value) return words(n.value);
+  if (n.children) return words(n.children);
+  return 0;
+};
+const readTime = (post: any) => Math.max(1, Math.round(words(post.body) / 220));
 </script>
 <template>
   <section>
     <h1 class="display max-w-[22ch]">Field notes on S3, cloud and DevOps.</h1>
     <p class="lede mt-5 max-w-[58ch]">
-      The trade-offs, the gotchas and the numbers behind object storage — written by the team that builds
-      S3 Explorer. No vendor spin, no 10× claims.
+      Request costs, egress cliffs, replication bills — measured, sourced and reproducible.
+      Written by the team behind S3 Explorer.
     </p>
 
-    <ul class="mt-14">
+    <ul class="mt-12">
       <li v-for="post in posts" :key="post._path">
-        <NuxtLink :to="post._path" class="entry">
+        <NuxtLink :to="post._path" class="entry group">
           <div class="label flex flex-wrap items-center gap-x-3 gap-y-1">
             <time>{{ fmt(post.date) }}</time>
-            <template v-if="post.tags?.length"><span class="opacity-60">·</span><span>{{ post.tags.join(' · ') }}</span></template>
+            <span aria-hidden="true" class="opacity-40">·</span>
+            <span>{{ readTime(post) }} min read</span>
+            <template v-if="post.tags?.length"><span aria-hidden="true" class="opacity-40">·</span><span>{{ post.tags.join(' · ') }}</span></template>
           </div>
-          <h2 class="mt-2.5 text-[1.35rem] font-semibold leading-snug tracking-[-0.022em]">{{ post.title }}</h2>
+          <h2 class="mt-2.5 text-[1.3rem] font-semibold leading-snug tracking-[-0.022em] decoration-1 underline-offset-[3px] group-hover:text-primary group-hover:underline">
+            {{ post.title }}
+          </h2>
           <p class="mt-2 max-w-[68ch] text-[15px] leading-relaxed text-muted-foreground">{{ post.description }}</p>
         </NuxtLink>
       </li>
     </ul>
+
+    <aside class="mt-2 flex flex-col gap-5 border-t border-border pt-8 sm:flex-row sm:items-center sm:justify-between">
+      <div>
+        <p class="text-[15px] font-semibold">S3 Explorer</p>
+        <p class="mt-1 max-w-[46ch] text-sm leading-relaxed text-muted-foreground">
+          The desktop S3 client these articles are tested with. Windows, macOS, Linux — local request metrics, no telemetry.
+        </p>
+      </div>
+      <a href="https://s3explorer.accessdevops.com" class="btn shrink-0">See S3 Explorer</a>
+    </aside>
   </section>
 </template>
