@@ -1,0 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&family=JetBrains+Mono:wght@400;500&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@layer base {
+  :root {
+    --background: 40 33% 98%; --foreground: 0 0% 10%; --muted: 40 10% 94%;
+    --muted-foreground: 40 4% 38%; --border: 40 10% 88%;
+    --primary: 175 77% 26%; --primary-foreground: 0 0% 98%;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --background: 160 10% 6%; --foreground: 40 15% 90%; --muted: 160 8% 11%;
+      --muted-foreground: 40 5% 66%; --border: 160 8% 16%;
+      --primary: 170 70% 50%; --primary-foreground: 160 30% 8%;
+    }
+  }
+  body { @apply bg-background text-foreground font-sans antialiased; }
+}
