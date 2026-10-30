@@ -22,7 +22,7 @@ People picture authorisation as a question put to one document. In S3 the questi
 
 The five gates, in order:
 
-1. **An explicit `Deny` anywhere.** Service control policies, session policies, the bucket policy, a permissions boundary, an ACL. One `Deny` ends the request. Nothing after this point is consulted.
+1. **An explicit `Deny` anywhere.** Service control policies, session policies, the bucket policy, a permissions boundary. One `Deny` ends the request. Nothing after this point is consulted. (ACLs are grants only — they cannot carry a `Deny`, so they never appear at this gate.)
 2. **The organisation's service control policy must list the action.** SCPs are not grants; they are filters. If `s3:GetObject` is not in an allowed statement, the call fails even when every other policy is permissive.
 3. **The identity or resource policy must allow it** — see the same-account/cross-account distinction below.
 4. **A permissions boundary or session policy must not exclude it.** These are intersections: the effective permission is the intersection of the boundary and the identity policy, never the union.

@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 940 610" width="940" height="610" role="img" aria-label="IAM evaluation order for an S3 request: explicit deny, service control policy, identity versus bucket policy, permissions boundary, then allow">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 940 620" width="940" height="620" role="img" aria-label="IAM evaluation order for an S3 request: explicit deny, service control policy, identity versus bucket policy, permissions boundary, then allow">
   <style>
     .t { font-family: Inter, system-ui, -apple-system, sans-serif; }
     .h { font-size: 17px; font-weight: 600; fill: #020817; }
@@ -9,91 +9,91 @@
     .r { font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 11px; fill: #B42318; }
   </style>
 
-  <rect x="0.5" y="0.5" width="939" height="609" rx="10" fill="#FFFFFF" stroke="#E2E8F0"/>
+  <rect x="0.5" y="0.5" width="939" height="619" rx="10" fill="#FFFFFF" stroke="#E2E8F0"/>
   <text x="34" y="46" class="t h">Why an S3 request is denied when both policies say Allow</text>
   <text x="34" y="68" class="t s">Five gates, checked in this order. A single explicit Deny at any layer ends the request.</text>
 
   <!-- gate 1 -->
-  <rect x="34" y="96" width="356" height="58" rx="7" fill="#F8FAFC" stroke="#E2E8F0"/>
+  <rect x="34" y="96" width="330" height="58" rx="7" fill="#F8FAFC" stroke="#E2E8F0"/>
   <text x="52" y="119" class="t n">1</text>
   <text x="72" y="119" class="t b">Explicit Deny anywhere?</text>
-  <text x="72" y="139" class="t d">SCP, session policy, bucket policy, boundary, ACL</text>
-  <line x1="390" y1="125" x2="452" y2="125" stroke="#B42318" stroke-width="1.25"/>
-  <polygon points="452,125 445,121.5 445,128.5" fill="#B42318"/>
-  <text x="462" y="122" class="t r">DENIED</text>
-  <text x="462" y="136" class="t d">immediately, no other gate is read</text>
+  <text x="72" y="139" class="t d">SCP, session policy, bucket policy, boundary</text>
+  <line x1="364" y1="125" x2="404" y2="125" stroke="#B42318" stroke-width="1.25"/>
+  <polygon points="404,125 397,121.5 397,128.5" fill="#B42318"/>
+  <text x="414" y="122" class="t r">DENIED</text>
+  <text x="414" y="137" class="t d">no other gate is read</text>
 
   <!-- gate 2 -->
-  <rect x="34" y="172" width="356" height="58" rx="7" fill="#F8FAFC" stroke="#E2E8F0"/>
+  <rect x="34" y="172" width="330" height="58" rx="7" fill="#F8FAFC" stroke="#E2E8F0"/>
   <text x="52" y="195" class="t n">2</text>
   <text x="72" y="195" class="t b">SCP allows this action?</text>
-  <text x="72" y="215" class="t d">SCPs are filters: not listed = denied</text>
-  <line x1="390" y1="201" x2="452" y2="201" stroke="#B42318" stroke-width="1.25"/>
-  <polygon points="452,201 445,197.5 445,204.5" fill="#B42318"/>
-  <text x="462" y="198" class="t r">DENIED</text>
-  <text x="462" y="212" class="t d">s3:GetObject absent from the list</text>
+  <text x="72" y="215" class="t d">SCPs are filters: unlisted = denied</text>
+  <line x1="364" y1="201" x2="404" y2="201" stroke="#B42318" stroke-width="1.25"/>
+  <polygon points="404,201 397,197.5 397,204.5" fill="#B42318"/>
+  <text x="414" y="198" class="t r">DENIED</text>
+  <text x="414" y="213" class="t d">action absent from the list</text>
 
   <!-- gate 3 -->
-  <rect x="34" y="248" width="356" height="76" rx="7" fill="#F8FAFC" stroke="#E2E8F0"/>
+  <rect x="34" y="248" width="330" height="76" rx="7" fill="#F8FAFC" stroke="#E2E8F0"/>
   <text x="52" y="271" class="t n">3</text>
   <text x="72" y="271" class="t b">Policy allows the action?</text>
   <text x="72" y="292" class="t d">Same account: identity OR bucket policy</text>
   <text x="72" y="309" class="t d">Cross-account: identity AND bucket policy</text>
 
   <!-- gate 4 -->
-  <rect x="34" y="342" width="356" height="58" rx="7" fill="#F8FAFC" stroke="#E2E8F0"/>
+  <rect x="34" y="342" width="330" height="58" rx="7" fill="#F8FAFC" stroke="#E2E8F0"/>
   <text x="52" y="365" class="t n">4</text>
   <text x="72" y="365" class="t b">Boundary / session policy allows?</text>
   <text x="72" y="385" class="t d">Intersection with the identity policy</text>
 
   <!-- gate 5 -->
-  <rect x="34" y="418" width="356" height="58" rx="7" fill="#F8FAFC" stroke="#E2E8F0"/>
+  <rect x="34" y="418" width="330" height="58" rx="7" fill="#F8FAFC" stroke="#E2E8F0"/>
   <text x="52" y="441" class="t n">5</text>
   <text x="72" y="441" class="t b">KMS key policy allows Decrypt?</text>
   <text x="72" y="461" class="t d">Separate service, separate authorisation</text>
-  <line x1="390" y1="447" x2="452" y2="447" stroke="#B42318" stroke-width="1.25"/>
-  <polygon points="452,447 445,443.5 445,450.5" fill="#B42318"/>
-  <text x="462" y="444" class="t r">AccessDenied</text>
-  <text x="462" y="458" class="t d">S3 allows, KMS refuses</text>
+  <line x1="364" y1="447" x2="404" y2="447" stroke="#B42318" stroke-width="1.25"/>
+  <polygon points="404,447 397,443.5 397,450.5" fill="#B42318"/>
+  <text x="414" y="444" class="t r">AccessDenied</text>
+  <text x="414" y="459" class="t d">S3 allows, KMS refuses</text>
 
   <!-- allow -->
-  <rect x="34" y="496" width="356" height="56" rx="7" fill="#EFF6FF" stroke="#2563EB"/>
+  <rect x="34" y="496" width="330" height="56" rx="7" fill="#EFF6FF" stroke="#2563EB"/>
   <text x="52" y="519" class="t b" fill="#2563EB">200 OK</text>
   <text x="52" y="538" class="t d">all five gates passed</text>
 
   <!-- vertical spine -->
-  <line x1="212" y1="154" x2="212" y2="172" stroke="#CBD5E1" stroke-width="1.25"/>
-  <polygon points="212,172 208.5,165 215.5,165" fill="#CBD5E1"/>
-  <line x1="212" y1="230" x2="212" y2="248" stroke="#CBD5E1" stroke-width="1.25"/>
-  <polygon points="212,248 208.5,241 215.5,241" fill="#CBD5E1"/>
-  <line x1="212" y1="324" x2="212" y2="342" stroke="#CBD5E1" stroke-width="1.25"/>
-  <polygon points="212,342 208.5,335 215.5,335" fill="#CBD5E1"/>
-  <line x1="212" y1="400" x2="212" y2="418" stroke="#CBD5E1" stroke-width="1.25"/>
-  <polygon points="212,418 208.5,411 215.5,411" fill="#CBD5E1"/>
-  <line x1="212" y1="476" x2="212" y2="496" stroke="#CBD5E1" stroke-width="1.25"/>
-  <polygon points="212,496 208.5,489 215.5,489" fill="#CBD5E1"/>
+  <line x1="199" y1="154" x2="199" y2="172" stroke="#CBD5E1" stroke-width="1.25"/>
+  <polygon points="199,172 195.5,165 202.5,165" fill="#CBD5E1"/>
+  <line x1="199" y1="230" x2="199" y2="248" stroke="#CBD5E1" stroke-width="1.25"/>
+  <polygon points="199,248 195.5,241 202.5,241" fill="#CBD5E1"/>
+  <line x1="199" y1="324" x2="199" y2="342" stroke="#CBD5E1" stroke-width="1.25"/>
+  <polygon points="199,342 195.5,335 202.5,335" fill="#CBD5E1"/>
+  <line x1="199" y1="400" x2="199" y2="418" stroke="#CBD5E1" stroke-width="1.25"/>
+  <polygon points="199,418 195.5,411 202.5,411" fill="#CBD5E1"/>
+  <line x1="199" y1="476" x2="199" y2="496" stroke="#CBD5E1" stroke-width="1.25"/>
+  <polygon points="199,496 195.5,489 202.5,489" fill="#CBD5E1"/>
 
   <!-- side note -->
-  <line x1="640" y1="96" x2="640" y2="552" stroke="#E2E8F0"/>
-  <text x="672" y="120" class="t b">The counter-intuitive part</text>
-  <text x="672" y="146" class="t d">Gate 3 is an OR inside one account and an</text>
-  <text x="672" y="163" class="t d">AND across two. A bucket policy that grants</text>
-  <text x="672" y="180" class="t d">a role in another account does nothing until</text>
-  <text x="672" y="197" class="t d">that account's identity policy also allows it.</text>
+  <text x="560" y="118" class="t b">The counter-intuitive part</text>
+  <text x="560" y="144" class="t d">Gate 3 is an OR inside one account</text>
+  <text x="560" y="161" class="t d">and an AND across two. A bucket policy</text>
+  <text x="560" y="178" class="t d">granting a role in another account does</text>
+  <text x="560" y="195" class="t d">nothing until that account's identity</text>
+  <text x="560" y="212" class="t d">policy also allows it.</text>
 
-  <text x="672" y="238" class="t b">What S3 tells you</text>
-  <text x="672" y="264" class="t d">Almost nothing. S3 returns a bare</text>
-  <text x="672" y="281" class="t r">AccessDenied</text>
-  <text x="672" y="303" class="t d">for every gate above except KMS, which</text>
-  <text x="672" y="320" class="t d">names kms:Decrypt explicitly. That is why</text>
-  <text x="672" y="337" class="t d">the error text points at the bucket even</text>
-  <text x="672" y="354" class="t d">when the cause sits in an SCP.</text>
+  <text x="560" y="256" class="t b">What S3 tells you</text>
+  <text x="560" y="282" class="t d">Almost nothing. S3 returns a bare</text>
+  <text x="560" y="299" class="t r">AccessDenied</text>
+  <text x="560" y="321" class="t d">for every gate above except KMS, which</text>
+  <text x="560" y="338" class="t d">names kms:Decrypt explicitly. That is why</text>
+  <text x="560" y="355" class="t d">the error points at the bucket even when</text>
+  <text x="560" y="372" class="t d">the cause sits in an SCP.</text>
 
-  <text x="672" y="395" class="t b">Where to look first</text>
-  <text x="672" y="421" class="t d">1. CloudTrail data events: errorCode and</text>
-  <text x="672" y="438" class="t d">   the calling identity for that request.</text>
-  <text x="672" y="460" class="t d">2. sts get-caller-identity: is the client</text>
-  <text x="672" y="477" class="t d">   running as the role you think?</text>
-  <text x="672" y="499" class="t d">3. Bucket policy versus what you edited.</text>
-  <text x="672" y="521" class="t d">4. The KMS key policy, last but loudest.</text>
+  <text x="560" y="414" class="t b">Where to look first</text>
+  <text x="560" y="440" class="t d">1. CloudTrail data events: errorCode</text>
+  <text x="560" y="457" class="t d">   and the calling identity.</text>
+  <text x="560" y="479" class="t d">2. sts get-caller-identity: is the</text>
+  <text x="560" y="496" class="t d">   client the role you think?</text>
+  <text x="560" y="518" class="t d">3. The bucket policy as stored.</text>
+  <text x="560" y="540" class="t d">4. The KMS key policy, last but loudest.</text>
 </svg>
