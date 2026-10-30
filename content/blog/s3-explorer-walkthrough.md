@@ -4,7 +4,18 @@ description: "A step-by-step walkthrough of S3 Explorer against a local S3 endpo
 date: 2026-10-30
 author: "Clement Baranger"
 tags: ["s3", "tutorial", "tooling", "seaweedfs"]
+video: "/videos/s3explorer-teaser.mp4"
+videoPoster: "/videos/s3-explorer-teaser-poster.webp"
+videoDuration: "PT30S"
 ---
+
+<figure class="clip">
+  <video controls playsinline preload="metadata" poster="/videos/s3-explorer-teaser-poster.webp" width="1080" height="1920" style="width:100%;height:auto;border-radius:16px;background:#0B0F0E;display:block">
+    <source src="/videos/s3explorer-teaser.mp4" type="video/mp4">
+    Your browser does not support embedded video.
+  </video>
+  <figcaption>30 seconds, no voiceover — from pick-provider to request-metrics dashboard. Every frame is a real capture of the session below.</figcaption>
+</figure>
 
 Most S3 clients assume you already know your endpoint format, your addressing mode and which fields are optional. S3 Explorer takes the opposite route: you pick your provider from a list, and the connection form configures itself.
 

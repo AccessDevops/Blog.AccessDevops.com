@@ -17,6 +17,8 @@ useSeoMeta({
   articleAuthor: [author],
   twitterCard: 'summary_large_image',
   twitterImage: `${SITE}/og-image.png`,
+  ogVideo: post.value.video ? `${SITE}${post.value.video}` : undefined,
+  ogVideoType: post.value.video ? 'video/mp4' : undefined,
 });
 const jsonld = {
   '@context': 'https://schema.org',
@@ -45,8 +47,21 @@ const jsonld = {
         { '@type': 'ListItem', position: 2, name: post.value.title, item: url },
       ],
     },
-  ],
+  ] as any[],
 };
+if (post.value.video) {
+  jsonld['@graph'].push({
+    '@type': 'VideoObject',
+    name: post.value.title,
+    description: post.value.description,
+    thumbnailUrl: [`${SITE}${post.value.videoPoster || '/og-image.png'}`],
+    uploadDate: post.value.date,
+    duration: post.value.videoDuration || 'PT30S',
+    contentUrl: `${SITE}${post.value.video}`,
+    embedUrl: url,
+    publisher: { '@type': 'Organization', name: 'AccessDevOps', url: 'https://accessdevops.com' },
+  });
+}
 useHead({
   link: [{ rel: 'canonical', href: url }],
   script: [{ type: 'application/ld+json', innerHTML: JSON.stringify(jsonld) }],
