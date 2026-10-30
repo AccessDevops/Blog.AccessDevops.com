@@ -5,4 +5,5 @@ export default defineNuxtConfig({
   css: ['~/assets/css/tailwind.css'],
   app: { head: { htmlAttrs: { lang: 'en' } } },
   content: { highlight: { theme: 'github-light' } },
+  nitro: { preset: 'netlify-static' },
 });
