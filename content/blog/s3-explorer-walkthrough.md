@@ -1,6 +1,6 @@
 ---
-title: "S3 Explorer in practice: from a blank screen to browsing a bucket in five minutes"
-description: "A step-by-step walkthrough of S3 Explorer against a local S3 endpoint: pick a provider, test the connection, browse buckets, preview objects, inspect metadata and read the request metrics dashboard. Every screenshot comes from a real session."
+title: "S3 Explorer walkthrough: zero to browsing in 5 minutes"
+description: "A step-by-step walkthrough of S3 Explorer against a live S3 endpoint: pick a provider, test, browse buckets, inspect metadata, read request metrics."
 date: 2026-10-30
 author: "Clement Baranger"
 tags: ["s3", "tutorial", "tooling", "seaweedfs"]

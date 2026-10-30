@@ -1,6 +1,6 @@
 ---
 title: "The real cost of S3: 8 providers compared, egress included"
-description: "Storage is 20% of your bill. We modelled 8 S3 providers across four workloads — backup, app data, media and DR — with storage, egress, requests and replication. The cheapest is not the one you think."
+description: "Storage is 20% of your bill. We modelled 8 S3 providers across 4 workloads — backup, app, media, DR — with storage, egress, requests and replication."
 date: 2026-10-30
 author: "Clement Baranger"
 tags: ["s3", "pricing", "cloud", "cost-optimisation"]
