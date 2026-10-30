@@ -20,7 +20,7 @@ function toggle() {
     @click="toggle"
     :aria-label="theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme'"
     :title="theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme'"
-    class="grid h-[30px] w-[30px] shrink-0 place-items-center rounded-sm border border-border text-muted-foreground transition-colors hover:border-foreground/25 hover:text-foreground"
+    class="grid h-[30px] w-[30px] shrink-0 place-items-center rounded-sm border border-foreground/20 text-muted-foreground transition-colors hover:border-foreground/40 hover:text-foreground"
   >
     <!-- moon: offered while in light -->
     <svg v-if="theme === 'light'" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
