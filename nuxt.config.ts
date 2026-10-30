@@ -5,10 +5,16 @@ export default defineNuxtConfig({
   css: ['~/assets/css/fonts.css', '~/assets/css/tailwind.css'],
   app: {
     head: {
-      htmlAttrs: { lang: 'en' },
+      htmlAttrs: { lang: 'en', 'data-theme': 'light' },
+      script: [
+        {
+          tagPosition: 'head',
+          innerHTML:
+            "try{if(localStorage.getItem('theme')==='dark')document.documentElement.dataset.theme='dark'}catch(e){}",
+        },
+      ],
       meta: [
-        { name: 'theme-color', content: '#020817', media: '(prefers-color-scheme: dark)' },
-        { name: 'theme-color', content: '#ffffff', media: '(prefers-color-scheme: light)' },
+        { name: 'theme-color', content: '#ffffff' },
         { name: 'author', content: 'Clement Baranger' },
         { name: 'robots', content: 'index, follow, max-image-preview:large' },
         { property: 'og:site_name', content: 'AccessDevOps Blog' },

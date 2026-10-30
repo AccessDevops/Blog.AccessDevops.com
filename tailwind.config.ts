@@ -1,7 +1,7 @@
 import type { Config } from 'tailwindcss';
 import typography from '@tailwindcss/typography';
 export default {
-  darkMode: 'media',
+  darkMode: ['selector', '[data-theme="dark"]'],
   content: ['./components/**/*.{vue,js,ts}', './layouts/**/*.vue', './pages/**/*.vue', './app.vue', './content/**/*.md'],
   theme: {
     extend: {

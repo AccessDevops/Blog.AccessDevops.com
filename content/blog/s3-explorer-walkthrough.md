@@ -9,6 +9,7 @@ videoPoster: "/videos/s3-explorer-teaser-poster.webp"
 videoDuration: "PT30S"
 ---
 
+<div class="clipblock">
 <figure class="clip">
   <video controls playsinline preload="metadata" poster="/videos/s3-explorer-teaser-poster.webp" width="1080" height="1920">
     <source src="/videos/s3explorer-teaser.mp4" type="video/mp4">
@@ -16,6 +17,16 @@ videoDuration: "PT30S"
   </video>
   <figcaption>30-second overview. The app screens in it are real captures from the session below; the rest is title cards.</figcaption>
 </figure>
+<div class="clipside">
+  <p class="label">What it covers</p>
+  <ul>
+    <li><strong>Pick a provider.</strong> 25 presets — AWS, R2, B2, Wasabi, MinIO, SeaweedFS — with endpoint and region filled in.</li>
+    <li><strong>Test before you save.</strong> The connection is checked and the bucket count confirmed.</li>
+    <li><strong>Browse, preview, inspect.</strong> Buckets, folders, object metadata, versions.</li>
+    <li><strong>Count the requests.</strong> Local per-operation metrics, the number most clients hide.</li>
+  </ul>
+</div>
+</div>
 
 Most S3 clients assume you already know your endpoint format, your addressing mode and which fields are optional. S3 Explorer takes the opposite route: you pick your provider from a list, and the connection form configures itself.
 

@@ -6,10 +6,11 @@
           <span aria-hidden="true" class="inline-block h-[9px] w-[9px] rounded-[2px] bg-primary"></span>
           AccessDevOps<span class="font-normal text-muted-foreground">/blog</span>
         </NuxtLink>
-        <nav class="flex items-center gap-5 text-sm">
+        <nav class="flex items-center gap-4 text-sm">
           <NuxtLink to="/" class="text-muted-foreground hover:text-foreground" active-class="text-foreground font-medium" exact-active-class="text-foreground font-medium">Articles</NuxtLink>
           <a href="https://s3explorer.accessdevops.com" class="text-muted-foreground hover:text-foreground">S3 Explorer</a>
           <a href="https://github.com/AccessDevOps" class="hidden text-muted-foreground hover:text-foreground sm:inline">GitHub</a>
+          <ThemeToggle class="ml-1" />
         </nav>
       </div>
     </header>
