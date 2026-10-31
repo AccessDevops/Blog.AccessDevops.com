@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 940 620" width="940" height="620" role="img" aria-label="Anatomy of a SigV4 presigned URL: the query string carries the issue date, the expiration window capped at 604800 seconds and the signature, and four clocks can end the link — the window itself, an STS session, a key rotation, or server clock skew">
+  <style>
+    .t { font-family: Inter, system-ui, -apple-system, sans-serif; }
+    .h { font-size: 17px; font-weight: 600; fill: #020817; }
+    .s { font-size: 12.5px; fill: #64748B; }
+    .l { font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 10.5px; letter-spacing: 0.06em; fill: #64748B; }
+    .b { font-size: 13px; font-weight: 600; fill: #020817; }
+    .d { font-size: 11.5px; fill: #64748B; }
+    .n { font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 12px; fill: #020817; }
+    .e { font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 10.5px; fill: #B42318; }
+  </style>
+
+  <rect x="0.5" y="0.5" width="939" height="619" rx="10" fill="#FFFFFF" stroke="#E2E8F0"/>
+
+  <text x="34" y="46" class="t h">What ends a presigned URL, and when</text>
+  <text x="34" y="68" class="t s">Nothing is stored when a link is signed. The window written into the link is its only clock — plus three others that stop it earlier.</text>
+
+  <!-- 1 -->
+  <text x="34" y="104" class="t l">1 · THE LINK CARRIES ITS OWN DEADLINE</text>
+  <rect x="34" y="116" width="872" height="140" rx="7" fill="#F8FAFC" stroke="#E2E8F0"/>
+
+  <text x="50" y="150" class="t n">https://docs-prod.s3.eu-west-3.amazonaws.com/contracts/acme.pdf</text>
+  <text x="540" y="150" class="t d">host and path are signed, byte for byte</text>
+
+  <text x="50" y="176" class="t n">?X-Amz-Date=20261031T090000Z&amp;X-Amz-Expires=604800</text>
+  <text x="540" y="176" class="t d">issue time + window, max 604 800 s</text>
+
+  <text x="50" y="202" class="t n">&amp;X-Amz-SignedHeaders=host&amp;X-Amz-Signature=9f2c…b41d</text>
+  <text x="540" y="202" class="t d">the HMAC: nothing else proves it</text>
+
+  <line x1="50" y1="218" x2="890" y2="218" stroke="#E2E8F0"/>
+  <text x="50" y="240" class="t d">Signed offline: no call to the bucket, no record kept. S3 rebuilds the HMAC at request time and compares.</text>
+
+  <!-- 2 -->
+  <text x="34" y="292" class="t l">2 · FOUR CLOCKS RUN AT ONCE</text>
+
+  <line x1="60" y1="352" x2="880" y2="352" stroke="#020817" stroke-width="1"/>
+  <polygon points="880,352 872,348.5 872,355.5" fill="#020817"/>
+
+  <line x1="60" y1="344" x2="60" y2="360" stroke="#2563EB" stroke-width="2"/>
+  <circle cx="60" cy="352" r="3.5" fill="#2563EB"/>
+  <text x="60" y="330" class="t b">t0 · signed</text>
+
+  <line x1="250" y1="344" x2="250" y2="360" stroke="#B42318" stroke-width="2"/>
+  <circle cx="250" cy="352" r="3.5" fill="#B42318"/>
+  <text x="250" y="378" class="t d">+1 h · STS session ends</text>
+
+  <line x1="560" y1="344" x2="560" y2="360" stroke="#B42318" stroke-width="2"/>
+  <circle cx="560" cy="352" r="3.5" fill="#B42318"/>
+  <text x="560" y="330" class="t d">key rotation · immediate</text>
+
+  <line x1="880" y1="344" x2="880" y2="360" stroke="#B42318" stroke-width="2"/>
+  <circle cx="880" cy="352" r="3.5" fill="#B42318"/>
+  <text x="749" y="330" class="t b">604 800 s · hard ceiling</text>
+
+  <text x="60" y="404" class="t d">Real life is min(t0 + X-Amz-Expires, the death of the credential that signed it).</text>
+  <text x="60" y="424" class="t d">A download already in flight keeps streaming past the deadline; a retry or a resume gets 403.</text>
+
+  <!-- 3 -->
+  <text x="34" y="458" class="t l">3 · WHAT THE CALLER SEES</text>
+
+  <rect x="34" y="470" width="424" height="62" rx="7" fill="#FFFFFF" stroke="#E2E8F0"/>
+  <text x="50" y="492" class="t e">403 AccessDenied</text>
+  <text x="50" y="514" class="t d">Message: Request has expired, with the deadline in &lt;Expires&gt;</text>
+
+  <rect x="482" y="470" width="424" height="62" rx="7" fill="#FFFFFF" stroke="#E2E8F0"/>
+  <text x="498" y="492" class="t e">400 AuthorizationQueryParametersError</text>
+  <text x="498" y="514" class="t d">X-Amz-Expires over 604 800: the URL never worked at all</text>
+
+  <rect x="34" y="544" width="424" height="62" rx="7" fill="#FFFFFF" stroke="#E2E8F0"/>
+  <text x="50" y="566" class="t e">403 SignatureDoesNotMatch</text>
+  <text x="50" y="588" class="t d">secret rotated, clock skewed, or a signed header changed</text>
+
+  <rect x="482" y="544" width="424" height="62" rx="7" fill="#FFFFFF" stroke="#E2E8F0"/>
+  <text x="498" y="566" class="t e">403 ExpiredRequest (R2)</text>
+  <text x="498" y="588" class="t d">same failure, another code — and no CORS headers on it</text>
+</svg>
