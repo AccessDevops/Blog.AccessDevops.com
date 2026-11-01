@@ -40,7 +40,24 @@ export default defineNuxtConfig({
       ],
     },
   },
-  content: { highlight: { theme: 'github-light' } },
+  content: {
+    // variantes high-contrast : la palette github standard tombe à 3,2:1
+    // sur certains tokens (gris des commentaires), sous le seuil AA.
+    highlight: {
+      theme: { default: 'github-light-high-contrast', dark: 'github-dark-high-contrast' },
+    },
+  },
+  // Shiki ne charge que les grammaires déclarées : sans cette liste, python,
+  // xml et bash tombent en texte brut et les blocs paraissent monochromes.
+  mdc: {
+    highlight: {
+      langs: [
+        'bash', 'shell', 'python', 'json', 'jsonc', 'xml', 'html', 'yaml',
+        'javascript', 'typescript', 'tsx', 'sql', 'ini', 'toml', 'diff',
+        'http', 'dockerfile', 'nginx', 'go', 'rust',
+      ],
+    },
+  },
   nitro: {
     preset: 'netlify-static',
     prerender: { routes: ['/rss.xml'], autoSubfolderIndex: false },

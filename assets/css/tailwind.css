@@ -114,6 +114,14 @@
   --tw-prose-bullets: hsl(var(--border));
   --tw-prose-hr: hsl(var(--border));
   --tw-prose-quotes: hsl(var(--muted-foreground));
+  /* Shiki ne colore que certains tokens : tout le reste hérite de cette
+     variable. Sans elle, Tailwind applique #e5e7eb (prévu pour fond sombre)
+     et le code non coloré devient invisible sur le fond clair. */
+  --tw-prose-pre-code: hsl(var(--foreground));
+  /* même piège pour le code inline : #111827 par défaut, invisible
+     sur le fond sombre (1,2:1). */
+  --tw-prose-code: hsl(var(--foreground));
+  --tw-prose-pre-bg: hsl(var(--muted));
   --tw-prose-quote-borders: hsl(var(--border));
   --tw-prose-captions: hsl(var(--muted-foreground));
   --tw-prose-th-borders: hsl(var(--border));
@@ -139,11 +147,21 @@
   background: hsl(var(--muted));
   padding: .15em .38em; border-radius: 4px;
 }
+/* Shiki n'écrit que les tokens qu'il colore ; le reste hérite de
+   --tw-prose-pre-code. Chaque token porte deux couleurs : --shiki-default
+   (clair) et --shiki-dark. Nuxt bascule sur html.dark, or le site utilise
+   data-theme : sans cette règle, le thème sombre garde la palette claire
+   (#032F62 sur #1e293b = 1,1:1, illisible). */
+html[data-theme="dark"] .shiki span { color: var(--shiki-dark); }
+
 .prose :where(pre) {
   background: hsl(var(--muted));
   border: 1px solid hsl(var(--border));
   border-radius: var(--r-md);
   font-size: .85em;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  tab-size: 2;
 }
 .prose :where(table) { font-size: .9375rem; }
 .prose :where(thead th) { font-weight: 600; font-size: .8125rem; letter-spacing: .02em; }
