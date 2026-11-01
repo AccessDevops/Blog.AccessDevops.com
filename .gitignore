@@ -16,3 +16,8 @@ assets-src/vp.html
 .chrome-tmp
 rt_*.png
 t_*.png
+
+# captures de contrôle locales
+*.png
+!public/**/*.png
+!assets-src/**/*.png
