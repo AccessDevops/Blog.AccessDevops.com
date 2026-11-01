@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 940 620" width="940" height="620" role="img" aria-label="A presigned POST: the policy document holding an expiration, a key prefix, a byte range and a content-type prefix is base64-encoded and HMAC-signed on your server, then S3 runs four checks in order — signature, declared form fields, condition matches, then the byte count — and stores nothing when one fails">
+  <style>
+    .t { font-family: Inter, system-ui, -apple-system, sans-serif; }
+    .h { font-size: 17px; font-weight: 600; fill: #020817; }
+    .s { font-size: 12.5px; fill: #64748B; }
+    .l { font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 10.5px; letter-spacing: 0.06em; fill: #64748B; }
+    .b { font-size: 13px; font-weight: 600; fill: #020817; }
+    .d { font-size: 11px; fill: #64748B; }
+    .k { font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 11.5px; fill: #020817; }
+    .n { font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 11px; fill: #FFFFFF; }
+    .e { font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 10px; fill: #B42318; }
+    .ok { font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 10px; fill: #2563EB; letter-spacing: 0.06em; }
+  </style>
+
+  <rect x="0.5" y="0.5" width="939" height="619" rx="10" fill="#FFFFFF" stroke="#E2E8F0"/>
+
+  <text x="34" y="46" class="t h">A POST policy is checked before anything is stored</text>
+  <text x="34" y="68" class="t s">The permission is a document signed on your server, not a URL. S3 evaluates it field by field as the form body arrives.</text>
+
+  <!-- 1 -->
+  <text x="34" y="104" class="t l">1 · THE DOCUMENT YOU SIGN</text>
+
+  <rect x="34" y="116" width="526" height="170" rx="7" fill="#F8FAFC" stroke="#E2E8F0"/>
+  <text x="50" y="142" class="t k">{ "expiration": "2026-11-01T18:00:00Z",</text>
+  <text x="50" y="162" class="t k">  "conditions": [</text>
+  <text x="66" y="182" class="t k">{ "bucket": "uploads-prod" },</text>
+  <text x="66" y="202" class="t k">[ "starts-with", "$key", "incoming/" ],</text>
+  <text x="66" y="222" class="t k">[ "content-length-range", 1, 10485760 ],</text>
+  <text x="66" y="242" class="t k">[ "starts-with", "$Content-Type", "image/" ]</text>
+  <text x="50" y="262" class="t k">  ] }</text>
+
+  <rect x="580" y="124" width="326" height="46" rx="7" fill="#FFFFFF" stroke="#E2E8F0"/>
+  <text x="592" y="143" class="t b">expiration</text>
+  <text x="592" y="160" class="t d">ISO8601. Past it: Policy expired.</text>
+
+  <rect x="580" y="182" width="326" height="46" rx="7" fill="#FFFFFF" stroke="#E2E8F0"/>
+  <text x="592" y="201" class="t b">starts-with</text>
+  <text x="592" y="218" class="t d">prefix match on the expanded key</text>
+
+  <rect x="580" y="240" width="326" height="46" rx="7" fill="#FFFFFF" stroke="#E2E8F0"/>
+  <text x="592" y="259" class="t b">content-length-range</text>
+  <text x="592" y="276" class="t d">min and max bytes, both inclusive</text>
+
+  <!-- 2 -->
+  <text x="34" y="320" class="t l">2 · FOUR CHECKS, IN THIS ORDER</text>
+
+  <rect x="34" y="330" width="872" height="48" rx="7" fill="#FFFFFF" stroke="#E2E8F0"/>
+  <circle cx="58" cy="354" r="11" fill="#020817"/>
+  <text x="58" y="358" class="t n" text-anchor="middle">1</text>
+  <text x="80" y="350" class="t b">The signature is recomputed from the policy</text>
+  <text x="80" y="367" class="t d">base64, then HMAC-SHA256 with the key derived from your date and region</text>
+  <text x="890" y="350" class="t e" text-anchor="end">403 SignatureDoesNotMatch</text>
+  <text x="890" y="367" class="t d" text-anchor="end">policy edited after signing, or the secret rotated</text>
+
+  <rect x="34" y="386" width="872" height="48" rx="7" fill="#FFFFFF" stroke="#E2E8F0"/>
+  <circle cx="58" cy="410" r="11" fill="#020817"/>
+  <text x="58" y="414" class="t n" text-anchor="middle">2</text>
+  <text x="80" y="406" class="t b">Every form field is declared in the policy</text>
+  <text x="80" y="423" class="t d">an x-amz-* field the policy never listed is an extra input field</text>
+  <text x="890" y="406" class="t e" text-anchor="end">403 Extra input fields</text>
+  <text x="890" y="423" class="t d" text-anchor="end">e.g. content-encoding, tagging, storage class</text>
+
+  <rect x="34" y="442" width="872" height="48" rx="7" fill="#FFFFFF" stroke="#E2E8F0"/>
+  <circle cx="58" cy="466" r="11" fill="#020817"/>
+  <text x="58" y="470" class="t n" text-anchor="middle">3</text>
+  <text x="80" y="462" class="t b">Each condition matches the expanded form</text>
+  <text x="80" y="479" class="t d">key prefix, content type, success status, user metadata</text>
+  <text x="890" y="462" class="t e" text-anchor="end">403 Policy Condition failed</text>
+  <text x="890" y="479" class="t d" text-anchor="end">the failing condition is quoted back</text>
+
+  <rect x="34" y="498" width="872" height="48" rx="7" fill="#FFFFFF" stroke="#E2E8F0"/>
+  <circle cx="58" cy="522" r="11" fill="#2563EB"/>
+  <text x="58" y="526" class="t n" text-anchor="middle">4</text>
+  <text x="80" y="518" class="t b">Bytes are counted while the body streams</text>
+  <text x="80" y="535" class="t d">the counter trips at max, S3 stops reading, nothing partial is kept</text>
+  <text x="890" y="518" class="t e" text-anchor="end">400 EntityTooLarge</text>
+  <text x="890" y="535" class="t d" text-anchor="end">with ProposedSize and MaxSizeAllowed</text>
+
+  <!-- 3 -->
+  <rect x="34" y="560" width="424" height="40" rx="7" fill="#FFFFFF" stroke="#E2E8F0"/>
+  <text x="50" y="578" class="t ok">ACCEPTED</text>
+  <text x="50" y="593" class="t d">object stored · 204 empty body, 201 returns the ETag</text>
+
+  <rect x="482" y="560" width="424" height="40" rx="7" fill="#FFFFFF" stroke="#E2E8F0"/>
+  <text x="498" y="578" class="t e">REJECTED</text>
+  <text x="498" y="593" class="t d">nothing stored · the socket can drop before the XML is read</text>
+</svg>
