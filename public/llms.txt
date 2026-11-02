@@ -14,6 +14,7 @@
 - DevOps practices, automation and CI/CD
 
 ## Articles
+- [Chained AssumeRole sessions stop at one hour, silently](https://blog.accessdevops.com/blog/assumerole-chaining-one-hour-ceiling): traces why a role that assumes another role gets 3600 seconds whatever its MaxSessionDuration says, the exact ValidationError, and the batch job that dies mid-run.
 - [Presigned POST: cap size and type before the upload starts](https://blog.accessdevops.com/blog/presigned-post-enforce-size-content-type): signs a policy instead of a URL so the bucket caps upload size and content type itself, with the exact error each failed condition returns.
 - [Presigned URLs expire at seven days. Then what?](https://blog.accessdevops.com/blog/presigned-url-seven-day-ceiling): traces the 604 800-second SigV4 signing-key ceiling, the three other clocks that kill a link early, and the mint-on-demand pattern that replaces long-lived URLs.
 - [When two policies allow and the request still fails](https://blog.accessdevops.com/blog/bucket-policy-allow-still-denied): the five-gate IAM evaluation order that explains why S3 returns AccessDenied when both policies say Allow, and where the hidden deny lives.
