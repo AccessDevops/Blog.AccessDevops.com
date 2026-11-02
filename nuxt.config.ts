@@ -32,6 +32,9 @@ export default defineNuxtConfig({
         { rel: 'preload', as: 'font', type: 'font/woff2', href: '/fonts/Inter-400-latin.woff2', crossorigin: 'anonymous' },
         { rel: 'preload', as: 'font', type: 'font/woff2', href: '/fonts/Inter-600-latin.woff2', crossorigin: 'anonymous' },
         { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' },
+        // Google exige un carré d'au moins 48 px : sans lui, il n'affiche
+        // aucune icône dans les résultats, même si un SVG est présent.
+        { rel: 'icon', type: 'image/png', sizes: '192x192', href: '/icon-192.png' },
         { rel: 'icon', type: 'image/png', sizes: '32x32', href: '/favicon-32.png' },
         { rel: 'icon', sizes: 'any', href: '/favicon.ico' },
         { rel: 'apple-touch-icon', sizes: '180x180', href: '/apple-touch-icon.png' },

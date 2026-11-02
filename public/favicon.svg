@@ -1,5 +1,11 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <rect width="64" height="64" rx="15" fill="#0B0F0E"/>
-  <rect x="3.5" y="3.5" width="57" height="57" rx="12.5" fill="none" stroke="#26D0B5" stroke-opacity="0.35" stroke-width="1.5"/>
-  <text x="32" y="46" font-family="Georgia,'Times New Roman',serif" font-size="40" font-weight="700" fill="#26D0B5" text-anchor="middle">A</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="AccessDevOps">
+  <!-- Reprend trait pour trait l'icône raster (assets-src/icon.html) :
+       fond #020817, carré #0B1220, A blanc, barre #2563EB.
+       Le SVG précédent était resté sur l'ancienne palette turquoise. -->
+  <rect width="512" height="512" fill="#020817"/>
+  <rect x="64" y="64" width="384" height="384" rx="84" fill="#0B1220" stroke="#F8FAFC" stroke-opacity="0.10"/>
+  <text x="256" y="246" text-anchor="middle" dominant-baseline="central"
+        font-family="Inter, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif"
+        font-size="224" font-weight="700" letter-spacing="-13" fill="#F8FAFC">A</text>
+  <rect x="212" y="431" width="88" height="9" rx="3" fill="#2563EB"/>
 </svg>
