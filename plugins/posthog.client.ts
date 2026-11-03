@@ -62,6 +62,15 @@ export default defineNuxtPlugin((nuxtApp) => {
     capture_pageleave: false,
     capture_performance: false,
     disable_session_recording: true,
+    // Ces quatre-là ne s'éteignent pas avec `autocapture: false` : ils sont
+    // allumés par la configuration distante du projet, et le réseau le
+    // montrait en production — exception-autocapture.js, dead-clicks-
+    // autocapture.js et surveys.js étaient téléchargés et actifs. Chacun
+    // émet ses propres événements, qu'un blog de texte n'exploitera jamais.
+    capture_exceptions: false,
+    capture_dead_clicks: false,
+    disable_surveys: true,
+    advanced_disable_feature_flags: true,
     defaults: '2025-05-24',
   })!;
 
