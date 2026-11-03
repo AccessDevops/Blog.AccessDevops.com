@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { guideFor } from '~/lib/guide-links';
 import { tagLabel, tagPath } from '~/lib/tags';
+import ogManifest from '~/lib/og-manifest.json';
 
 const route = useRoute();
 const { trackArticleViewed, trackReadComplete } = useBlogTracking();
@@ -42,6 +43,17 @@ const related = computed(() => {
 if (!post.value) throw createError({ statusCode: 404, statusMessage: 'Post not found' });
 const author = post.value.author || 'Clement Baranger';
 
+/**
+ * Image Open Graph propre à l'article quand scripts/og-images.mjs l'a
+ * produite, générique sinon. Le repli compte : un article publié sans avoir
+ * lancé le script doit partager une image correcte, pas une image absente.
+ */
+const ogImage = computed(() =>
+  (ogManifest as Record<string, boolean>)[slug.value]
+    ? `${SITE}/og/${slug.value}.png`
+    : `${SITE}/og-image.png`,
+);
+
 // Sentinelle de fin d'article : son entrée dans la fenêtre vaut « lu ».
 const endMarker = ref<HTMLElement | null>(null);
 let stopReadObserver: (() => void) | null = null;
@@ -64,12 +76,12 @@ useSeoMeta({
   ogType: 'article',
   ogTitle: post.value.title,
   ogDescription: post.value.description,
-  ogImage: `${SITE}/og-image.png`,
+  ogImage: ogImage.value,
   ogUrl: url,
   articlePublishedTime: post.value.date,
   articleAuthor: [author],
   twitterCard: 'summary_large_image',
-  twitterImage: `${SITE}/og-image.png`,
+  twitterImage: ogImage.value,
   ogVideo: post.value.video ? `${SITE}${post.value.video}` : undefined,
   ogVideoType: post.value.video ? 'video/mp4' : undefined,
 });
@@ -80,7 +92,7 @@ const jsonld = {
       '@type': 'BlogPosting',
       headline: post.value.title,
       description: post.value.description,
-      image: [`${SITE}/og-image.png`],
+      image: [ogImage.value],
       datePublished: post.value.date,
       dateModified: post.value.updated || post.value.date,
       inLanguage: 'en',

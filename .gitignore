@@ -21,3 +21,6 @@ t_*.png
 *.png
 !public/**/*.png
 !assets-src/**/*.png
+
+# fichiers temporaires du générateur d'images Open Graph
+.og-tmp

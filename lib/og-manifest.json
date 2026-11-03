@@ -1,0 +1,10 @@
+{
+  "abac-object-tags-vs-prefix-policies": true,
+  "assumerole-chaining-one-hour-ceiling": true,
+  "bucket-policy-allow-still-denied": true,
+  "presigned-post-enforce-size-content-type": true,
+  "presigned-url-seven-day-ceiling": true,
+  "s3-explorer-walkthrough": true,
+  "s3-total-cost-of-ownership": true,
+  "welcome": true
+}

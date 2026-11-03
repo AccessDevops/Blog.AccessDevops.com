@@ -8,7 +8,8 @@
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "seo": "python3 scripts/seo-audit.py",
-    "indexnow": "node scripts/indexnow.mjs"
+    "indexnow": "node scripts/indexnow.mjs",
+    "og": "node scripts/og-images.mjs"
   },
   "dependencies": {
     "@nuxt/content": "^2.13.4",

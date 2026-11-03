@@ -1,0 +1,64 @@
+<!doctype html>
+<!--
+  Gabarit de l'image Open Graph d'un article. Rendu par scripts/og-images.mjs,
+  qui remplace les marqueurs __TITLE__, __KICKER__ et __READ__ puis
+  photographie la page en 1200x630.
+
+  Même palette et même typographie que public/og-image.png (assets-src/og.html)
+  pour que les deux ne se ressemblent pas « presque ». Les polices sont
+  chargées depuis public/fonts/ : les mêmes fichiers que le site, donc aucun
+  appel réseau au rendu et aucune dérive entre l'image et la page.
+-->
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  @font-face{font-family:'Inter';font-weight:400;src:url('../public/fonts/Inter-400-latin.woff2') format('woff2')}
+  @font-face{font-family:'Inter';font-weight:600;src:url('../public/fonts/Inter-600-latin.woff2') format('woff2')}
+  @font-face{font-family:'Inter';font-weight:700;src:url('../public/fonts/Inter-700-latin.woff2') format('woff2')}
+  @font-face{font-family:'JetBrains Mono';font-weight:400;src:url('../public/fonts/JetBrainsMono-400-latin.woff2') format('woff2')}
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{width:1200px;height:630px;overflow:hidden}
+  body{background:#020817}
+  .canvas{position:relative;width:1200px;height:630px;overflow:hidden;background:#020817;color:#F8FAFC;
+          font-family:'Inter',sans-serif;display:flex;flex-direction:column;justify-content:space-between;padding:64px 68px}
+  .frame{position:absolute;inset:24px;border:1px solid rgba(248,250,252,.08);border-radius:12px}
+  .top{position:relative;z-index:2;display:flex;align-items:center;gap:12px}
+  .mark{width:26px;height:26px;border-radius:6px;background:#2563EB;display:flex;align-items:center;justify-content:center;
+        font-weight:700;font-size:15px;color:#fff}
+  .brand{font-size:19px;font-weight:600;letter-spacing:-.01em}
+  .brand span{color:#64748B;font-weight:400}
+  .mid{position:relative;z-index:2}
+  .kicker{font-family:'JetBrains Mono',monospace;font-size:15px;color:#2563EB;letter-spacing:.02em;margin-bottom:20px}
+  /* La taille suit la longueur du titre : un titre de 70 caractères en 66px
+     déborde sur quatre lignes et sort du cadre. Les classes sont posées par
+     le script d'après le nombre de caractères. */
+  h1{font-size:62px;line-height:1.06;letter-spacing:-.036em;font-weight:650;max-width:1000px}
+  h1.long{font-size:52px;line-height:1.1}
+  h1.xlong{font-size:44px;line-height:1.12}
+  .bot{position:relative;z-index:2;display:flex;align-items:center;gap:14px;
+       font-family:'JetBrains Mono',monospace;font-size:15px;color:#64748B}
+  .accent{width:36px;height:2px;background:#2563EB}
+  .url{color:#94A3B8}
+  .read{margin-left:auto;color:#64748B}
+</style>
+</head>
+<body>
+<div class="canvas">
+  <div class="frame"></div>
+  <div class="top">
+    <div class="mark">A</div>
+    <div class="brand">AccessDevOps<span>/blog</span></div>
+  </div>
+  <div class="mid">
+    <div class="kicker">__KICKER__</div>
+    <h1 class="__SIZE__">__TITLE__</h1>
+  </div>
+  <div class="bot">
+    <div class="accent"></div>
+    <div class="url">blog.accessdevops.com</div>
+    <div class="read">__READ__</div>
+  </div>
+</div>
+</body>
+</html>
