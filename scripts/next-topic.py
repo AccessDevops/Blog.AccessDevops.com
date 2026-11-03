@@ -1,13 +1,17 @@
 #!/usr/bin/env python3
-"""Queue driver for the daily S3 article series.
+"""Topic source for the S3 article series (three per week).
 
   python3 scripts/next-topic.py          -> prints the next unwritten topic as JSON
-  python3 scripts/next-topic.py --status -> prints progress per segment
+  python3 scripts/next-topic.py --list   -> every unwritten topic + the tags they add to
+  python3 scripts/next-topic.py --status -> progress per segment
   exit 3 when every topic has been written
 
-The queue is content/topics.json, order is authoritative, completion is
-detected by the existence of content/blog/<slug>.md. Idempotent: re-running
-after a successful write returns the following topic.
+The queue is content/topics.json. Its order is a suggestion, not an
+obligation: the series is published three times a week and the topic is chosen
+each time from what the readers actually read, what search engines ask for but
+the sites do not answer, and which tag is one article short of becoming an
+indexable page. This script exists to show the remaining choices with enough
+context to make that call — see content/AUTHORING.md, "Choosing the topic".
 """
 import json, os, sys, glob
 from collections import Counter
@@ -30,6 +34,23 @@ if "--status" in sys.argv:
         print(f"{seg:<14}{by_done.get(seg,0):>6}{by[seg]:>7}")
     print(f"\nnext: {pending[0]['slug'] if pending else '—'}")
     sys.exit(0 if pending else 3)
+
+if "--list" in sys.argv:
+    # Combien d'articles portent déjà chaque tag : c'est ce qui décide si un
+    # sujet fait franchir le seuil d'indexation d'une page de tag.
+    tag_counts = Counter()
+    for t in done:
+        for tag in t.get("tags", []):
+            tag_counts[tag] += 1
+    out = []
+    for t in pending:
+        entry = dict(t)
+        entry["tags_now"] = {tag: tag_counts.get(tag, 0) for tag in t.get("tags", [])}
+        entry["tags_at_publish"] = {tag: tag_counts.get(tag, 0) + 1 for tag in t.get("tags", [])}
+        out.append(entry)
+    print(json.dumps({"written": len(done), "remaining": len(pending), "topics": out},
+                     ensure_ascii=False, indent=2))
+    sys.exit(0)
 
 if not pending:
     print("all topics written", file=sys.stderr)

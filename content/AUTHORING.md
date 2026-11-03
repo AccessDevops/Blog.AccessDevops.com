@@ -1,9 +1,66 @@
-# Authoring rules — one S3 article per day
+# Authoring rules — three S3 articles per week
 
-Single source of truth for the daily series. `scripts/next-topic.py` gives you the
-topic; this file gives you everything else. Follow it literally — it exists so that
-100 consecutive articles read like one publication and none of them ships a
-factual error.
+Single source of truth for the series. `content/topics.json` holds the 100 topics;
+this file holds everything else. Follow it literally — it exists so that every
+article reads like the same publication and none of them ships a factual error.
+
+The cadence changed on 2026-11-03, deliberately. One article per day on a domain
+opened days earlier, with 100 topics queued in advance, is the profile Google's
+scaled-content policy is written to catch — the writing can be sound and the
+cadence is still assessed on its own. Two or three a week is the pace of a
+publication with something to say, not of a pipeline.
+
+## Choosing the topic
+
+The queue is not an order. Each time, pick from the unwritten topics:
+
+```bash
+python3 scripts/next-topic.py --list      # every remaining topic + the tags it would grow
+```
+
+Choose on these criteria, in this order:
+
+1. **What readers already read.** Articles that produced `blog_read_complete`
+   and, above all, `blog_product_click` with `placement: "in_article"` tell you
+   which neighbourhood works. A topic next to one that converts beats a topic at
+   the head of the list.
+2. **What is searched and not answered.** Queries where the product site is seen
+   but never clicked (`s3 explorer`, `s3 bucket explorer`) are demand without a
+   page. An article can claim them; a comparison page usually converts better,
+   so decide which one the query deserves.
+3. **Which tag is one article short.** A tag page becomes indexable at
+   `MIN_POSTS_FOR_INDEX` (lib/tags.ts, currently 2). Picking a topic that pushes
+   a tag over the threshold creates a second indexable page for free.
+
+Write the criterion in the commit body — one sentence, why this topic now:
+
+```
+Article: <slug>
+
+Chosen for criterion 2: the product site is seen for "s3 bucket explorer" with
+0 clicks, and no page claims it.
+```
+
+If the data is not reachable (no PostHog key in the environment, no Search
+Console export), say so in the commit and in the final message, and fall back to
+criterion 3, which needs nothing but the repository. Do not invent numbers to
+justify a choice.
+
+## What makes an article publishable
+
+Every article must contain **at least one thing that could not have been written
+without doing the work**. One of:
+
+- a measurement you made yourself, with the command that reproduces it;
+- a real error, pasted as it came out, unedited;
+- a screenshot of S3 Explorer showing the case — ask Clément, you cannot launch
+  the app yourself;
+- a comparison table whose figures are dated and sourced;
+- a diagram in `public/diagrams/`.
+
+The SVG is the floor, not the ceiling: it is expected. If the only unique element
+an article can offer is a generic diagram, write a different topic this week and
+come back to this one when you can measure something.
 
 ## Who reads this
 
@@ -150,6 +207,7 @@ alt text on every image. It must exit 0.
 
 ```bash
 cd /home/hermes/.hermes/cache/scratch/blog-nuxt
+npm run og                            # per-article Open Graph image — not optional
 npm run generate
 python3 scripts/seo-audit.py          # must exit 0 — fix the article, never the script
 
@@ -171,6 +229,31 @@ curl -s -o /dev/null -w '%{http_code}' https://blog.accessdevops.com/blog/<slug>
 
 Retry for up to 5 minutes. If it never returns 200, say so in the final message
 instead of claiming success.
+
+**IndexNow runs by itself after the deploy.** Do not call `npm run indexnow`
+after an article: the deploy already pings it, and a second submission of the
+same URLs is noise.
+
+## Every third article: measure, then say what you found
+
+After three articles, read PostHog for the period and report four things:
+
+- visitors and articles seen (`blog_article_viewed`);
+- completion rate per article (`blog_read_complete` / `blog_article_viewed`);
+- clicks to the product, split by `placement` (`in_article`, `guide_card`, `nav`,
+  `footer`);
+- source split, keeping `ai_assistant` apart from the search engines.
+
+Two readings decide the next change:
+
+- **Many views, few completions** → the title or the opening is wrong, not the
+  topic. Rewrite the lede before writing another article on that theme.
+- **Read to the end, no product click** → the guide link is in the wrong place,
+  or the guide does not match the article. Fix `lib/guide-links.ts` or move the
+  link to where the problem is actually described.
+
+If PostHog cannot be queried, say so plainly. A measurement you do not have is
+not a measurement of zero.
 
 ## Failure handling
 

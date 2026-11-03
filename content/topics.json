@@ -1,118 +1,1408 @@
 {
   "version": 1,
   "created": "2026-10-30",
-  "cadence": "one article per day, 12:00 Europe/Paris",
-  "rules": "Take the first topic whose slug has no content/blog/<slug>.md. Never skip, never reorder. See content/AUTHORING.md.",
+  "cadence": "three articles per week — Monday, Wednesday, Friday, 12:00 Europe/Paris",
+  "rules": "Choose the topic, do not take the head of the queue. Before each article, pick from the unwritten topics in content/topics.json (python3 scripts/next-topic.py --list) using these criteria, in this order: (1) what readers already read — the neighbours of articles that produced blog_read_complete and blog_product_click in PostHog; (2) what is searched but unanswered — queries the product site is seen for without ranking, which an article can claim; (3) which tag is one article short of MIN_POSTS_FOR_INDEX, turning a noindex tag page into an indexable one. Write the criterion used in the commit body — one sentence, why this topic now. Never catch up: if a slot was missed, the next article is simply the next scheduled one. See content/AUTHORING.md.",
   "topics": [
-    {"n": 1, "slug": "bucket-policy-allow-still-denied", "title": "When two policies allow and the request still fails", "angle": "Explicit deny precedence, the evaluation order, and the deny hidden in a service control policy", "tags": ["s3", "iam", "security"], "segment": "access", "visual": "diagram", "product": "Show the policy chain from the client's point of view before saving a connection"},
-    {"n": 2, "slug": "presigned-url-seven-day-ceiling", "title": "Presigned URLs expire at seven days. Then what?", "angle": "The hard 7-day limit on SigV4, what happens when the signing credentials rotate, and safe patterns for long-lived downloads", "tags": ["s3", "security", "presigned-urls"], "segment": "access", "visual": "diagram", "product": "Test a presigned URL against a live endpoint and see the expiry"},
-    {"n": 3, "slug": "presigned-post-enforce-size-content-type", "title": "Presigned POST: enforcing size and content type before the upload starts", "angle": "Policy conditions that block an oversized or wrong-type upload, which a presigned PUT cannot do", "tags": ["s3", "security", "uploads"], "segment": "access", "visual": "diagram", "product": "Inspect which headers a client actually sends"},
-    {"n": 4, "slug": "assumerole-chaining-one-hour-ceiling", "title": "Role chaining caps sessions at one hour — and nobody notices until the batch job dies", "angle": "AssumeRole chaining's 1-hour ceiling, session duration inheritance, and the long-running job that breaks", "tags": ["s3", "iam", "sts"], "segment": "access", "visual": "diagram", "product": "Verify a connection's effective credentials before running a long job"},
-    {"n": 5, "slug": "abac-object-tags-vs-prefix-policies", "title": "Object tags or prefixes: choosing an access model that survives growth", "angle": "ABAC with s3:ExistingObjectTag, tag-based cost, and where prefix policies become unmaintainable", "tags": ["s3", "iam", "governance"], "segment": "access", "visual": "diagram", "product": "Display object tags and metadata next to permissions"},
-    {"n": 6, "slug": "cross-account-access-confused-deputy", "title": "Cross-account access without wildcards: the confused deputy problem in S3", "angle": "aws:SourceAccount and aws:SourceArn conditions, trusting an account id vs trusting a role", "tags": ["s3", "iam", "security"], "segment": "access", "visual": "diagram", "product": "Test cross-account credentials against a bucket in one step"},
-    {"n": 7, "slug": "block-public-access-four-switches", "title": "Block Public Access has four switches and you need to know which one matters", "angle": "Account vs bucket level, ACL vs policy blocking, and the ordering that makes one switch redundant", "tags": ["s3", "security", "public-access"], "segment": "access", "visual": "diagram", "product": "See the effective permission state a client sees"},
-    {"n": 8, "slug": "access-points-multi-region-worth-it", "title": "Access Points and Multi-Region Access Points: when the extra layer earns its keep", "angle": "Policy scoping per access point, the DNS-based routing, and the cost/benefit for small teams", "tags": ["s3", "network", "governance"], "segment": "access", "visual": "diagram", "product": "Point one profile at any endpoint and compare"},
-    {"n": 9, "slug": "anonymous-read-exact-leak-path", "title": "The exact combination that leaks a bucket to the internet", "angle": "ACL plus policy plus BPA off, and how each single change would have prevented it", "tags": ["s3", "security", "public-access"], "segment": "access", "visual": "diagram", "product": "Test anonymous read on a bucket without writing code"},
-    {"n": 10, "slug": "auditing-who-can-read-a-bucket", "title": "How to answer 'who can read this bucket' in under an hour", "angle": "Access Analyzer, policy simulator, and the manual review of wildcards and role paths that tools miss", "tags": ["s3", "security", "audit"], "segment": "access", "visual": "diagram", "product": "List buckets and policies from the client side, then verify with a test read"},
-
-    {"n": 11, "slug": "sse-s3-vs-sse-kms-vs-dsse", "title": "SSE-S3, SSE-KMS, DSSE-KMS: the cost per 1000 requests", "angle": "KMS pricing per request, the throttling cliff around 5,500 req/s, and the tier that fits a real workload", "tags": ["s3", "encryption", "cost"], "segment": "encryption", "visual": "chart", "product": "Inspect an object's effective encryption from its metadata"},
-    {"n": 12, "slug": "kms-key-policy-lockout", "title": "The KMS key policy that locks you out of your own data", "angle": "Missing kms:CreateGrant for the caller, the account-principal delegation trap, and how to recover", "tags": ["s3", "encryption", "kms"], "segment": "encryption", "visual": "diagram", "product": "Read encryption headers on a failing request"},
-    {"n": 13, "slug": "bucket-keys-kms-cost", "title": "Bucket keys cut KMS costs up to 99% — until cross-account access breaks", "angle": "How S3 Bucket Keys work, when they silently disable, and the replication interaction", "tags": ["s3", "encryption", "cost"], "segment": "encryption", "visual": "chart", "product": "Show key id per object to confirm what actually encrypted it"},
-    {"n": 14, "slug": "client-side-encryption-tradeoffs", "title": "Client-side encryption: what you gain, what you lose forever", "angle": "Losing range requests, server-side processing and lifecycle analytics, and the key custody burden", "tags": ["s3", "encryption", "architecture"], "segment": "encryption", "visual": "diagram", "product": "Compare an encrypted and non-encrypted object side by side"},
-    {"n": 15, "slug": "tls-certificate-trust-not-no-verify", "title": "Stop shipping --no-verify-ssl: fixing S3 TLS trust properly", "angle": "Why the flag shows up in production scripts, custom CAs for MinIO/on-prem, and what breaks when you remove it", "tags": ["s3", "security", "tls"], "segment": "encryption", "visual": "diagram", "product": "Surface the TLS error text instead of a generic failure"},
-    {"n": 16, "slug": "kms-key-rotation-does-not-reencrypt", "title": "Key rotation does not re-encrypt your objects", "angle": "What automatic rotation actually changes, DEK wrapping, and how to verify which key version protects an object", "tags": ["s3", "encryption", "kms"], "segment": "encryption", "visual": "diagram", "product": "Display key id and version per object"},
-    {"n": 17, "slug": "sse-c-provider-support-matrix", "title": "SSE-C support across S3-compatible providers", "angle": "Who implements customer-provided keys, who ignores the header silently, and how to test it in 2 minutes", "tags": ["s3", "encryption", "interop"], "segment": "encryption", "visual": "chart", "product": "Test SSE-C headers against any endpoint"},
-    {"n": 18, "slug": "unencrypted-metadata-and-tags", "title": "Your object metadata and tags are never encrypted", "angle": "What leaks in headers and inventory reports, and which fields to keep out of tags", "tags": ["s3", "encryption", "privacy"], "segment": "encryption", "visual": "diagram", "product": "Show raw metadata and tag values in the object inspector"},
-    {"n": 19, "slug": "cross-region-replication-kms-reencrypt", "title": "Replicating KMS-encrypted objects needs a second permission", "angle": "Re-encryption on the destination, the key policy on both sides, and the replication failure that looks like a network error", "tags": ["s3", "encryption", "replication"], "segment": "encryption", "visual": "diagram", "product": "Compare encryption metadata across two endpoints"},
-    {"n": 20, "slug": "encryption-choice-by-framework", "title": "Which encryption satisfies which framework", "angle": "Mapping SSE-S3/KMS/C and client-side to PCI DSS, HIPAA, ISO 27001 and SecNumCloud without over-engineering", "tags": ["s3", "encryption", "compliance"], "segment": "encryption", "visual": "chart", "product": "Export encryption state for an auditor in one view"},
-
-    {"n": 21, "slug": "lifecycle-rules-that-never-fire", "title": "Lifecycle rules that silently never fire", "angle": "Prefix overlap, tag filters, the 30-day minimum, and the rule ordering that shadows your intent", "tags": ["s3", "lifecycle", "cost"], "segment": "retention", "visual": "diagram", "product": "Read lifecycle configuration and show which rule matches an object"},
-    {"n": 22, "slug": "object-lock-governance-vs-compliance", "title": "Object Lock: governance mode you can undo, compliance mode you cannot", "angle": "The two modes, who can bypass, the retention date extension, and the cost of choosing wrong", "tags": ["s3", "retention", "immutability"], "segment": "retention", "visual": "diagram", "product": "Show retention and legal hold state on an object"},
-    {"n": 23, "slug": "legal-hold-vs-retention-precedence", "title": "Legal hold and retention on the same object: which wins", "angle": "Independent mechanisms, the delete behaviour, and the audit trail you need for litigation", "tags": ["s3", "retention", "compliance"], "segment": "retention", "visual": "diagram", "product": "Inspect both fields in one object view"},
-    {"n": 24, "slug": "glacier-tiers-retrieval-bill", "title": "Glacier Instant, Flexible, Deep: the retrieval bill nobody models", "angle": "Per-GB retrieval, per-request fees, the 5% monthly free tier, and a worked 10 TB restore", "tags": ["s3", "archive", "cost"], "segment": "retention", "visual": "chart", "product": "Identify the storage class of every object in a prefix"},
-    {"n": 25, "slug": "early-deletion-minimum-durations", "title": "Early deletion fees: the 30/90/180-day minimums in numbers", "angle": "Why archiving for a month costs more than keeping it in Standard, with a break-even table", "tags": ["s3", "archive", "cost"], "segment": "retention", "visual": "chart", "product": "Group objects by storage class before a migration"},
-    {"n": 26, "slug": "intelligent-tiering-128kb-rule", "title": "Transitions and small objects: the 128 KB rule", "angle": "Why moving 1M small objects to IA increases the bill, and the monitoring-only alternative", "tags": ["s3", "lifecycle", "cost"], "segment": "retention", "visual": "chart", "product": "Count and size objects per prefix before changing a rule"},
-    {"n": 27, "slug": "incomplete-multipart-storage-leak", "title": "Incomplete multipart uploads are a silent storage leak", "angle": "Where the parts hide, how they are billed, and the one lifecycle rule that cleans them", "tags": ["s3", "lifecycle", "cost"], "segment": "retention", "visual": "diagram", "product": "List in-progress multipart uploads per bucket"},
-    {"n": 28, "slug": "expiring-noncurrent-versions-counter", "title": "Expiring noncurrent versions: how the counter actually works", "angle": "Days after becoming noncurrent, NewerNoncurrentVersions, and the rule that keeps 3 versions forever", "tags": ["s3", "lifecycle", "versioning"], "segment": "retention", "visual": "diagram", "product": "Show version stack depth per object"},
-    {"n": 29, "slug": "retention-per-data-class", "title": "One bucket for every log is a retention policy that fits nobody", "angle": "Splitting by class (audit, debug, application), the duplicated lifecycle cost, and the exemption list", "tags": ["s3", "governance", "lifecycle"], "segment": "retention", "visual": "diagram", "product": "Browse several buckets from one window to compare policies"},
-    {"n": 30, "slug": "deletion-protection-human-error", "title": "The prefix deletion that wiped production, and the three guards that would have stopped it", "angle": "MFA delete, explicit deny in the bucket policy, and Object Lock as the last line", "tags": ["s3", "security", "retention"], "segment": "retention", "visual": "diagram", "product": "See exactly what a delete will remove before confirming"},
-
-    {"n": 31, "slug": "delete-markers-204-does-nothing", "title": "The 204 that deletes nothing: understanding delete markers", "angle": "How a DELETE creates a marker, why GET returns 404 while the data stays, and how to prove it", "tags": ["s3", "versioning", "troubleshooting"], "segment": "versioning", "visual": "diagram", "product": "Switch to the versions tab and see the hidden object"},
-    {"n": 32, "slug": "restoring-a-deleted-object-two-steps", "title": "Restoring a deleted object takes two steps, not one", "angle": "Removing the marker then restoring the version, and the copy pattern when the client has no version support", "tags": ["s3", "versioning", "recovery"], "segment": "versioning", "visual": "diagram", "product": "Preview and restore a version without a script"},
-    {"n": 33, "slug": "versioning-storage-cost-model", "title": "What 50 edits of a 1 GB file really cost with versioning on", "angle": "Full copies, not deltas, plus the request cost of each write, with a per-year projection", "tags": ["s3", "versioning", "cost"], "segment": "versioning", "visual": "chart", "product": "Show total bytes across versions, not just the current object"},
-    {"n": 34, "slug": "suspending-versioning-null-version", "title": "Suspending versioning does not delete versions — and creates a null version", "angle": "What suspension means for new writes, existing data, and replication", "tags": ["s3", "versioning", "governance"], "segment": "versioning", "visual": "diagram", "product": "Display versioning state per bucket at a glance"},
-    {"n": 35, "slug": "batch-delete-versions-at-scale", "title": "Deleting a million versions without the console", "angle": "DeleteObjects in batches of 1000, the manifest pattern, and the throttling you will hit", "tags": ["s3", "versioning", "operations"], "segment": "versioning", "visual": "diagram", "product": "Select many objects and act without writing a script"},
-    {"n": 36, "slug": "immutability-without-object-lock", "title": "Immutability without Object Lock: copy-on-write to a sealed bucket", "angle": "The pattern for providers that lack Object Lock, and what it cannot guarantee", "tags": ["s3", "retention", "backup"], "segment": "versioning", "visual": "diagram", "product": "Copy between two configured endpoints in one action"},
-    {"n": 37, "slug": "ransomware-recovery-drill", "title": "Ransomware hit your bucket. Run the recovery drill.", "angle": "Versioning plus Object Lock plus an isolated copy, and the 30-minute drill that proves it works", "tags": ["s3", "security", "recovery"], "segment": "versioning", "visual": "diagram", "product": "Restore a previous version and verify checksum"},
-    {"n": 38, "slug": "replication-delete-markers-off-by-default", "title": "Replication does not propagate deletes unless you ask", "angle": "DeleteMarkerReplication status Disabled by default, and the divergence it creates", "tags": ["s3", "versioning", "replication"], "segment": "versioning", "visual": "diagram", "product": "Compare object counts between source and replica"},
-    {"n": 39, "slug": "re-enable-versioning-null-trap", "title": "Re-enabling versioning leaves a null version behind", "angle": "What null means, why it confuses restores, and how to clean it", "tags": ["s3", "versioning", "troubleshooting"], "segment": "versioning", "visual": "diagram", "product": "Show version id including null"},
-    {"n": 40, "slug": "versioning-support-across-providers", "title": "Who really implements versioning among S3-compatible providers", "angle": "Native versus partial versus emulated, and the tests that reveal it", "tags": ["s3", "versioning", "interop"], "segment": "versioning", "visual": "chart", "product": "Test versioning behaviour against any endpoint"},
-
-    {"n": 41, "slug": "multipart-5mb-floor-10000-parts", "title": "Multipart upload: the 5 MB floor and the 10,000-part ceiling", "angle": "Why a 60 GB single-part PUT fails and how part sizing decides success", "tags": ["s3", "uploads", "multipart"], "segment": "multipart", "visual": "diagram", "product": "Upload a large file and watch the parts"},
-    {"n": 42, "slug": "resume-interrupted-multipart-upload", "title": "Resuming an interrupted 40 GB upload instead of restarting it", "angle": "UploadId persistence, ListParts, and which clients actually resume", "tags": ["s3", "uploads", "multipart"], "segment": "multipart", "visual": "diagram", "product": "Show in-progress uploads and their part counts"},
-    {"n": 43, "slug": "part-size-math-throughput", "title": "Choosing part size from object size and bandwidth", "angle": "The formula, 8/16/64 MB tradeoffs, and the parts-per-second your endpoint tolerates", "tags": ["s3", "uploads", "performance"], "segment": "multipart", "visual": "chart", "product": "Measure the throughput of a real transfer"},
-    {"n": 44, "slug": "etag-is-not-md5-on-multipart", "title": "ETag is not MD5: verifying integrity on multipart objects", "angle": "The dash-suffix format, computing the composite hash, and the newer checksum headers that fix it", "tags": ["s3", "uploads", "integrity"], "segment": "multipart", "visual": "diagram", "product": "Display the ETag and checksum fields side by side"},
-    {"n": 45, "slug": "entity-too-small-retry-pattern", "title": "EntityTooSmall: the error, the cause, and the retry pattern", "angle": "A part below 5 MB that is not the last one, and why naive retries repeat the failure", "tags": ["s3", "uploads", "troubleshooting"], "segment": "multipart", "visual": "diagram", "product": "Read the raw S3 error response instead of a generic message"},
-    {"n": 46, "slug": "parallel-parts-vs-single-stream", "title": "Parallel parts beat a single stream — up to the endpoint's limit", "angle": "Concurrency sweet spot, endpoint throttling, and measuring instead of guessing", "tags": ["s3", "uploads", "performance"], "segment": "multipart", "visual": "chart", "product": "Compare transfer times across settings"},
-    {"n": 47, "slug": "retries-backoff-and-put-idempotency", "title": "Retries with jitter, and why PUT is the friend that saves you", "angle": "Exponential backoff, the retryable error classes, and idempotency across PUT/COPY/multipart", "tags": ["s3", "reliability", "uploads"], "segment": "multipart", "visual": "diagram", "product": "Show retry counts and error codes per request"},
-    {"n": 48, "slug": "five-terabyte-limit-and-sharding", "title": "The 5 TB object limit and when to shard instead", "angle": "Single-object ceiling, 48.8 TB theoretical, and sharding patterns for backups", "tags": ["s3", "architecture", "limits"], "segment": "multipart", "visual": "diagram", "product": "Inspect object size distribution in a prefix"},
-    {"n": 49, "slug": "resumable-downloads-range-requests", "title": "Resumable downloads with range requests and checksum validation", "angle": "Range math, multipart GET, and catching corruption before it reaches your disk", "tags": ["s3", "downloads", "performance"], "segment": "multipart", "visual": "diagram", "product": "Download with resume and verify the checksum"},
-    {"n": 50, "slug": "proxy-idle-timeout-kills-uploads", "title": "The 100-second idle timeout that kills long uploads", "angle": "Load balancers and proxies dropping silent connections, keep-alives, and chunked throughput", "tags": ["s3", "network", "uploads"], "segment": "multipart", "visual": "diagram", "product": "Show where a transfer stalls in the request log"},
-
-    {"n": 51, "slug": "egress-dominates-every-bill", "title": "Egress is the line item that decides your bill", "angle": "Where egress is free (same-region, CDN origin fetch), where it is billed twice, and the levers that cut it", "tags": ["s3", "cost", "egress"], "segment": "cost", "visual": "chart", "product": "Estimate egress from a real object listing"},
-    {"n": 52, "slug": "request-charges-list-is-not-free", "title": "LIST is not free: how a polling script costs $50 a month", "angle": "Per-1000 request pricing by class, polling intervals, and inventory as the cheap alternative", "tags": ["s3", "cost", "operations"], "segment": "cost", "visual": "chart", "product": "Count the API calls a browsing session generates"},
-    {"n": 53, "slug": "storage-class-minimum-durations", "title": "Minimum storage durations: the 30/90/180-day trap", "angle": "Charged as if stored, even after deletion, with the spreadsheet that shows the crossover", "tags": ["s3", "cost", "archive"], "segment": "cost", "visual": "chart", "product": "Group by storage class before cleanup"},
-    {"n": 54, "slug": "retrieval-fees-versus-storage", "title": "A 10 TB restore from Deep Archive costs more than a year of storage", "angle": "Retrieval per GB plus request fees, the free tier, and the budget alarm you should set", "tags": ["s3", "cost", "archive"], "segment": "cost", "visual": "chart", "product": "Identify what is in an archive tier before restoring"},
-    {"n": 55, "slug": "cross-region-replication-cost", "title": "Cross-region replication triples the bill, not doubles it", "angle": "Storage, transfer, request and retrieval components with a worked 20 TB example", "tags": ["s3", "cost", "replication"], "segment": "cost", "visual": "chart", "product": "Compare two endpoints' bucket sizes"},
-    {"n": 56, "slug": "inventory-and-analytics-for-cost", "title": "Storage Lens, Inventory and Analytics: the only way to know what you store", "angle": "Access denied to Inventory is a policy problem, and why listing manually is not an option at scale", "tags": ["s3", "cost", "governance"], "segment": "cost", "visual": "diagram", "product": "Produce a local inventory without server-side tooling"},
-    {"n": 57, "slug": "small-object-overhead", "title": "A million 4 KB files cost ten times what you expect", "angle": "128 KB minimum billing, per-request overhead, and the packing strategies that fix it", "tags": ["s3", "cost", "architecture"], "segment": "cost", "visual": "chart", "product": "Show object size distribution for a prefix"},
-    {"n": 58, "slug": "idle-versions-invisible-bill", "title": "Idle versions and orphan parts: the invisible 20% of the bill", "angle": "Measuring both, the lifecycle rules that clean them, and the order to apply them", "tags": ["s3", "cost", "lifecycle"], "segment": "cost", "visual": "chart", "product": "Show versions and uploads outside the visible object list"},
-    {"n": 59, "slug": "cost-allocation-that-survives", "title": "Tagging strategies that survive into a bill", "angle": "Which tag keys reach cost allocation, the per-object tag cost, and the fallback by prefix", "tags": ["s3", "cost", "governance"], "segment": "cost", "visual": "diagram", "product": "Inspect tags at scale to find untagged objects"},
-    {"n": 60, "slug": "honest-provider-cost-comparison", "title": "R2, B2, Wasabi, OVH: comparing without the marketing", "angle": "Egress-free claims, 90-day minimums, fair-use clauses, and the workloads where each wins", "tags": ["s3", "cost", "interop"], "segment": "cost", "visual": "chart", "product": "Benchmark the same workload against any endpoint"},
-
-    {"n": 61, "slug": "request-rate-prefix-sharding", "title": "3,500 PUT and 5,500 GET per second per prefix: still relevant?", "angle": "What the 2018 change removed, why hot prefixes still hurt, and when sharding is pointless", "tags": ["s3", "performance", "scale"], "segment": "performance", "visual": "diagram", "product": "Show request rate per bucket from a local session"},
-    {"n": 62, "slug": "hot-prefix-date-based-keys", "title": "Date-based keys looked smart in 2015 and hurt now", "angle": "Lexical ordering, LIST efficiency, and the partition skew that concurrency reintroduces", "tags": ["s3", "performance", "architecture"], "segment": "performance", "visual": "diagram", "product": "Visualise key distribution in a bucket"},
-    {"n": 63, "slug": "list-pagination-1000-pages", "title": "LIST returns 1000 keys per page — and counting objects is O(n)", "angle": "Continuation tokens, the cost of counting, and the inventory alternative", "tags": ["s3", "performance", "api"], "segment": "performance", "visual": "diagram", "product": "Page through a large bucket without freezing"},
-    {"n": 64, "slug": "range-requests-saturate-link", "title": "Saturating a gigabit link with range requests", "angle": "Concurrent ranges, offset alignment, and the throughput math", "tags": ["s3", "performance", "downloads"], "segment": "performance", "visual": "chart", "product": "Download with parallel ranges and show the rate"},
-    {"n": 65, "slug": "transfer-acceleration-when-worth", "title": "Transfer Acceleration: when it earns its premium", "angle": "The edge network, the distance threshold where it wins, and the workloads where it is pure cost", "tags": ["s3", "performance", "network"], "segment": "performance", "visual": "chart", "product": "Compare transfer time across endpoints"},
-    {"n": 66, "slug": "parallel-read-multipart-get", "title": "Parallel reads: the client-side trick that speeds up big downloads", "angle": "Multipart GET, ordering, and the memory/disk tradeoff", "tags": ["s3", "performance", "downloads"], "segment": "performance", "visual": "diagram", "product": "Show progress and speed per connection"},
-    {"n": 67, "slug": "latency-versus-throughput", "title": "Latency is not throughput: measuring the right thing", "angle": "Round-trip time versus MB/s, connection reuse, and what 30 ms of RTT costs you", "tags": ["s3", "performance", "diagnostics"], "segment": "performance", "visual": "chart", "product": "Show per-request latency distribution"},
-    {"n": 68, "slug": "byte-range-caching-cdn-hit-ratio", "title": "Byte-range caching and the CDN hit ratio nobody watches", "angle": "Range support, cache key design, and the 206 responses that reduce your hit rate", "tags": ["s3", "performance", "cdn"], "segment": "performance", "visual": "diagram", "product": "Inspect Cache-Control and range headers on objects"},
-    {"n": 69, "slug": "event-notifications-ordering-duplicates", "title": "Event notifications arrive twice, out of order, and that is documented", "angle": "At-least-once delivery, ordering per key, and the idempotent consumer pattern", "tags": ["s3", "architecture", "events"], "segment": "performance", "visual": "diagram", "product": "Read bucket notification configuration"},
-    {"n": 70, "slug": "benchmarking-honestly", "title": "Benchmarking S3 honestly: what the tools actually measure", "angle": "s5cmd, rclone and a GUI test different things, and why your numbers will differ", "tags": ["s3", "performance", "operations"], "segment": "performance", "visual": "chart", "product": "Run a repeatable transfer test from one client"},
-
-    {"n": 71, "slug": "rpo-rto-object-storage", "title": "What RPO and RTO actually mean for object storage", "angle": "Replication lag, restore time for 20 TB, and the numbers to put in a contract", "tags": ["s3", "reliability", "dr"], "segment": "reliability", "visual": "chart", "product": "Verify replica contents against the source"},
-    {"n": 72, "slug": "replication-time-control-sla", "title": "Replication Time Control: the 15-minute SLA and what it costs", "angle": "The 99.99% commitment, metrics to watch, and when standard replication is enough", "tags": ["s3", "reliability", "replication"], "segment": "reliability", "visual": "chart", "product": "Compare object timestamps across two endpoints"},
-    {"n": 73, "slug": "failover-drill-without-breaking-prod", "title": "Running a failover drill without breaking production", "angle": "Read-only validation, DNS TTL, and the checklist that proves the switch before you need it", "tags": ["s3", "reliability", "dr"], "segment": "reliability", "visual": "diagram", "product": "Point the same profile at two endpoints to compare"},
-    {"n": 74, "slug": "backup-versus-replication", "title": "Replication is not backup: it propagates your deletes", "angle": "Why the 3-2-1 rule still applies, and the immutable copy that breaks the chain", "tags": ["s3", "reliability", "backup"], "segment": "reliability", "visual": "diagram", "product": "Copy between isolated accounts or endpoints"},
-    {"n": 75, "slug": "cross-account-backup-against-compromise", "title": "Cross-account backup: your only defence against account compromise", "angle": "Separate credentials, the trust boundary, and the restore path when the source account is gone", "tags": ["s3", "reliability", "security"], "segment": "reliability", "visual": "diagram", "product": "Manage several endpoint profiles in one client"},
-    {"n": 76, "slug": "consistency-read-after-write", "title": "Read-after-write consistency covers less than you think", "angle": "What became strongly consistent in 2020, what LIST never guaranteed, and the races that remain", "tags": ["s3", "reliability", "api"], "segment": "reliability", "visual": "diagram", "product": "Verify a write completed before the app proceeds"},
-    {"n": 77, "slug": "regional-outage-playbook", "title": "Regional outage playbook for teams without a platform team", "angle": "DNS, retries, degraded mode, and the 6 decisions you must make in advance", "tags": ["s3", "reliability", "dr"], "segment": "reliability", "visual": "diagram", "product": "Keep working against an alternate endpoint"},
-    {"n": 78, "slug": "end-to-end-checksums", "title": "End-to-end checksums: catching the corruption nothing else sees", "angle": "CRC32C/CRC64NVME, the composite algorithm, and where TLS checksums stop helping", "tags": ["s3", "reliability", "integrity"], "segment": "reliability", "visual": "diagram", "product": "Verify a downloaded object against its checksum"},
-    {"n": 79, "slug": "restore-testing", "title": "The backup you never restored is not a backup", "angle": "A quarterly restore drill with a timer, and the metrics that make it credible in an audit", "tags": ["s3", "reliability", "backup"], "segment": "reliability", "visual": "diagram", "product": "Restore a subset and compare checksums"},
-    {"n": 80, "slug": "durability-versus-availability", "title": "Eleven nines of durability is not eleven nines of availability", "angle": "What the two numbers measure, the failure modes, and what you must build yourself", "tags": ["s3", "reliability", "architecture"], "segment": "reliability", "visual": "chart", "product": "See errors per request over a session"},
-
-    {"n": 81, "slug": "server-access-logs-vs-cloudtrail", "title": "Server access logs or CloudTrail data events: pick by question", "angle": "Cost per million events, latency, field coverage, and which answers 'who read this object'", "tags": ["s3", "audit", "security"], "segment": "security", "visual": "chart", "product": "Show request logs for a single object"},
-    {"n": 82, "slug": "detecting-public-buckets-at-scale", "title": "Detecting public buckets at scale in five minutes", "angle": "Config rules, Access Analyzer, and a script that checks effective public access on every bucket", "tags": ["s3", "security", "audit"], "segment": "security", "visual": "diagram", "product": "Test anonymous access per bucket from one pane"},
-    {"n": 83, "slug": "malware-scanning-without-proxy", "title": "Scanning uploads for malware without a proxy", "angle": "Event-driven scanning, the quarantine bucket pattern, and the race between scan and download", "tags": ["s3", "security", "architecture"], "segment": "security", "visual": "diagram", "product": "Inspect uploaded objects before promoting them"},
-    {"n": 84, "slug": "bucket-policy-lint-forgotten-conditions", "title": "The bucket policy conditions everybody forgets", "angle": "aws:SecureTransport, s3:prefix, s3:max-keys and the deny that has to exist for an audit to pass", "tags": ["s3", "security", "policy"], "segment": "security", "visual": "diagram", "product": "Read and compare policy documents across buckets"},
-    {"n": 85, "slug": "cors-misconfiguration-wildcard", "title": "A CORS wildcard on a bucket is an exfiltration primitive", "angle": "AllowedOrigins as *, credentialed requests, and the browser behaviour that exposes data", "tags": ["s3", "security", "web"], "segment": "security", "visual": "diagram", "product": "Inspect CORS configuration per bucket"},
-    {"n": 86, "slug": "presigned-url-leakage", "title": "Presigned URLs leak into logs, referrers and chat", "angle": "Short TTLs, one-time patterns, and what an attacker does with a URL that still has 6 days left", "tags": ["s3", "security", "presigned-urls"], "segment": "security", "visual": "diagram", "product": "Generate and test a short-lived URL"},
-    {"n": 87, "slug": "object-ownership-acl-migration", "title": "Bucket owner enforced: migrating away from ACLs", "angle": "The ACL-disabled default, the migration order, and the clients that still send canned ACLs", "tags": ["s3", "security", "migration"], "segment": "security", "visual": "diagram", "product": "Show object ownership fields per object"},
-    {"n": 88, "slug": "incident-response-preserve-evidence", "title": "Before you fix the bucket, preserve the evidence", "angle": "What to snapshot, log retention during an incident, and the order that keeps findings usable", "tags": ["s3", "security", "incident"], "segment": "security", "visual": "diagram", "product": "Capture a bucket's state without mutating it"},
-
-    {"n": 89, "slug": "path-style-versus-virtual-hosted", "title": "Path-style versus virtual-hosted: the flag that breaks on MinIO and R2", "angle": "DNS constraints, TLS certificate names, and the one-line client fix", "tags": ["s3", "interop", "configuration"], "segment": "interop", "visual": "diagram", "product": "Toggle addressing style per connection profile"},
-    {"n": 90, "slug": "signature-v2-v4-legacy-clients", "title": "SigV2 is gone in most regions and legacy clients still fail", "angle": "Identifying the signature version in an error, and the migration for old SDKs", "tags": ["s3", "interop", "legacy"], "segment": "interop", "visual": "diagram", "product": "Surface the signature version in a connection test"},
-    {"n": 91, "slug": "s3-compatible-gap-matrix", "title": "The S3-compatible gap matrix: what each provider omits", "angle": "Object Lock, Inventory, Select, versioning, event notifications — who has what, tested", "tags": ["s3", "interop", "comparison"], "segment": "interop", "visual": "chart", "product": "Run the same capability probe across providers"},
-    {"n": 92, "slug": "migrating-fifty-terabytes", "title": "Migrating 50 TB without downtime", "angle": "Staged cutover, dual-write window, checksum verification, and the rollback that must stay possible", "tags": ["s3", "interop", "migration"], "segment": "interop", "visual": "diagram", "product": "Copy and verify across two endpoints"},
-    {"n": 93, "slug": "conditional-and-range-header-inconsistencies", "title": "Conditional and range headers behave differently across providers", "angle": "If-Match support, 416 handling, and why resumable clients break on a compatible API", "tags": ["s3", "interop", "api"], "segment": "interop", "visual": "chart", "product": "Test headers against an arbitrary endpoint"},
-    {"n": 94, "slug": "minio-small-cluster-traps", "title": "MinIO in production: the small-cluster traps", "angle": "Erasure coding overhead, drive counts, the 4-drive minimum, and the rebuild time on spinning disks", "tags": ["s3", "interop", "self-hosted"], "segment": "interop", "visual": "diagram", "product": "Connect to a self-hosted endpoint in seconds"},
-    {"n": 95, "slug": "r2-and-b2-client-config", "title": "R2 and B2: what changes in your client config", "angle": "Endpoint formats, region strings, missing features, and the errors that look like auth failures", "tags": ["s3", "interop", "configuration"], "segment": "interop", "visual": "chart", "product": "Presets for the provider list, with correct defaults"},
-
-    {"n": 96, "slug": "conditional-writes-if-none-match", "title": "Conditional writes finally make S3 usable as a lock", "angle": "If-None-Match: *, the 412 race, provider support, and the distributed lock pattern it enables", "tags": ["s3", "api", "architecture"], "segment": "edge", "visual": "diagram", "product": "Write and detect a precondition failure"},
-    {"n": 97, "slug": "requester-pays-who-it-breaks", "title": "Requester Pays shifts the egress bill, and breaks half your tools", "angle": "How the header changes reads, the clients that ignore it, and the datasets where it makes sense", "tags": ["s3", "cost", "api"], "segment": "edge", "visual": "diagram", "product": "Handle requester-pays buckets in a GUI"},
-    {"n": 98, "slug": "static-hosting-limits", "title": "Static hosting on a bucket: the limits that force a CDN", "angle": "No custom headers, no TLS, redirect rules only, and the 404 behaviour", "tags": ["s3", "web", "architecture"], "segment": "edge", "visual": "diagram", "product": "Inspect website configuration per bucket"},
-    {"n": 99, "slug": "crc64nvme-new-integrity-default", "title": "CRC64NVME: the integrity default that changed under you", "angle": "Full-object versus composite checksums, the SDK defaults, and what older clients send", "tags": ["s3", "integrity", "api"], "segment": "edge", "visual": "diagram", "product": "Show the checksum algorithm per object"},
-    {"n": 100, "slug": "portable-config-across-five-providers", "title": "One client, five providers: the config that keeps you portable", "angle": "Profile design, endpoint/path-style/region matrix, and the abstractions that hide provider gaps", "tags": ["s3", "interop", "architecture"], "segment": "edge", "visual": "chart", "product": "Switch providers without touching code"}
+    {
+      "n": 1,
+      "slug": "bucket-policy-allow-still-denied",
+      "title": "When two policies allow and the request still fails",
+      "angle": "Explicit deny precedence, the evaluation order, and the deny hidden in a service control policy",
+      "tags": [
+        "s3",
+        "iam",
+        "security"
+      ],
+      "segment": "access",
+      "visual": "diagram",
+      "product": "Show the policy chain from the client's point of view before saving a connection"
+    },
+    {
+      "n": 2,
+      "slug": "presigned-url-seven-day-ceiling",
+      "title": "Presigned URLs expire at seven days. Then what?",
+      "angle": "The hard 7-day limit on SigV4, what happens when the signing credentials rotate, and safe patterns for long-lived downloads",
+      "tags": [
+        "s3",
+        "security",
+        "presigned-urls"
+      ],
+      "segment": "access",
+      "visual": "diagram",
+      "product": "Test a presigned URL against a live endpoint and see the expiry"
+    },
+    {
+      "n": 3,
+      "slug": "presigned-post-enforce-size-content-type",
+      "title": "Presigned POST: enforcing size and content type before the upload starts",
+      "angle": "Policy conditions that block an oversized or wrong-type upload, which a presigned PUT cannot do",
+      "tags": [
+        "s3",
+        "security",
+        "uploads"
+      ],
+      "segment": "access",
+      "visual": "diagram",
+      "product": "Inspect which headers a client actually sends"
+    },
+    {
+      "n": 4,
+      "slug": "assumerole-chaining-one-hour-ceiling",
+      "title": "Role chaining caps sessions at one hour — and nobody notices until the batch job dies",
+      "angle": "AssumeRole chaining's 1-hour ceiling, session duration inheritance, and the long-running job that breaks",
+      "tags": [
+        "s3",
+        "iam",
+        "sts"
+      ],
+      "segment": "access",
+      "visual": "diagram",
+      "product": "Verify a connection's effective credentials before running a long job"
+    },
+    {
+      "n": 5,
+      "slug": "abac-object-tags-vs-prefix-policies",
+      "title": "Object tags or prefixes: choosing an access model that survives growth",
+      "angle": "ABAC with s3:ExistingObjectTag, tag-based cost, and where prefix policies become unmaintainable",
+      "tags": [
+        "s3",
+        "iam",
+        "governance"
+      ],
+      "segment": "access",
+      "visual": "diagram",
+      "product": "Display object tags and metadata next to permissions"
+    },
+    {
+      "n": 6,
+      "slug": "cross-account-access-confused-deputy",
+      "title": "Cross-account access without wildcards: the confused deputy problem in S3",
+      "angle": "aws:SourceAccount and aws:SourceArn conditions, trusting an account id vs trusting a role",
+      "tags": [
+        "s3",
+        "iam",
+        "security"
+      ],
+      "segment": "access",
+      "visual": "diagram",
+      "product": "Test cross-account credentials against a bucket in one step"
+    },
+    {
+      "n": 7,
+      "slug": "block-public-access-four-switches",
+      "title": "Block Public Access has four switches and you need to know which one matters",
+      "angle": "Account vs bucket level, ACL vs policy blocking, and the ordering that makes one switch redundant",
+      "tags": [
+        "s3",
+        "security",
+        "public-access"
+      ],
+      "segment": "access",
+      "visual": "diagram",
+      "product": "See the effective permission state a client sees"
+    },
+    {
+      "n": 8,
+      "slug": "access-points-multi-region-worth-it",
+      "title": "Access Points and Multi-Region Access Points: when the extra layer earns its keep",
+      "angle": "Policy scoping per access point, the DNS-based routing, and the cost/benefit for small teams",
+      "tags": [
+        "s3",
+        "network",
+        "governance"
+      ],
+      "segment": "access",
+      "visual": "diagram",
+      "product": "Point one profile at any endpoint and compare"
+    },
+    {
+      "n": 9,
+      "slug": "anonymous-read-exact-leak-path",
+      "title": "The exact combination that leaks a bucket to the internet",
+      "angle": "ACL plus policy plus BPA off, and how each single change would have prevented it",
+      "tags": [
+        "s3",
+        "security",
+        "public-access"
+      ],
+      "segment": "access",
+      "visual": "diagram",
+      "product": "Test anonymous read on a bucket without writing code"
+    },
+    {
+      "n": 10,
+      "slug": "auditing-who-can-read-a-bucket",
+      "title": "How to answer 'who can read this bucket' in under an hour",
+      "angle": "Access Analyzer, policy simulator, and the manual review of wildcards and role paths that tools miss",
+      "tags": [
+        "s3",
+        "security",
+        "audit"
+      ],
+      "segment": "access",
+      "visual": "diagram",
+      "product": "List buckets and policies from the client side, then verify with a test read"
+    },
+    {
+      "n": 11,
+      "slug": "sse-s3-vs-sse-kms-vs-dsse",
+      "title": "SSE-S3, SSE-KMS, DSSE-KMS: the cost per 1000 requests",
+      "angle": "KMS pricing per request, the throttling cliff around 5,500 req/s, and the tier that fits a real workload",
+      "tags": [
+        "s3",
+        "encryption",
+        "cost"
+      ],
+      "segment": "encryption",
+      "visual": "chart",
+      "product": "Inspect an object's effective encryption from its metadata"
+    },
+    {
+      "n": 12,
+      "slug": "kms-key-policy-lockout",
+      "title": "The KMS key policy that locks you out of your own data",
+      "angle": "Missing kms:CreateGrant for the caller, the account-principal delegation trap, and how to recover",
+      "tags": [
+        "s3",
+        "encryption",
+        "kms"
+      ],
+      "segment": "encryption",
+      "visual": "diagram",
+      "product": "Read encryption headers on a failing request"
+    },
+    {
+      "n": 13,
+      "slug": "bucket-keys-kms-cost",
+      "title": "Bucket keys cut KMS costs up to 99% — until cross-account access breaks",
+      "angle": "How S3 Bucket Keys work, when they silently disable, and the replication interaction",
+      "tags": [
+        "s3",
+        "encryption",
+        "cost"
+      ],
+      "segment": "encryption",
+      "visual": "chart",
+      "product": "Show key id per object to confirm what actually encrypted it"
+    },
+    {
+      "n": 14,
+      "slug": "client-side-encryption-tradeoffs",
+      "title": "Client-side encryption: what you gain, what you lose forever",
+      "angle": "Losing range requests, server-side processing and lifecycle analytics, and the key custody burden",
+      "tags": [
+        "s3",
+        "encryption",
+        "architecture"
+      ],
+      "segment": "encryption",
+      "visual": "diagram",
+      "product": "Compare an encrypted and non-encrypted object side by side"
+    },
+    {
+      "n": 15,
+      "slug": "tls-certificate-trust-not-no-verify",
+      "title": "Stop shipping --no-verify-ssl: fixing S3 TLS trust properly",
+      "angle": "Why the flag shows up in production scripts, custom CAs for MinIO/on-prem, and what breaks when you remove it",
+      "tags": [
+        "s3",
+        "security",
+        "tls"
+      ],
+      "segment": "encryption",
+      "visual": "diagram",
+      "product": "Surface the TLS error text instead of a generic failure"
+    },
+    {
+      "n": 16,
+      "slug": "kms-key-rotation-does-not-reencrypt",
+      "title": "Key rotation does not re-encrypt your objects",
+      "angle": "What automatic rotation actually changes, DEK wrapping, and how to verify which key version protects an object",
+      "tags": [
+        "s3",
+        "encryption",
+        "kms"
+      ],
+      "segment": "encryption",
+      "visual": "diagram",
+      "product": "Display key id and version per object"
+    },
+    {
+      "n": 17,
+      "slug": "sse-c-provider-support-matrix",
+      "title": "SSE-C support across S3-compatible providers",
+      "angle": "Who implements customer-provided keys, who ignores the header silently, and how to test it in 2 minutes",
+      "tags": [
+        "s3",
+        "encryption",
+        "interop"
+      ],
+      "segment": "encryption",
+      "visual": "chart",
+      "product": "Test SSE-C headers against any endpoint"
+    },
+    {
+      "n": 18,
+      "slug": "unencrypted-metadata-and-tags",
+      "title": "Your object metadata and tags are never encrypted",
+      "angle": "What leaks in headers and inventory reports, and which fields to keep out of tags",
+      "tags": [
+        "s3",
+        "encryption",
+        "privacy"
+      ],
+      "segment": "encryption",
+      "visual": "diagram",
+      "product": "Show raw metadata and tag values in the object inspector"
+    },
+    {
+      "n": 19,
+      "slug": "cross-region-replication-kms-reencrypt",
+      "title": "Replicating KMS-encrypted objects needs a second permission",
+      "angle": "Re-encryption on the destination, the key policy on both sides, and the replication failure that looks like a network error",
+      "tags": [
+        "s3",
+        "encryption",
+        "replication"
+      ],
+      "segment": "encryption",
+      "visual": "diagram",
+      "product": "Compare encryption metadata across two endpoints"
+    },
+    {
+      "n": 20,
+      "slug": "encryption-choice-by-framework",
+      "title": "Which encryption satisfies which framework",
+      "angle": "Mapping SSE-S3/KMS/C and client-side to PCI DSS, HIPAA, ISO 27001 and SecNumCloud without over-engineering",
+      "tags": [
+        "s3",
+        "encryption",
+        "compliance"
+      ],
+      "segment": "encryption",
+      "visual": "chart",
+      "product": "Export encryption state for an auditor in one view"
+    },
+    {
+      "n": 21,
+      "slug": "lifecycle-rules-that-never-fire",
+      "title": "Lifecycle rules that silently never fire",
+      "angle": "Prefix overlap, tag filters, the 30-day minimum, and the rule ordering that shadows your intent",
+      "tags": [
+        "s3",
+        "lifecycle",
+        "cost"
+      ],
+      "segment": "retention",
+      "visual": "diagram",
+      "product": "Read lifecycle configuration and show which rule matches an object"
+    },
+    {
+      "n": 22,
+      "slug": "object-lock-governance-vs-compliance",
+      "title": "Object Lock: governance mode you can undo, compliance mode you cannot",
+      "angle": "The two modes, who can bypass, the retention date extension, and the cost of choosing wrong",
+      "tags": [
+        "s3",
+        "retention",
+        "immutability"
+      ],
+      "segment": "retention",
+      "visual": "diagram",
+      "product": "Show retention and legal hold state on an object"
+    },
+    {
+      "n": 23,
+      "slug": "legal-hold-vs-retention-precedence",
+      "title": "Legal hold and retention on the same object: which wins",
+      "angle": "Independent mechanisms, the delete behaviour, and the audit trail you need for litigation",
+      "tags": [
+        "s3",
+        "retention",
+        "compliance"
+      ],
+      "segment": "retention",
+      "visual": "diagram",
+      "product": "Inspect both fields in one object view"
+    },
+    {
+      "n": 24,
+      "slug": "glacier-tiers-retrieval-bill",
+      "title": "Glacier Instant, Flexible, Deep: the retrieval bill nobody models",
+      "angle": "Per-GB retrieval, per-request fees, the 5% monthly free tier, and a worked 10 TB restore",
+      "tags": [
+        "s3",
+        "archive",
+        "cost"
+      ],
+      "segment": "retention",
+      "visual": "chart",
+      "product": "Identify the storage class of every object in a prefix"
+    },
+    {
+      "n": 25,
+      "slug": "early-deletion-minimum-durations",
+      "title": "Early deletion fees: the 30/90/180-day minimums in numbers",
+      "angle": "Why archiving for a month costs more than keeping it in Standard, with a break-even table",
+      "tags": [
+        "s3",
+        "archive",
+        "cost"
+      ],
+      "segment": "retention",
+      "visual": "chart",
+      "product": "Group objects by storage class before a migration"
+    },
+    {
+      "n": 26,
+      "slug": "intelligent-tiering-128kb-rule",
+      "title": "Transitions and small objects: the 128 KB rule",
+      "angle": "Why moving 1M small objects to IA increases the bill, and the monitoring-only alternative",
+      "tags": [
+        "s3",
+        "lifecycle",
+        "cost"
+      ],
+      "segment": "retention",
+      "visual": "chart",
+      "product": "Count and size objects per prefix before changing a rule"
+    },
+    {
+      "n": 27,
+      "slug": "incomplete-multipart-storage-leak",
+      "title": "Incomplete multipart uploads are a silent storage leak",
+      "angle": "Where the parts hide, how they are billed, and the one lifecycle rule that cleans them",
+      "tags": [
+        "s3",
+        "lifecycle",
+        "cost"
+      ],
+      "segment": "retention",
+      "visual": "diagram",
+      "product": "List in-progress multipart uploads per bucket"
+    },
+    {
+      "n": 28,
+      "slug": "expiring-noncurrent-versions-counter",
+      "title": "Expiring noncurrent versions: how the counter actually works",
+      "angle": "Days after becoming noncurrent, NewerNoncurrentVersions, and the rule that keeps 3 versions forever",
+      "tags": [
+        "s3",
+        "lifecycle",
+        "versioning"
+      ],
+      "segment": "retention",
+      "visual": "diagram",
+      "product": "Show version stack depth per object"
+    },
+    {
+      "n": 29,
+      "slug": "retention-per-data-class",
+      "title": "One bucket for every log is a retention policy that fits nobody",
+      "angle": "Splitting by class (audit, debug, application), the duplicated lifecycle cost, and the exemption list",
+      "tags": [
+        "s3",
+        "governance",
+        "lifecycle"
+      ],
+      "segment": "retention",
+      "visual": "diagram",
+      "product": "Browse several buckets from one window to compare policies"
+    },
+    {
+      "n": 30,
+      "slug": "deletion-protection-human-error",
+      "title": "The prefix deletion that wiped production, and the three guards that would have stopped it",
+      "angle": "MFA delete, explicit deny in the bucket policy, and Object Lock as the last line",
+      "tags": [
+        "s3",
+        "security",
+        "retention"
+      ],
+      "segment": "retention",
+      "visual": "diagram",
+      "product": "See exactly what a delete will remove before confirming"
+    },
+    {
+      "n": 31,
+      "slug": "delete-markers-204-does-nothing",
+      "title": "The 204 that deletes nothing: understanding delete markers",
+      "angle": "How a DELETE creates a marker, why GET returns 404 while the data stays, and how to prove it",
+      "tags": [
+        "s3",
+        "versioning",
+        "troubleshooting"
+      ],
+      "segment": "versioning",
+      "visual": "diagram",
+      "product": "Switch to the versions tab and see the hidden object"
+    },
+    {
+      "n": 32,
+      "slug": "restoring-a-deleted-object-two-steps",
+      "title": "Restoring a deleted object takes two steps, not one",
+      "angle": "Removing the marker then restoring the version, and the copy pattern when the client has no version support",
+      "tags": [
+        "s3",
+        "versioning",
+        "recovery"
+      ],
+      "segment": "versioning",
+      "visual": "diagram",
+      "product": "Preview and restore a version without a script"
+    },
+    {
+      "n": 33,
+      "slug": "versioning-storage-cost-model",
+      "title": "What 50 edits of a 1 GB file really cost with versioning on",
+      "angle": "Full copies, not deltas, plus the request cost of each write, with a per-year projection",
+      "tags": [
+        "s3",
+        "versioning",
+        "cost"
+      ],
+      "segment": "versioning",
+      "visual": "chart",
+      "product": "Show total bytes across versions, not just the current object"
+    },
+    {
+      "n": 34,
+      "slug": "suspending-versioning-null-version",
+      "title": "Suspending versioning does not delete versions — and creates a null version",
+      "angle": "What suspension means for new writes, existing data, and replication",
+      "tags": [
+        "s3",
+        "versioning",
+        "governance"
+      ],
+      "segment": "versioning",
+      "visual": "diagram",
+      "product": "Display versioning state per bucket at a glance"
+    },
+    {
+      "n": 35,
+      "slug": "batch-delete-versions-at-scale",
+      "title": "Deleting a million versions without the console",
+      "angle": "DeleteObjects in batches of 1000, the manifest pattern, and the throttling you will hit",
+      "tags": [
+        "s3",
+        "versioning",
+        "operations"
+      ],
+      "segment": "versioning",
+      "visual": "diagram",
+      "product": "Select many objects and act without writing a script"
+    },
+    {
+      "n": 36,
+      "slug": "immutability-without-object-lock",
+      "title": "Immutability without Object Lock: copy-on-write to a sealed bucket",
+      "angle": "The pattern for providers that lack Object Lock, and what it cannot guarantee",
+      "tags": [
+        "s3",
+        "retention",
+        "backup"
+      ],
+      "segment": "versioning",
+      "visual": "diagram",
+      "product": "Copy between two configured endpoints in one action"
+    },
+    {
+      "n": 37,
+      "slug": "ransomware-recovery-drill",
+      "title": "Ransomware hit your bucket. Run the recovery drill.",
+      "angle": "Versioning plus Object Lock plus an isolated copy, and the 30-minute drill that proves it works",
+      "tags": [
+        "s3",
+        "security",
+        "recovery"
+      ],
+      "segment": "versioning",
+      "visual": "diagram",
+      "product": "Restore a previous version and verify checksum"
+    },
+    {
+      "n": 38,
+      "slug": "replication-delete-markers-off-by-default",
+      "title": "Replication does not propagate deletes unless you ask",
+      "angle": "DeleteMarkerReplication status Disabled by default, and the divergence it creates",
+      "tags": [
+        "s3",
+        "versioning",
+        "replication"
+      ],
+      "segment": "versioning",
+      "visual": "diagram",
+      "product": "Compare object counts between source and replica"
+    },
+    {
+      "n": 39,
+      "slug": "re-enable-versioning-null-trap",
+      "title": "Re-enabling versioning leaves a null version behind",
+      "angle": "What null means, why it confuses restores, and how to clean it",
+      "tags": [
+        "s3",
+        "versioning",
+        "troubleshooting"
+      ],
+      "segment": "versioning",
+      "visual": "diagram",
+      "product": "Show version id including null"
+    },
+    {
+      "n": 40,
+      "slug": "versioning-support-across-providers",
+      "title": "Who really implements versioning among S3-compatible providers",
+      "angle": "Native versus partial versus emulated, and the tests that reveal it",
+      "tags": [
+        "s3",
+        "versioning",
+        "interop"
+      ],
+      "segment": "versioning",
+      "visual": "chart",
+      "product": "Test versioning behaviour against any endpoint"
+    },
+    {
+      "n": 41,
+      "slug": "multipart-5mb-floor-10000-parts",
+      "title": "Multipart upload: the 5 MB floor and the 10,000-part ceiling",
+      "angle": "Why a 60 GB single-part PUT fails and how part sizing decides success",
+      "tags": [
+        "s3",
+        "uploads",
+        "multipart"
+      ],
+      "segment": "multipart",
+      "visual": "diagram",
+      "product": "Upload a large file and watch the parts"
+    },
+    {
+      "n": 42,
+      "slug": "resume-interrupted-multipart-upload",
+      "title": "Resuming an interrupted 40 GB upload instead of restarting it",
+      "angle": "UploadId persistence, ListParts, and which clients actually resume",
+      "tags": [
+        "s3",
+        "uploads",
+        "multipart"
+      ],
+      "segment": "multipart",
+      "visual": "diagram",
+      "product": "Show in-progress uploads and their part counts"
+    },
+    {
+      "n": 43,
+      "slug": "part-size-math-throughput",
+      "title": "Choosing part size from object size and bandwidth",
+      "angle": "The formula, 8/16/64 MB tradeoffs, and the parts-per-second your endpoint tolerates",
+      "tags": [
+        "s3",
+        "uploads",
+        "performance"
+      ],
+      "segment": "multipart",
+      "visual": "chart",
+      "product": "Measure the throughput of a real transfer"
+    },
+    {
+      "n": 44,
+      "slug": "etag-is-not-md5-on-multipart",
+      "title": "ETag is not MD5: verifying integrity on multipart objects",
+      "angle": "The dash-suffix format, computing the composite hash, and the newer checksum headers that fix it",
+      "tags": [
+        "s3",
+        "uploads",
+        "integrity"
+      ],
+      "segment": "multipart",
+      "visual": "diagram",
+      "product": "Display the ETag and checksum fields side by side"
+    },
+    {
+      "n": 45,
+      "slug": "entity-too-small-retry-pattern",
+      "title": "EntityTooSmall: the error, the cause, and the retry pattern",
+      "angle": "A part below 5 MB that is not the last one, and why naive retries repeat the failure",
+      "tags": [
+        "s3",
+        "uploads",
+        "troubleshooting"
+      ],
+      "segment": "multipart",
+      "visual": "diagram",
+      "product": "Read the raw S3 error response instead of a generic message"
+    },
+    {
+      "n": 46,
+      "slug": "parallel-parts-vs-single-stream",
+      "title": "Parallel parts beat a single stream — up to the endpoint's limit",
+      "angle": "Concurrency sweet spot, endpoint throttling, and measuring instead of guessing",
+      "tags": [
+        "s3",
+        "uploads",
+        "performance"
+      ],
+      "segment": "multipart",
+      "visual": "chart",
+      "product": "Compare transfer times across settings"
+    },
+    {
+      "n": 47,
+      "slug": "retries-backoff-and-put-idempotency",
+      "title": "Retries with jitter, and why PUT is the friend that saves you",
+      "angle": "Exponential backoff, the retryable error classes, and idempotency across PUT/COPY/multipart",
+      "tags": [
+        "s3",
+        "reliability",
+        "uploads"
+      ],
+      "segment": "multipart",
+      "visual": "diagram",
+      "product": "Show retry counts and error codes per request"
+    },
+    {
+      "n": 48,
+      "slug": "five-terabyte-limit-and-sharding",
+      "title": "The 5 TB object limit and when to shard instead",
+      "angle": "Single-object ceiling, 48.8 TB theoretical, and sharding patterns for backups",
+      "tags": [
+        "s3",
+        "architecture",
+        "limits"
+      ],
+      "segment": "multipart",
+      "visual": "diagram",
+      "product": "Inspect object size distribution in a prefix"
+    },
+    {
+      "n": 49,
+      "slug": "resumable-downloads-range-requests",
+      "title": "Resumable downloads with range requests and checksum validation",
+      "angle": "Range math, multipart GET, and catching corruption before it reaches your disk",
+      "tags": [
+        "s3",
+        "downloads",
+        "performance"
+      ],
+      "segment": "multipart",
+      "visual": "diagram",
+      "product": "Download with resume and verify the checksum"
+    },
+    {
+      "n": 50,
+      "slug": "proxy-idle-timeout-kills-uploads",
+      "title": "The 100-second idle timeout that kills long uploads",
+      "angle": "Load balancers and proxies dropping silent connections, keep-alives, and chunked throughput",
+      "tags": [
+        "s3",
+        "network",
+        "uploads"
+      ],
+      "segment": "multipart",
+      "visual": "diagram",
+      "product": "Show where a transfer stalls in the request log"
+    },
+    {
+      "n": 51,
+      "slug": "egress-dominates-every-bill",
+      "title": "Egress is the line item that decides your bill",
+      "angle": "Where egress is free (same-region, CDN origin fetch), where it is billed twice, and the levers that cut it",
+      "tags": [
+        "s3",
+        "cost",
+        "egress"
+      ],
+      "segment": "cost",
+      "visual": "chart",
+      "product": "Estimate egress from a real object listing"
+    },
+    {
+      "n": 52,
+      "slug": "request-charges-list-is-not-free",
+      "title": "LIST is not free: how a polling script costs $50 a month",
+      "angle": "Per-1000 request pricing by class, polling intervals, and inventory as the cheap alternative",
+      "tags": [
+        "s3",
+        "cost",
+        "operations"
+      ],
+      "segment": "cost",
+      "visual": "chart",
+      "product": "Count the API calls a browsing session generates"
+    },
+    {
+      "n": 53,
+      "slug": "storage-class-minimum-durations",
+      "title": "Minimum storage durations: the 30/90/180-day trap",
+      "angle": "Charged as if stored, even after deletion, with the spreadsheet that shows the crossover",
+      "tags": [
+        "s3",
+        "cost",
+        "archive"
+      ],
+      "segment": "cost",
+      "visual": "chart",
+      "product": "Group by storage class before cleanup"
+    },
+    {
+      "n": 54,
+      "slug": "retrieval-fees-versus-storage",
+      "title": "A 10 TB restore from Deep Archive costs more than a year of storage",
+      "angle": "Retrieval per GB plus request fees, the free tier, and the budget alarm you should set",
+      "tags": [
+        "s3",
+        "cost",
+        "archive"
+      ],
+      "segment": "cost",
+      "visual": "chart",
+      "product": "Identify what is in an archive tier before restoring"
+    },
+    {
+      "n": 55,
+      "slug": "cross-region-replication-cost",
+      "title": "Cross-region replication triples the bill, not doubles it",
+      "angle": "Storage, transfer, request and retrieval components with a worked 20 TB example",
+      "tags": [
+        "s3",
+        "cost",
+        "replication"
+      ],
+      "segment": "cost",
+      "visual": "chart",
+      "product": "Compare two endpoints' bucket sizes"
+    },
+    {
+      "n": 56,
+      "slug": "inventory-and-analytics-for-cost",
+      "title": "Storage Lens, Inventory and Analytics: the only way to know what you store",
+      "angle": "Access denied to Inventory is a policy problem, and why listing manually is not an option at scale",
+      "tags": [
+        "s3",
+        "cost",
+        "governance"
+      ],
+      "segment": "cost",
+      "visual": "diagram",
+      "product": "Produce a local inventory without server-side tooling"
+    },
+    {
+      "n": 57,
+      "slug": "small-object-overhead",
+      "title": "A million 4 KB files cost ten times what you expect",
+      "angle": "128 KB minimum billing, per-request overhead, and the packing strategies that fix it",
+      "tags": [
+        "s3",
+        "cost",
+        "architecture"
+      ],
+      "segment": "cost",
+      "visual": "chart",
+      "product": "Show object size distribution for a prefix"
+    },
+    {
+      "n": 58,
+      "slug": "idle-versions-invisible-bill",
+      "title": "Idle versions and orphan parts: the invisible 20% of the bill",
+      "angle": "Measuring both, the lifecycle rules that clean them, and the order to apply them",
+      "tags": [
+        "s3",
+        "cost",
+        "lifecycle"
+      ],
+      "segment": "cost",
+      "visual": "chart",
+      "product": "Show versions and uploads outside the visible object list"
+    },
+    {
+      "n": 59,
+      "slug": "cost-allocation-that-survives",
+      "title": "Tagging strategies that survive into a bill",
+      "angle": "Which tag keys reach cost allocation, the per-object tag cost, and the fallback by prefix",
+      "tags": [
+        "s3",
+        "cost",
+        "governance"
+      ],
+      "segment": "cost",
+      "visual": "diagram",
+      "product": "Inspect tags at scale to find untagged objects"
+    },
+    {
+      "n": 60,
+      "slug": "honest-provider-cost-comparison",
+      "title": "R2, B2, Wasabi, OVH: comparing without the marketing",
+      "angle": "Egress-free claims, 90-day minimums, fair-use clauses, and the workloads where each wins",
+      "tags": [
+        "s3",
+        "cost",
+        "interop"
+      ],
+      "segment": "cost",
+      "visual": "chart",
+      "product": "Benchmark the same workload against any endpoint"
+    },
+    {
+      "n": 61,
+      "slug": "request-rate-prefix-sharding",
+      "title": "3,500 PUT and 5,500 GET per second per prefix: still relevant?",
+      "angle": "What the 2018 change removed, why hot prefixes still hurt, and when sharding is pointless",
+      "tags": [
+        "s3",
+        "performance",
+        "scale"
+      ],
+      "segment": "performance",
+      "visual": "diagram",
+      "product": "Show request rate per bucket from a local session"
+    },
+    {
+      "n": 62,
+      "slug": "hot-prefix-date-based-keys",
+      "title": "Date-based keys looked smart in 2015 and hurt now",
+      "angle": "Lexical ordering, LIST efficiency, and the partition skew that concurrency reintroduces",
+      "tags": [
+        "s3",
+        "performance",
+        "architecture"
+      ],
+      "segment": "performance",
+      "visual": "diagram",
+      "product": "Visualise key distribution in a bucket"
+    },
+    {
+      "n": 63,
+      "slug": "list-pagination-1000-pages",
+      "title": "LIST returns 1000 keys per page — and counting objects is O(n)",
+      "angle": "Continuation tokens, the cost of counting, and the inventory alternative",
+      "tags": [
+        "s3",
+        "performance",
+        "api"
+      ],
+      "segment": "performance",
+      "visual": "diagram",
+      "product": "Page through a large bucket without freezing"
+    },
+    {
+      "n": 64,
+      "slug": "range-requests-saturate-link",
+      "title": "Saturating a gigabit link with range requests",
+      "angle": "Concurrent ranges, offset alignment, and the throughput math",
+      "tags": [
+        "s3",
+        "performance",
+        "downloads"
+      ],
+      "segment": "performance",
+      "visual": "chart",
+      "product": "Download with parallel ranges and show the rate"
+    },
+    {
+      "n": 65,
+      "slug": "transfer-acceleration-when-worth",
+      "title": "Transfer Acceleration: when it earns its premium",
+      "angle": "The edge network, the distance threshold where it wins, and the workloads where it is pure cost",
+      "tags": [
+        "s3",
+        "performance",
+        "network"
+      ],
+      "segment": "performance",
+      "visual": "chart",
+      "product": "Compare transfer time across endpoints"
+    },
+    {
+      "n": 66,
+      "slug": "parallel-read-multipart-get",
+      "title": "Parallel reads: the client-side trick that speeds up big downloads",
+      "angle": "Multipart GET, ordering, and the memory/disk tradeoff",
+      "tags": [
+        "s3",
+        "performance",
+        "downloads"
+      ],
+      "segment": "performance",
+      "visual": "diagram",
+      "product": "Show progress and speed per connection"
+    },
+    {
+      "n": 67,
+      "slug": "latency-versus-throughput",
+      "title": "Latency is not throughput: measuring the right thing",
+      "angle": "Round-trip time versus MB/s, connection reuse, and what 30 ms of RTT costs you",
+      "tags": [
+        "s3",
+        "performance",
+        "diagnostics"
+      ],
+      "segment": "performance",
+      "visual": "chart",
+      "product": "Show per-request latency distribution"
+    },
+    {
+      "n": 68,
+      "slug": "byte-range-caching-cdn-hit-ratio",
+      "title": "Byte-range caching and the CDN hit ratio nobody watches",
+      "angle": "Range support, cache key design, and the 206 responses that reduce your hit rate",
+      "tags": [
+        "s3",
+        "performance",
+        "cdn"
+      ],
+      "segment": "performance",
+      "visual": "diagram",
+      "product": "Inspect Cache-Control and range headers on objects"
+    },
+    {
+      "n": 69,
+      "slug": "event-notifications-ordering-duplicates",
+      "title": "Event notifications arrive twice, out of order, and that is documented",
+      "angle": "At-least-once delivery, ordering per key, and the idempotent consumer pattern",
+      "tags": [
+        "s3",
+        "architecture",
+        "events"
+      ],
+      "segment": "performance",
+      "visual": "diagram",
+      "product": "Read bucket notification configuration"
+    },
+    {
+      "n": 70,
+      "slug": "benchmarking-honestly",
+      "title": "Benchmarking S3 honestly: what the tools actually measure",
+      "angle": "s5cmd, rclone and a GUI test different things, and why your numbers will differ",
+      "tags": [
+        "s3",
+        "performance",
+        "operations"
+      ],
+      "segment": "performance",
+      "visual": "chart",
+      "product": "Run a repeatable transfer test from one client"
+    },
+    {
+      "n": 71,
+      "slug": "rpo-rto-object-storage",
+      "title": "What RPO and RTO actually mean for object storage",
+      "angle": "Replication lag, restore time for 20 TB, and the numbers to put in a contract",
+      "tags": [
+        "s3",
+        "reliability",
+        "dr"
+      ],
+      "segment": "reliability",
+      "visual": "chart",
+      "product": "Verify replica contents against the source"
+    },
+    {
+      "n": 72,
+      "slug": "replication-time-control-sla",
+      "title": "Replication Time Control: the 15-minute SLA and what it costs",
+      "angle": "The 99.99% commitment, metrics to watch, and when standard replication is enough",
+      "tags": [
+        "s3",
+        "reliability",
+        "replication"
+      ],
+      "segment": "reliability",
+      "visual": "chart",
+      "product": "Compare object timestamps across two endpoints"
+    },
+    {
+      "n": 73,
+      "slug": "failover-drill-without-breaking-prod",
+      "title": "Running a failover drill without breaking production",
+      "angle": "Read-only validation, DNS TTL, and the checklist that proves the switch before you need it",
+      "tags": [
+        "s3",
+        "reliability",
+        "dr"
+      ],
+      "segment": "reliability",
+      "visual": "diagram",
+      "product": "Point the same profile at two endpoints to compare"
+    },
+    {
+      "n": 74,
+      "slug": "backup-versus-replication",
+      "title": "Replication is not backup: it propagates your deletes",
+      "angle": "Why the 3-2-1 rule still applies, and the immutable copy that breaks the chain",
+      "tags": [
+        "s3",
+        "reliability",
+        "backup"
+      ],
+      "segment": "reliability",
+      "visual": "diagram",
+      "product": "Copy between isolated accounts or endpoints"
+    },
+    {
+      "n": 75,
+      "slug": "cross-account-backup-against-compromise",
+      "title": "Cross-account backup: your only defence against account compromise",
+      "angle": "Separate credentials, the trust boundary, and the restore path when the source account is gone",
+      "tags": [
+        "s3",
+        "reliability",
+        "security"
+      ],
+      "segment": "reliability",
+      "visual": "diagram",
+      "product": "Manage several endpoint profiles in one client"
+    },
+    {
+      "n": 76,
+      "slug": "consistency-read-after-write",
+      "title": "Read-after-write consistency covers less than you think",
+      "angle": "What became strongly consistent in 2020, what LIST never guaranteed, and the races that remain",
+      "tags": [
+        "s3",
+        "reliability",
+        "api"
+      ],
+      "segment": "reliability",
+      "visual": "diagram",
+      "product": "Verify a write completed before the app proceeds"
+    },
+    {
+      "n": 77,
+      "slug": "regional-outage-playbook",
+      "title": "Regional outage playbook for teams without a platform team",
+      "angle": "DNS, retries, degraded mode, and the 6 decisions you must make in advance",
+      "tags": [
+        "s3",
+        "reliability",
+        "dr"
+      ],
+      "segment": "reliability",
+      "visual": "diagram",
+      "product": "Keep working against an alternate endpoint"
+    },
+    {
+      "n": 78,
+      "slug": "end-to-end-checksums",
+      "title": "End-to-end checksums: catching the corruption nothing else sees",
+      "angle": "CRC32C/CRC64NVME, the composite algorithm, and where TLS checksums stop helping",
+      "tags": [
+        "s3",
+        "reliability",
+        "integrity"
+      ],
+      "segment": "reliability",
+      "visual": "diagram",
+      "product": "Verify a downloaded object against its checksum"
+    },
+    {
+      "n": 79,
+      "slug": "restore-testing",
+      "title": "The backup you never restored is not a backup",
+      "angle": "A quarterly restore drill with a timer, and the metrics that make it credible in an audit",
+      "tags": [
+        "s3",
+        "reliability",
+        "backup"
+      ],
+      "segment": "reliability",
+      "visual": "diagram",
+      "product": "Restore a subset and compare checksums"
+    },
+    {
+      "n": 80,
+      "slug": "durability-versus-availability",
+      "title": "Eleven nines of durability is not eleven nines of availability",
+      "angle": "What the two numbers measure, the failure modes, and what you must build yourself",
+      "tags": [
+        "s3",
+        "reliability",
+        "architecture"
+      ],
+      "segment": "reliability",
+      "visual": "chart",
+      "product": "See errors per request over a session"
+    },
+    {
+      "n": 81,
+      "slug": "server-access-logs-vs-cloudtrail",
+      "title": "Server access logs or CloudTrail data events: pick by question",
+      "angle": "Cost per million events, latency, field coverage, and which answers 'who read this object'",
+      "tags": [
+        "s3",
+        "audit",
+        "security"
+      ],
+      "segment": "security",
+      "visual": "chart",
+      "product": "Show request logs for a single object"
+    },
+    {
+      "n": 82,
+      "slug": "detecting-public-buckets-at-scale",
+      "title": "Detecting public buckets at scale in five minutes",
+      "angle": "Config rules, Access Analyzer, and a script that checks effective public access on every bucket",
+      "tags": [
+        "s3",
+        "security",
+        "audit"
+      ],
+      "segment": "security",
+      "visual": "diagram",
+      "product": "Test anonymous access per bucket from one pane"
+    },
+    {
+      "n": 83,
+      "slug": "malware-scanning-without-proxy",
+      "title": "Scanning uploads for malware without a proxy",
+      "angle": "Event-driven scanning, the quarantine bucket pattern, and the race between scan and download",
+      "tags": [
+        "s3",
+        "security",
+        "architecture"
+      ],
+      "segment": "security",
+      "visual": "diagram",
+      "product": "Inspect uploaded objects before promoting them"
+    },
+    {
+      "n": 84,
+      "slug": "bucket-policy-lint-forgotten-conditions",
+      "title": "The bucket policy conditions everybody forgets",
+      "angle": "aws:SecureTransport, s3:prefix, s3:max-keys and the deny that has to exist for an audit to pass",
+      "tags": [
+        "s3",
+        "security",
+        "policy"
+      ],
+      "segment": "security",
+      "visual": "diagram",
+      "product": "Read and compare policy documents across buckets"
+    },
+    {
+      "n": 85,
+      "slug": "cors-misconfiguration-wildcard",
+      "title": "A CORS wildcard on a bucket is an exfiltration primitive",
+      "angle": "AllowedOrigins as *, credentialed requests, and the browser behaviour that exposes data",
+      "tags": [
+        "s3",
+        "security",
+        "web"
+      ],
+      "segment": "security",
+      "visual": "diagram",
+      "product": "Inspect CORS configuration per bucket"
+    },
+    {
+      "n": 86,
+      "slug": "presigned-url-leakage",
+      "title": "Presigned URLs leak into logs, referrers and chat",
+      "angle": "Short TTLs, one-time patterns, and what an attacker does with a URL that still has 6 days left",
+      "tags": [
+        "s3",
+        "security",
+        "presigned-urls"
+      ],
+      "segment": "security",
+      "visual": "diagram",
+      "product": "Generate and test a short-lived URL"
+    },
+    {
+      "n": 87,
+      "slug": "object-ownership-acl-migration",
+      "title": "Bucket owner enforced: migrating away from ACLs",
+      "angle": "The ACL-disabled default, the migration order, and the clients that still send canned ACLs",
+      "tags": [
+        "s3",
+        "security",
+        "migration"
+      ],
+      "segment": "security",
+      "visual": "diagram",
+      "product": "Show object ownership fields per object"
+    },
+    {
+      "n": 88,
+      "slug": "incident-response-preserve-evidence",
+      "title": "Before you fix the bucket, preserve the evidence",
+      "angle": "What to snapshot, log retention during an incident, and the order that keeps findings usable",
+      "tags": [
+        "s3",
+        "security",
+        "incident"
+      ],
+      "segment": "security",
+      "visual": "diagram",
+      "product": "Capture a bucket's state without mutating it"
+    },
+    {
+      "n": 89,
+      "slug": "path-style-versus-virtual-hosted",
+      "title": "Path-style versus virtual-hosted: the flag that breaks on MinIO and R2",
+      "angle": "DNS constraints, TLS certificate names, and the one-line client fix",
+      "tags": [
+        "s3",
+        "interop",
+        "configuration"
+      ],
+      "segment": "interop",
+      "visual": "diagram",
+      "product": "Toggle addressing style per connection profile"
+    },
+    {
+      "n": 90,
+      "slug": "signature-v2-v4-legacy-clients",
+      "title": "SigV2 is gone in most regions and legacy clients still fail",
+      "angle": "Identifying the signature version in an error, and the migration for old SDKs",
+      "tags": [
+        "s3",
+        "interop",
+        "legacy"
+      ],
+      "segment": "interop",
+      "visual": "diagram",
+      "product": "Surface the signature version in a connection test"
+    },
+    {
+      "n": 91,
+      "slug": "s3-compatible-gap-matrix",
+      "title": "The S3-compatible gap matrix: what each provider omits",
+      "angle": "Object Lock, Inventory, Select, versioning, event notifications — who has what, tested",
+      "tags": [
+        "s3",
+        "interop",
+        "comparison"
+      ],
+      "segment": "interop",
+      "visual": "chart",
+      "product": "Run the same capability probe across providers"
+    },
+    {
+      "n": 92,
+      "slug": "migrating-fifty-terabytes",
+      "title": "Migrating 50 TB without downtime",
+      "angle": "Staged cutover, dual-write window, checksum verification, and the rollback that must stay possible",
+      "tags": [
+        "s3",
+        "interop",
+        "migration"
+      ],
+      "segment": "interop",
+      "visual": "diagram",
+      "product": "Copy and verify across two endpoints"
+    },
+    {
+      "n": 93,
+      "slug": "conditional-and-range-header-inconsistencies",
+      "title": "Conditional and range headers behave differently across providers",
+      "angle": "If-Match support, 416 handling, and why resumable clients break on a compatible API",
+      "tags": [
+        "s3",
+        "interop",
+        "api"
+      ],
+      "segment": "interop",
+      "visual": "chart",
+      "product": "Test headers against an arbitrary endpoint"
+    },
+    {
+      "n": 94,
+      "slug": "minio-small-cluster-traps",
+      "title": "MinIO in production: the small-cluster traps",
+      "angle": "Erasure coding overhead, drive counts, the 4-drive minimum, and the rebuild time on spinning disks",
+      "tags": [
+        "s3",
+        "interop",
+        "self-hosted"
+      ],
+      "segment": "interop",
+      "visual": "diagram",
+      "product": "Connect to a self-hosted endpoint in seconds"
+    },
+    {
+      "n": 95,
+      "slug": "r2-and-b2-client-config",
+      "title": "R2 and B2: what changes in your client config",
+      "angle": "Endpoint formats, region strings, missing features, and the errors that look like auth failures",
+      "tags": [
+        "s3",
+        "interop",
+        "configuration"
+      ],
+      "segment": "interop",
+      "visual": "chart",
+      "product": "Presets for the provider list, with correct defaults"
+    },
+    {
+      "n": 96,
+      "slug": "conditional-writes-if-none-match",
+      "title": "Conditional writes finally make S3 usable as a lock",
+      "angle": "If-None-Match: *, the 412 race, provider support, and the distributed lock pattern it enables",
+      "tags": [
+        "s3",
+        "api",
+        "architecture"
+      ],
+      "segment": "edge",
+      "visual": "diagram",
+      "product": "Write and detect a precondition failure"
+    },
+    {
+      "n": 97,
+      "slug": "requester-pays-who-it-breaks",
+      "title": "Requester Pays shifts the egress bill, and breaks half your tools",
+      "angle": "How the header changes reads, the clients that ignore it, and the datasets where it makes sense",
+      "tags": [
+        "s3",
+        "cost",
+        "api"
+      ],
+      "segment": "edge",
+      "visual": "diagram",
+      "product": "Handle requester-pays buckets in a GUI"
+    },
+    {
+      "n": 98,
+      "slug": "static-hosting-limits",
+      "title": "Static hosting on a bucket: the limits that force a CDN",
+      "angle": "No custom headers, no TLS, redirect rules only, and the 404 behaviour",
+      "tags": [
+        "s3",
+        "web",
+        "architecture"
+      ],
+      "segment": "edge",
+      "visual": "diagram",
+      "product": "Inspect website configuration per bucket"
+    },
+    {
+      "n": 99,
+      "slug": "crc64nvme-new-integrity-default",
+      "title": "CRC64NVME: the integrity default that changed under you",
+      "angle": "Full-object versus composite checksums, the SDK defaults, and what older clients send",
+      "tags": [
+        "s3",
+        "integrity",
+        "api"
+      ],
+      "segment": "edge",
+      "visual": "diagram",
+      "product": "Show the checksum algorithm per object"
+    },
+    {
+      "n": 100,
+      "slug": "portable-config-across-five-providers",
+      "title": "One client, five providers: the config that keeps you portable",
+      "angle": "Profile design, endpoint/path-style/region matrix, and the abstractions that hide provider gaps",
+      "tags": [
+        "s3",
+        "interop",
+        "architecture"
+      ],
+      "segment": "edge",
+      "visual": "chart",
+      "product": "Switch providers without touching code"
+    }
   ]
 }

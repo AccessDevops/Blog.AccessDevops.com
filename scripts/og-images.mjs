@@ -30,15 +30,22 @@ const FORCE = args.includes('--force');
 const ONLY = (args.find(a => a.startsWith('--only=')) || '').split('=')[1];
 
 function findChrome() {
+  const home = process.env.HOME || '';
   const candidates = [
     process.env.CHROME_PATH,
+    // Un Chrome « for testing » posé à côté de l'outil : le serveur qui publie
+    // n'a pas de navigateur système, et en installer un via apt demande root
+    // alors qu'un binaire téléchargé se suffit à lui-même.
+    `${home}/.hermes/tools/chrome-headless-shell/chrome-headless-shell`,
     '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',
     '/Applications/Chromium.app/Contents/MacOS/Chromium',
     '/usr/bin/google-chrome', '/usr/bin/google-chrome-stable', '/usr/bin/chromium', '/usr/bin/chromium-browser',
   ].filter(Boolean);
   for (const c of candidates) if (existsSync(c)) return c;
-  const which = spawnSync('which', ['google-chrome'], { encoding: 'utf8' });
-  if (which.status === 0) return which.stdout.trim();
+  for (const bin of ['google-chrome', 'chromium', 'chrome-headless-shell']) {
+    const which = spawnSync('which', [bin], { encoding: 'utf8' });
+    if (which.status === 0) return which.stdout.trim();
+  }
   return null;
 }
 
@@ -108,7 +115,10 @@ if (!chrome) {
     writeFileSync(page, html);
 
     const r = spawnSync(chrome, [
-      '--headless', '--disable-gpu', '--hide-scrollbars', '--no-first-run',
+      // --no-sandbox : le serveur de publication n'a pas d'espaces de noms
+      // utilisateur, et Chrome refuse alors de démarrer (rc=null, aucune
+      // capture). On ne rend ici que nos propres gabarits, depuis le disque.
+      '--headless', '--disable-gpu', '--hide-scrollbars', '--no-first-run', '--no-sandbox',
       '--force-device-scale-factor=1', `--window-size=${W},${H}`,
       `--screenshot=${join(process.cwd(), out)}`,
       `--user-data-dir=${join(process.cwd(), tmp, 'profile')}`,
