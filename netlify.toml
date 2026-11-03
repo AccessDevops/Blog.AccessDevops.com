@@ -2,6 +2,11 @@
   command = "npm run generate"
   publish = "dist"
 
+# Ping IndexNow après chaque déploiement de production, une fois le site en
+# ligne. Voir netlify/plugins/indexnow/index.js.
+[[plugins]]
+  package = "./netlify/plugins/indexnow"
+
 [build.environment]
   NODE_VERSION = "22"
   NPM_FLAGS = "--prefer-offline --no-audit --no-fund"
