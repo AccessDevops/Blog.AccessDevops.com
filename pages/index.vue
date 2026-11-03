@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { productUrl } from '~/lib/product-link';
+import { tagLabel, tagPath } from '~/lib/tags';
 const { data: posts } = await useAsyncData('posts', () => queryContent('blog').sort({ date: -1 }).find());
 const SITE = 'https://blog.accessdevops.com';
 const productHome = productUrl('/', 'blog_home');
@@ -54,6 +55,10 @@ const readTime = (post: any) => Math.max(1, Math.round(words(post.body) / 220));
       Written by the team behind S3 Explorer.
     </p>
 
+    <p class="mt-5 text-[15px]">
+      <NuxtLink to="/tags" class="link">Browse by topic →</NuxtLink>
+    </p>
+
     <ul class="mt-12">
       <li v-for="post in posts" :key="post._path">
         <NuxtLink :to="post._path" class="entry group grid grid-cols-[minmax(0,1fr)_auto] items-start gap-5">
@@ -62,7 +67,7 @@ const readTime = (post: any) => Math.max(1, Math.round(words(post.body) / 220));
               <time>{{ fmt(post.date) }}</time>
               <span aria-hidden="true" class="opacity-40">·</span>
               <span>{{ readTime(post) }} min read</span>
-              <template v-if="post.tags?.length"><span aria-hidden="true" class="opacity-40">·</span><span>{{ post.tags.join(' · ') }}</span></template>
+              <template v-if="post.tags?.length"><span aria-hidden="true" class="opacity-40">·</span><span>{{ post.tags.map(tagLabel).join(' · ') }}</span></template>
             </div>
             <h2 class="mt-2.5 text-[1.3rem] font-semibold leading-snug tracking-[-0.022em] decoration-1 underline-offset-[3px] group-hover:text-primary group-hover:underline">
               {{ post.title }}

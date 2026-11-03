@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { guideFor } from '~/lib/guide-links';
+import { tagLabel, tagPath } from '~/lib/tags';
 
 const route = useRoute();
 const { trackArticleViewed, trackReadComplete } = useBlogTracking();
@@ -153,7 +154,14 @@ useHead({
     </section>
 
     <footer class="mt-16 flex flex-wrap items-center justify-between gap-4 border-t border-border pt-6">
-      <span class="label">{{ (post.tags || []).join(' · ') || 'untagged' }}</span>
+      <!-- Les tags étaient du texte mort. En faire des liens est le seul
+           maillage interne qui grandit avec le nombre d'articles. -->
+      <ul v-if="(post.tags || []).length" class="flex flex-wrap items-center gap-2">
+        <li v-for="t in post.tags" :key="t">
+          <NuxtLink :to="tagPath(t)" class="label hover:text-foreground">{{ tagLabel(t) }}</NuxtLink>
+        </li>
+      </ul>
+      <span v-else class="label">untagged</span>
       <NuxtLink to="/" class="link text-sm">← All articles</NuxtLink>
     </footer>
   </article>

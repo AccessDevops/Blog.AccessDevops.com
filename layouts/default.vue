@@ -26,6 +26,7 @@ const productFooter = productUrl('/', 'blog_footer');
     <footer class="border-t border-border">
       <div class="mx-auto flex w-full max-w-[780px] flex-col gap-4 px-6 py-8 sm:flex-row sm:items-center sm:justify-between">
         <nav class="flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-muted-foreground">
+          <NuxtLink to="/tags" class="hover:text-foreground">Topics</NuxtLink>
           <a href="/rss.xml" class="hover:text-foreground">RSS</a>
           <a href="https://github.com/AccessDevOps" class="hover:text-foreground">GitHub</a>
           <a :href="productFooter" class="hover:text-foreground">S3 Explorer</a>
