@@ -1,0 +1,13 @@
+# Proxy inverse PostHog.
+#
+# Ces règles vivent ici et non dans netlify.toml : le preset netlify-static de
+# Nitro écrit dist/_redirects avec un attrape-tout « /* /404.html 404 », et
+# Netlify traite _redirects avant netlify.toml. L'attrape-tout répondait donc
+# 404 sur /relay-Kp7W/* avant que les règles du toml soient lues — la mesure
+# partait dans le vide pendant que la page, elle, fonctionnait.
+#
+# Nitro place le contenu de ce fichier avant ses propres règles, donc l'ordre
+# ci-dessous est celui qui compte. Le « ! » force la réécriture même si un
+# fichier existe au même chemin.
+/relay-Kp7W/static/*  https://eu-assets.i.posthog.com/static/:splat  200!
+/relay-Kp7W/*         https://eu.i.posthog.com/:splat                200!

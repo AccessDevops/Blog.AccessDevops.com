@@ -12,21 +12,9 @@
   NPM_FLAGS = "--prefer-offline --no-audit --no-fund"
   NODE_OPTIONS = "--max-old-space-size=4096"
 
-# Proxy inverse PostHog. Doit précéder toute autre règle de redirection.
-# Deux entrées : les assets statiques du SDK et l'API sont sur deux
-# sous-domaines PostHog différents. force=true pour que la réécriture
-# s'applique même si un fichier existe au même chemin.
-[[redirects]]
-  from = "/relay-Kp7W/static/*"
-  to = "https://eu-assets.i.posthog.com/static/:splat"
-  status = 200
-  force = true
-
-[[redirects]]
-  from = "/relay-Kp7W/*"
-  to = "https://eu.i.posthog.com/:splat"
-  status = 200
-  force = true
+# Le proxy inverse PostHog est dans public/_redirects, pas ici : voir le
+# commentaire de ce fichier. Netlify lit _redirects avant netlify.toml, et
+# l'attrape-tout que Nitro y écrit interceptait ces chemins.
 
 [[headers]]
   for = "/fonts/*"
