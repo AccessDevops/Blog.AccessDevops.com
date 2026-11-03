@@ -4,6 +4,8 @@ description: "Prefixes decide what a principal can list, tags decide what it can
 date: 2026-11-03
 author: "Clement Baranger"
 tags: ["s3", "iam", "governance", "access-control"]
+guide: s3-error-codes
+related: [bucket-policy-allow-still-denied, presigned-url-seven-day-ceiling]
 ---
 
 ## The short version

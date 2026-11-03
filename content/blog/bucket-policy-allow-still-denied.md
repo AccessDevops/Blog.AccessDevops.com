@@ -4,6 +4,8 @@ description: "S3 returns AccessDenied even when the bucket and IAM policies both
 date: 2026-10-30
 author: "Clement Baranger"
 tags: ["s3", "iam", "security", "access-control"]
+guide: s3-error-codes
+related: [abac-object-tags-vs-prefix-policies, presigned-post-enforce-size-content-type]
 ---
 
 ## The short version

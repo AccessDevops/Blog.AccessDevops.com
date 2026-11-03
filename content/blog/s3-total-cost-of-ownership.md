@@ -4,6 +4,8 @@ description: "Storage is 20% of your bill. We modelled 8 S3 providers across 4 w
 date: 2026-10-30
 author: "Clement Baranger"
 tags: ["s3", "pricing", "cloud", "cost-optimisation"]
+guide: s3-storage-pricing-comparison
+related: [s3-explorer-walkthrough, bucket-policy-allow-still-denied]
 ---
 
 Every "S3 pricing comparison" ranks providers by the storage line: $0.023 here, $0.00695 there. That number is almost meaningless.

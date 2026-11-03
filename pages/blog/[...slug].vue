@@ -1,7 +1,41 @@
 <script setup lang="ts">
+import { guideFor } from '~/lib/guide-links';
+
 const route = useRoute();
 const SITE = 'https://blog.accessdevops.com';
 const { data: post } = await useAsyncData(`post-${route.path}`, () => queryContent(route.path).findOne());
+const { data: allPosts } = await useAsyncData('blog-index', () =>
+  queryContent('/blog').only(['title', 'description', '_path', 'tags']).find(),
+);
+
+// Le pont vers la page guide du site produit, quand l'article en a une.
+const guide = computed(() => guideFor(post.value?.guide as string | undefined));
+
+/**
+ * Trois articles à lire ensuite. Ordre de priorité : le choix éditorial écrit
+ * dans le frontmatter, puis les tags partagés. Un lien interne qui ne correspond
+ * à rien coûte plus qu'il ne rapporte — il dilue le sujet de la page.
+ */
+const related = computed(() => {
+  const list = (allPosts.value ?? []) as any[];
+  const self = post.value!._path;
+  const explicit = (post.value!.related ?? []) as string[];
+  if (explicit.length) {
+    return explicit
+      .map(slug => list.find(x => x._path === `/blog/${slug}` || x._path === slug))
+      .filter(Boolean)
+      .slice(0, 3);
+  }
+  const mine = new Set<string>((post.value!.tags ?? []) as string[]);
+  return list
+    .filter(x => x._path !== self)
+    .map(x => ({ x, score: ((x.tags ?? []) as string[]).filter(t => mine.has(t)).length }))
+    .filter(v => v.score > 0)
+    .sort((a, b) => b.score - a.score)
+    .slice(0, 2)
+    .map(v => v.x);
+});
+
 if (!post.value) throw createError({ statusCode: 404, statusMessage: 'Post not found' });
 const author = post.value.author || 'Clement Baranger';
 const url = `${SITE}${post.value._path}`;
@@ -77,6 +111,26 @@ useHead({
       <p class="lede mt-4 max-w-[62ch]">{{ post.description }}</p>
     </header>
     <ContentRenderer :value="post" class="prose max-w-none" />
+
+    <aside v-if="guide" class="mt-14 rounded-lg border border-border p-5">
+      <p class="text-sm leading-relaxed text-muted-foreground">{{ guide.blurb }}</p>
+      <a :href="guide.url" class="link mt-3 inline-block text-sm">
+        {{ guide.title }} →
+      </a>
+    </aside>
+
+    <section v-if="related.length" class="mt-14">
+      <h2 class="label">Keep reading</h2>
+      <ul class="mt-3 divide-y divide-border border-y border-border">
+        <li v-for="r in related" :key="r._path">
+          <NuxtLink :to="r._path" class="group block py-4">
+            <span class="font-medium underline-offset-4 group-hover:underline">{{ r.title }}</span>
+            <span class="mt-1 block text-sm leading-relaxed text-muted-foreground">{{ r.description }}</span>
+          </NuxtLink>
+        </li>
+      </ul>
+    </section>
+
     <footer class="mt-16 flex flex-wrap items-center justify-between gap-4 border-t border-border pt-6">
       <span class="label">{{ (post.tags || []).join(' · ') || 'untagged' }}</span>
       <NuxtLink to="/" class="link text-sm">← All articles</NuxtLink>

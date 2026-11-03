@@ -4,6 +4,8 @@ description: "A presigned PUT signs a URL, not a byte count. A POST policy adds 
 date: 2026-11-01
 author: "Clement Baranger"
 tags: ["s3", "security", "uploads"]
+guide: share-s3-file-presigned-url
+related: [presigned-url-seven-day-ceiling, abac-object-tags-vs-prefix-policies]
 ---
 
 Every "upload directly to S3" feature starts the same way: the server hands the browser a presigned URL, the browser PUTs the file, the object appears. It ships in ten minutes, and quietly grants anyone holding that link the right to store four gigabytes of anything in your bucket. The fix is a different primitive: a presigned POST, where the permission is a document stating the size and type it will accept, signed before a single byte moves.

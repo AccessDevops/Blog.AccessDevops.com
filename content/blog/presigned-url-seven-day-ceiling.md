@@ -4,6 +4,8 @@ description: "Seven days is not a setting: it is how long the SigV4 signing key 
 date: 2026-10-31
 author: "Clement Baranger"
 tags: ["s3", "security", "presigned-urls"]
+guide: share-s3-file-presigned-url
+related: [presigned-post-enforce-size-content-type, bucket-policy-allow-still-denied]
 ---
 
 Every sharing feature hits the same wall. Someone builds a "copy link" button, a customer forwards the link in a PDF, and eight days later the download returns a page of XML instead of a file. Nothing was broken by a bug: the link was signed with an expiry date, and that date has a ceiling nobody chose.

@@ -7,6 +7,8 @@ tags: ["s3", "tutorial", "tooling", "seaweedfs"]
 video: "/videos/s3explorer-teaser.mp4"
 videoPoster: "/videos/s3-explorer-teaser-poster.webp"
 videoDuration: "PT30S"
+guide: s3-compatible-storage-desktop-client
+related: [s3-total-cost-of-ownership, presigned-url-seven-day-ceiling]
 ---
 
 <div class="clipblock">

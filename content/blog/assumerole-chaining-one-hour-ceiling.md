@@ -4,6 +4,8 @@ description: "A role that assumes another role gets 3600 seconds, whatever its M
 date: 2026-11-02
 author: "Clement Baranger"
 tags: ["s3", "iam", "sts", "aws"]
+guide: s3-error-codes
+related: [presigned-url-seven-day-ceiling, bucket-policy-allow-still-denied]
 ---
 
 A nightly job ran for three weeks, then stopped at 01:00:03 with `400 Bad Request`. The error named a token — not a bucket, not a policy. Nothing had been deployed; the only change was the size of the dataset, from fifty minutes of work to seventy.
