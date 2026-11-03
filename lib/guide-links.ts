@@ -21,7 +21,7 @@ export interface ProductGuide {
   blurb: string;
 }
 
-const PRODUCT_SITE = 'https://s3explorer.accessdevops.com';
+import { productUrl } from './product-link';
 
 export const GUIDES: Record<string, ProductGuide> = {
   'share-s3-file-presigned-url': {
@@ -61,9 +61,17 @@ export const GUIDES: Record<string, ProductGuide> = {
   },
 };
 
-export function guideFor(slug: string | undefined): (ProductGuide & { url: string }) | null {
+/**
+ * `campaign` porte le slug de l'article d'où part le lien, pas celui du guide
+ * d'arrivée : la question est « quel article convertit », et deux articles
+ * différents pointent vers le même guide.
+ */
+export function guideFor(
+  slug: string | undefined,
+  campaign = 'blog',
+): (ProductGuide & { url: string }) | null {
   if (!slug) return null;
   const g = GUIDES[slug];
   if (!g) return null;
-  return { ...g, url: `${PRODUCT_SITE}/guides/${g.slug}/` };
+  return { ...g, url: productUrl(`/guides/${g.slug}/`, campaign) };
 }

@@ -1,3 +1,11 @@
+<script setup lang="ts">
+import { productUrl } from '~/lib/product-link';
+
+// Deux campagnes distinctes : un clic depuis la navigation n'a pas la même
+// valeur qu'un clic depuis le pied de page d'un article lu en entier.
+const productNav = productUrl('/', 'blog_nav');
+const productFooter = productUrl('/', 'blog_footer');
+</script>
 <template>
   <div class="flex min-h-screen flex-col">
     <header class="sticky top-0 z-10 border-b border-border bg-background/90 backdrop-blur-md">
@@ -8,7 +16,7 @@
         </NuxtLink>
         <nav class="flex items-center gap-4 text-sm">
           <NuxtLink to="/" class="text-muted-foreground hover:text-foreground" active-class="text-foreground font-medium" exact-active-class="text-foreground font-medium">Articles</NuxtLink>
-          <a href="https://s3explorer.accessdevops.com" class="text-muted-foreground hover:text-foreground">S3 Explorer</a>
+          <a :href="productNav" class="text-muted-foreground hover:text-foreground">S3 Explorer</a>
           <a href="https://github.com/AccessDevOps" class="hidden text-muted-foreground hover:text-foreground sm:inline">GitHub</a>
           <ThemeToggle class="ml-1" />
         </nav>
@@ -20,7 +28,7 @@
         <nav class="flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-muted-foreground">
           <a href="/rss.xml" class="hover:text-foreground">RSS</a>
           <a href="https://github.com/AccessDevOps" class="hover:text-foreground">GitHub</a>
-          <a href="https://s3explorer.accessdevops.com" class="hover:text-foreground">S3 Explorer</a>
+          <a :href="productFooter" class="hover:text-foreground">S3 Explorer</a>
           <a href="https://accessdevops.com" class="hover:text-foreground">accessdevops.com</a>
         </nav>
         <span class="label">© {{ new Date().getFullYear() }} AccessDevOps</span>

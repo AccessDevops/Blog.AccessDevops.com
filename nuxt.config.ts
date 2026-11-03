@@ -2,6 +2,23 @@ export default defineNuxtConfig({
   compatibilityDate: '2025-01-01',
   modules: ['@nuxt/content', '@nuxtjs/sitemap', '@nuxtjs/tailwindcss'],
   site: { url: 'https://blog.accessdevops.com', name: 'AccessDevOps Blog' },
+
+  runtimeConfig: {
+    public: {
+      // Clé publique PostHog, injectée dans le bundle au moment du build
+      // (`nuxt generate`). Sans valeur, le plugin se tait et le prévient en
+      // console — il ne casse pas la page.
+      posthogKey: '',
+      // Proxy inverse sur notre propre domaine : les bloqueurs (uBlock,
+      // Brave, Firefox strict, NextDNS) filtrent *.posthog.com. Le suffixe
+      // aléatoire du chemin évite qu'une règle générique /relay-* le vise.
+      // Réécrit vers eu.i.posthog.com par netlify.toml.
+      posthogHost: 'https://blog.accessdevops.com/relay-Kp7W',
+      // Où vit réellement le tableau de bord, pour que les liens « voir dans
+      // PostHog » ne pointent pas sur le proxy.
+      posthogUiHost: 'https://eu.posthog.com',
+    },
+  },
   css: ['~/assets/css/fonts.css', '~/assets/css/tailwind.css'],
   app: {
     head: {

@@ -1,6 +1,8 @@
 <script setup lang="ts">
+import { productUrl } from '~/lib/product-link';
 const { data: posts } = await useAsyncData('posts', () => queryContent('blog').sort({ date: -1 }).find());
 const SITE = 'https://blog.accessdevops.com';
+const productHome = productUrl('/', 'blog_home');
 useSeoMeta({
   title: 'AccessDevOps Blog — S3, Cloud & DevOps Guides',
   description: 'Field notes on cloud infrastructure, DevOps and S3-compatible object storage — practical guides for engineers.',
@@ -79,7 +81,7 @@ const readTime = (post: any) => Math.max(1, Math.round(words(post.body) / 220));
           The desktop S3 client these articles are tested with. Windows, macOS, Linux — with a per-request metrics view built in.
         </p>
       </div>
-      <a href="https://s3explorer.accessdevops.com" class="btn shrink-0">See S3 Explorer</a>
+      <a :href="productHome" class="btn shrink-0">See S3 Explorer</a>
     </aside>
   </section>
 </template>

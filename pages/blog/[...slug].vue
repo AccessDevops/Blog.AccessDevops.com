@@ -2,6 +2,7 @@
 import { guideFor } from '~/lib/guide-links';
 
 const route = useRoute();
+const { trackArticleViewed, trackReadComplete } = useBlogTracking();
 const SITE = 'https://blog.accessdevops.com';
 const { data: post } = await useAsyncData(`post-${route.path}`, () => queryContent(route.path).findOne());
 const { data: allPosts } = await useAsyncData('blog-index', () =>
@@ -9,7 +10,8 @@ const { data: allPosts } = await useAsyncData('blog-index', () =>
 );
 
 // Le pont vers la page guide du site produit, quand l'article en a une.
-const guide = computed(() => guideFor(post.value?.guide as string | undefined));
+const slug = computed(() => (post.value?._path ?? '').replace('/blog/', ''));
+const guide = computed(() => guideFor(post.value?.guide as string | undefined, slug.value));
 
 /**
  * Trois articles à lire ensuite. Ordre de priorité : le choix éditorial écrit
@@ -38,6 +40,22 @@ const related = computed(() => {
 
 if (!post.value) throw createError({ statusCode: 404, statusMessage: 'Post not found' });
 const author = post.value.author || 'Clement Baranger';
+
+// Sentinelle de fin d'article : son entrée dans la fenêtre vaut « lu ».
+const endMarker = ref<HTMLElement | null>(null);
+let stopReadObserver: (() => void) | null = null;
+onMounted(() => {
+  trackArticleViewed({
+    slug: slug.value,
+    title: post.value!.title,
+    tags: (post.value!.tags ?? []) as string[],
+    guide: post.value!.guide as string | undefined,
+  });
+  stopReadObserver = trackReadComplete(endMarker.value, slug.value);
+});
+// Sans cela, l'observateur d'un article continue de surveiller après la
+// navigation vers le suivant et attribue sa lecture au mauvais slug.
+onBeforeUnmount(() => stopReadObserver?.());
 const url = `${SITE}${post.value._path}`;
 useSeoMeta({
   title: `${post.value.title} — AccessDevOps Blog`,
@@ -111,6 +129,9 @@ useHead({
       <p class="lede mt-4 max-w-[62ch]">{{ post.description }}</p>
     </header>
     <ContentRenderer :value="post" class="prose max-w-none" />
+    <!-- Sentinelle de fin de lecture. 1 px de haut : un élément sans hauteur
+         n'intersecte rien de façon fiable selon les moteurs. -->
+    <div ref="endMarker" aria-hidden="true" class="h-px"></div>
 
     <aside v-if="guide" class="mt-14 rounded-lg border border-border p-5">
       <p class="text-sm leading-relaxed text-muted-foreground">{{ guide.blurb }}</p>
