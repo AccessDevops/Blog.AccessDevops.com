@@ -73,7 +73,7 @@ return redirect(url, status_code=302)
 
 `ResponseContentDisposition` is signed along with the request, so the filename a customer sees cannot be altered by editing the URL.
 
-**2. Cap the age in the bucket, not in the caller.** A bucket policy `Deny` on `s3:signatureAge` rejects any SigV4 presigned request older than a number of seconds you set, whatever the URL claims. A `Deny` always wins over an `Allow` — the evaluation order behind that is covered in [When two policies allow and the request still fails](/blog/bucket-policy-allow-still-denied).
+**2. Cap the age in the bucket, not in the caller.** A bucket policy `Deny` on `s3:signatureAge` rejects any SigV4 presigned request older than a number of **milliseconds** you set — 900 000 is fifteen minutes — whatever the URL claims. A `Deny` always wins over an `Allow` — the evaluation order behind that is covered in [When two policies allow and the request still fails](/blog/bucket-policy-allow-still-denied).
 
 ```json
 {
@@ -84,7 +84,7 @@ return redirect(url, status_code=302)
     "Principal": "*",
     "Action": "s3:GetObject",
     "Resource": "arn:aws:s3:::docs-prod/*",
-    "Condition": { "NumericGreaterThan": { "s3:signatureAge": "900" } }
+    "Condition": { "NumericGreaterThan": { "s3:signatureAge": "900000" } }
   }]
 }
 ```

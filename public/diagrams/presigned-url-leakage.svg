@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="940" height="520" viewBox="0 0 940 520" role="img" aria-labelledby="t d">
+  <title id="t">A presigned URL is a credential copied into four stores</title>
+  <desc id="d">The signing server produces a URL whose credential field names the access key and signing date and whose signature field grants access. That string is copied into an application access log, a CDN or WAF log, a TLS-inspecting proxy and a chat link preview. Redaction removes the signature; the key id, date, region, expiry and session token stay readable.</desc>
+
+  <rect width="940" height="520" fill="#FFFFFF"/>
+
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#64748B"/>
+    </marker>
+    <marker id="arrowAccent" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#2563EB"/>
+    </marker>
+  </defs>
+
+  <!-- signer -->
+  <rect x="40" y="52" width="180" height="104" rx="10" fill="#FFFFFF" stroke="#E2E8F0"/>
+  <text x="60" y="80" font-family="Inter, system-ui, sans-serif" font-size="13" font-weight="600" fill="#020817">Your server</text>
+  <text x="60" y="101" font-family="Inter, system-ui, sans-serif" font-size="11" fill="#64748B">signs locally, no call</text>
+  <text x="60" y="119" font-family="Inter, system-ui, sans-serif" font-size="11" fill="#64748B">to any AWS API</text>
+  <text x="60" y="141" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="10.5" fill="#020817">ExpiresIn=900</text>
+
+  <line x1="222" y1="104" x2="292" y2="104" stroke="#64748B" stroke-width="1" marker-end="url(#arrow)"/>
+
+  <!-- the url -->
+  <text x="302" y="44" font-family="Inter, system-ui, sans-serif" font-size="11" fill="#64748B">the URL is the credential</text>
+  <rect x="300" y="52" width="360" height="104" rx="10" fill="#FFFFFF" stroke="#E2E8F0"/>
+  <rect x="314" y="66" width="332" height="34" rx="6" fill="#FFFFFF" stroke="#E2E8F0"/>
+  <text x="326" y="81" font-family="Inter, system-ui, sans-serif" font-size="10" fill="#64748B">X-Amz-Credential</text>
+  <text x="326" y="94" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="10.5" fill="#020817">AKIA…/20261104/eu-west-3/s3</text>
+  <rect x="314" y="108" width="332" height="34" rx="6" fill="#FFFFFF" stroke="#2563EB"/>
+  <text x="326" y="123" font-family="Inter, system-ui, sans-serif" font-size="10" fill="#64748B">X-Amz-Signature</text>
+  <text x="326" y="136" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="10.5" fill="#2563EB">64 hex characters — grants access</text>
+
+  <line x1="662" y1="104" x2="732" y2="104" stroke="#2563EB" stroke-width="1" marker-end="url(#arrowAccent)"/>
+
+  <!-- bucket -->
+  <rect x="736" y="52" width="164" height="104" rx="10" fill="#FFFFFF" stroke="#E2E8F0"/>
+  <text x="756" y="80" font-family="Inter, system-ui, sans-serif" font-size="13" font-weight="600" fill="#020817">S3 bucket</text>
+  <text x="756" y="101" font-family="Inter, system-ui, sans-serif" font-size="11" fill="#64748B">returns the object</text>
+  <text x="756" y="119" font-family="Inter, system-ui, sans-serif" font-size="11" fill="#64748B">checks the signature</text>
+  <text x="756" y="137" font-family="Inter, system-ui, sans-serif" font-size="11" fill="#64748B">not the holder</text>
+
+  <!-- copies bus -->
+  <line x1="480" y1="156" x2="480" y2="190" stroke="#64748B" stroke-width="1"/>
+  <line x1="116" y1="190" x2="824" y2="190" stroke="#64748B" stroke-width="1"/>
+  <text x="492" y="182" font-family="Inter, system-ui, sans-serif" font-size="11" fill="#64748B">copied into</text>
+  <line x1="116" y1="190" x2="116" y2="246" stroke="#64748B" stroke-width="1" marker-end="url(#arrow)"/>
+  <line x1="352" y1="190" x2="352" y2="246" stroke="#64748B" stroke-width="1" marker-end="url(#arrow)"/>
+  <line x1="588" y1="190" x2="588" y2="246" stroke="#64748B" stroke-width="1" marker-end="url(#arrow)"/>
+  <line x1="824" y1="190" x2="824" y2="246" stroke="#64748B" stroke-width="1" marker-end="url(#arrow)"/>
+
+  <!-- four stores -->
+  <rect x="16" y="250" width="200" height="112" rx="10" fill="#FFFFFF" stroke="#E2E8F0"/>
+  <text x="32" y="277" font-family="Inter, system-ui, sans-serif" font-size="12.5" font-weight="600" fill="#020817">App access log</text>
+  <text x="32" y="298" font-family="Inter, system-ui, sans-serif" font-size="10.5" fill="#64748B">full query string</text>
+  <text x="32" y="315" font-family="Inter, system-ui, sans-serif" font-size="10.5" fill="#64748B">by default</text>
+  <text x="32" y="340" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="10" fill="#020817">$request</text>
+
+  <rect x="252" y="250" width="200" height="112" rx="10" fill="#FFFFFF" stroke="#E2E8F0"/>
+  <text x="268" y="277" font-family="Inter, system-ui, sans-serif" font-size="12.5" font-weight="600" fill="#020817">CDN or WAF log</text>
+  <text x="268" y="298" font-family="Inter, system-ui, sans-serif" font-size="10.5" fill="#64748B">full URI, as issued</text>
+  <text x="268" y="315" font-family="Inter, system-ui, sans-serif" font-size="10.5" fill="#64748B">read by more teams</text>
+  <text x="268" y="340" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="10" fill="#020817">cs-uri-query</text>
+
+  <rect x="488" y="250" width="200" height="112" rx="10" fill="#FFFFFF" stroke="#E2E8F0"/>
+  <text x="504" y="277" font-family="Inter, system-ui, sans-serif" font-size="12.5" font-weight="600" fill="#020817">TLS proxy</text>
+  <text x="504" y="298" font-family="Inter, system-ui, sans-serif" font-size="10.5" fill="#64748B">full URI, plus body</text>
+  <text x="504" y="315" font-family="Inter, system-ui, sans-serif" font-size="10.5" fill="#64748B">held by its admins</text>
+  <text x="504" y="340" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="10" fill="#020817">MITM inspection</text>
+
+  <rect x="724" y="250" width="200" height="112" rx="10" fill="#FFFFFF" stroke="#E2E8F0"/>
+  <text x="740" y="277" font-family="Inter, system-ui, sans-serif" font-size="12.5" font-weight="600" fill="#020817">Chat preview</text>
+  <text x="740" y="298" font-family="Inter, system-ui, sans-serif" font-size="10.5" fill="#64748B">fetched to render</text>
+  <text x="740" y="315" font-family="Inter, system-ui, sans-serif" font-size="10.5" fill="#64748B">a bot you did not send</text>
+  <text x="740" y="340" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="10" fill="#020817">HEAD, then GET</text>
+
+  <!-- outcome -->
+  <line x1="16" y1="392" x2="924" y2="392" stroke="#E2E8F0" stroke-width="1"/>
+  <text x="16" y="420" font-family="Inter, system-ui, sans-serif" font-size="12" fill="#020817">Redaction removes the signature: replay stops there.</text>
+  <text x="16" y="444" font-family="Inter, system-ui, sans-serif" font-size="12" fill="#020817">The key id, signing date, region, expiry and session token stay readable.</text>
+  <text x="16" y="474" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="10.5" fill="#64748B">334 chars with a long-term key · 1 009 with a session token · measured 2026-11-04</text>
+</svg>
