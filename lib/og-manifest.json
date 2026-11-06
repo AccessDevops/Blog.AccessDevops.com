@@ -2,6 +2,7 @@
   "abac-object-tags-vs-prefix-policies": true,
   "assumerole-chaining-one-hour-ceiling": true,
   "bucket-policy-allow-still-denied": true,
+  "multipart-5mb-floor-10000-parts": true,
   "presigned-post-enforce-size-content-type": true,
   "presigned-url-leakage": true,
   "presigned-url-seven-day-ceiling": true,

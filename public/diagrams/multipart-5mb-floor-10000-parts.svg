@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="940" height="580" viewBox="0 0 940 580" role="img" aria-labelledby="t d">
+  <title id="t">Where a multipart upload is checked</title>
+  <desc id="d">Four steps — create, upload parts, complete, object — with the part count refused during the upload and the 5 MiB floor refused at completion.</desc>
+
+  <rect x="0" y="0" width="940" height="580" fill="#FFFFFF"/>
+
+  <!-- separator between the flow and the annotations -->
+  <line x1="276" y1="48" x2="276" y2="440" stroke="#E2E8F0" stroke-width="1"/>
+
+  <!-- step 1 -->
+  <rect x="24" y="64" width="228" height="66" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1"/>
+  <text x="40" y="94" font-family="Inter, system-ui, sans-serif" font-size="13" font-weight="600" fill="#020817">CreateMultipartUpload</text>
+  <text x="40" y="114" font-family="Inter, system-ui, sans-serif" font-size="11.5" fill="#64748B">returns an UploadId</text>
+  <line x1="138" y1="130" x2="138" y2="156" stroke="#2563EB" stroke-width="1"/>
+  <path d="M133 152 L138 160 L143 152 Z" fill="#2563EB"/>
+
+  <!-- step 2 -->
+  <rect x="24" y="164" width="228" height="66" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1"/>
+  <text x="40" y="194" font-family="Inter, system-ui, sans-serif" font-size="13" font-weight="600" fill="#020817">UploadPart &#215; N</text>
+  <text x="40" y="214" font-family="Inter, system-ui, sans-serif" font-size="11.5" fill="#64748B">each part signed, any order</text>
+  <line x1="138" y1="230" x2="138" y2="256" stroke="#2563EB" stroke-width="1"/>
+  <path d="M133 252 L138 260 L143 252 Z" fill="#2563EB"/>
+
+  <!-- step 3 -->
+  <rect x="24" y="264" width="228" height="66" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1"/>
+  <text x="40" y="294" font-family="Inter, system-ui, sans-serif" font-size="13" font-weight="600" fill="#020817">CompleteMultipartUpload</text>
+  <text x="40" y="314" font-family="Inter, system-ui, sans-serif" font-size="11.5" fill="#64748B">ascending part order</text>
+  <line x1="138" y1="330" x2="138" y2="356" stroke="#2563EB" stroke-width="1"/>
+  <path d="M133 352 L138 360 L143 352 Z" fill="#2563EB"/>
+
+  <!-- step 4 -->
+  <rect x="24" y="364" width="228" height="66" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1"/>
+  <text x="40" y="394" font-family="Inter, system-ui, sans-serif" font-size="13" font-weight="600" fill="#020817">Object</text>
+  <text x="40" y="414" font-family="Inter, system-ui, sans-serif" font-size="11.5" fill="#64748B">parts no longer addressable</text>
+
+  <!-- annotation 1 -->
+  <text x="300" y="94" font-family="Inter, system-ui, sans-serif" font-size="12.5" fill="#020817">Nothing is stored yet.</text>
+  <text x="300" y="114" font-family="Inter, system-ui, sans-serif" font-size="11.5" fill="#64748B">The upload ID is the only handle.</text>
+
+  <!-- annotation 2: the parts -->
+  <rect x="300" y="172" width="46" height="26" fill="#FFFFFF" stroke="#2563EB" stroke-width="1"/>
+  <text x="317" y="189" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" fill="#020817">1</text>
+  <rect x="354" y="172" width="46" height="26" fill="#FFFFFF" stroke="#2563EB" stroke-width="1"/>
+  <text x="371" y="189" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" fill="#020817">2</text>
+  <rect x="408" y="172" width="46" height="26" fill="#FFFFFF" stroke="#2563EB" stroke-width="1"/>
+  <text x="425" y="189" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" fill="#020817">3</text>
+  <rect x="462" y="172" width="46" height="26" fill="#FFFFFF" stroke="#2563EB" stroke-width="1"/>
+  <text x="479" y="189" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" fill="#020817">4</text>
+  <rect x="516" y="172" width="46" height="26" fill="#FFFFFF" stroke="#64748B" stroke-width="1" stroke-dasharray="3 3"/>
+  <text x="533" y="189" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" fill="#64748B">n</text>
+  <text x="300" y="222" font-family="Inter, system-ui, sans-serif" font-size="11.5" fill="#020817">5 MiB &#8804; part &#8804; 5 GiB, except the last</text>
+  <text x="600" y="186" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" fill="#020817">part 10 001 &#8594; 400 InvalidArgument</text>
+  <text x="600" y="204" font-family="Inter, system-ui, sans-serif" font-size="11.5" fill="#64748B">refused during the upload</text>
+
+  <!-- annotation 3: the floor -->
+  <rect x="300" y="282" width="6" height="6" fill="#2563EB"/>
+  <text x="314" y="290" font-family="Inter, system-ui, sans-serif" font-size="13" font-weight="600" fill="#020817">The floor is checked here</text>
+  <text x="314" y="312" font-family="Inter, system-ui, sans-serif" font-size="11.5" fill="#64748B">400 EntityTooSmall, after the whole payload</text>
+
+  <!-- annotation 4 -->
+  <text x="300" y="392" font-family="Inter, system-ui, sans-serif" font-size="12.5" fill="#020817">Nothing is left to abort.</text>
+  <text x="300" y="412" font-family="Inter, system-ui, sans-serif" font-size="11.5" fill="#64748B">10 000 parts &#215; 5 GiB = 48.8 TiB ceiling</text>
+
+  <!-- bottom band -->
+  <rect x="24" y="470" width="892" height="76" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1"/>
+  <rect x="40" y="486" width="3" height="44" fill="#2563EB"/>
+  <text x="58" y="504" font-family="Inter, system-ui, sans-serif" font-size="12.5" fill="#020817">A single PUT is capped at 5 GiB, so a 60 GiB file takes the four steps above.</text>
+  <text x="58" y="526" font-family="Inter, system-ui, sans-serif" font-size="11.5" fill="#64748B">The part count is refused early; the part size is refused last.</text>
+</svg>
