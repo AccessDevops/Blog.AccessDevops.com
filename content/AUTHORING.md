@@ -206,7 +206,7 @@ alt text on every image. It must exit 0.
 ## Ship it
 
 ```bash
-cd /home/hermes/.hermes/cache/scratch/blog-nuxt
+cd /home/hermes/work/blog-nuxt   # dossier permanent : `scratch/` est purgé après 24 h
 npm run og                            # per-article Open Graph image — not optional
 npm run generate
 python3 scripts/seo-audit.py          # must exit 0 — fix the article, never the script
