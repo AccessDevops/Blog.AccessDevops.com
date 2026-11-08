@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 500" role="img" aria-labelledby="t d">
+  <title id="t">Three EU dates that change what an S3 bucket costs and proves</title>
+  <desc id="d">A timeline of three regulatory dates — 12 September 2025, 12 January 2027 and 11 December 2027 — with the operational work each one implies for object storage: inventorying orphaned multipart parts, object versions and egress attribution.</desc>
+  <rect width="900" height="500" fill="#020817"/>
+
+  <text x="60" y="52" fill="#E2E8F0" font-family="Inter, system-ui, -apple-system, Segoe UI, sans-serif" font-size="21" font-weight="600">Three dates, one bucket inventory</text>
+  <text x="60" y="80" fill="#94A3B8" font-family="Inter, system-ui, -apple-system, Segoe UI, sans-serif" font-size="13.5">The EU Data Act ends switching fees in 2027. The work it implies starts now.</text>
+
+  <!-- axe -->
+  <line x1="90" y1="150" x2="820" y2="150" stroke="#334155" stroke-width="2"/>
+  <line x1="190" y1="150" x2="450" y2="150" stroke="#2563EB" stroke-width="3"/>
+  <line x1="450" y1="150" x2="710" y2="150" stroke="#1E3A5F" stroke-width="3" stroke-dasharray="7 6"/>
+
+  <!-- jalons -->
+  <circle cx="190" cy="150" r="7" fill="#2563EB"/>
+  <circle cx="450" cy="150" r="9" fill="#2563EB" stroke="#020817" stroke-width="3"/>
+  <circle cx="710" cy="150" r="7" fill="#0B1A33" stroke="#3B82F6" stroke-width="2.5"/>
+
+  <text x="190" y="128" fill="#94A3B8" font-family="Inter, system-ui, sans-serif" font-size="12.5" text-anchor="middle">12 Sep 2025</text>
+  <text x="450" y="124" fill="#E2E8F0" font-family="Inter, system-ui, sans-serif" font-size="14" font-weight="600" text-anchor="middle">12 Jan 2027</text>
+  <text x="710" y="128" fill="#94A3B8" font-family="Inter, system-ui, sans-serif" font-size="12.5" text-anchor="middle">11 Dec 2027</text>
+
+  <text x="190" y="178" fill="#94A3B8" font-family="Inter, system-ui, sans-serif" font-size="11.5" text-anchor="middle">switching at cost</text>
+  <text x="450" y="178" fill="#3B82F6" font-family="Inter, system-ui, sans-serif" font-size="11.5" text-anchor="middle">switching egress = 0</text>
+  <text x="710" y="178" fill="#94A3B8" font-family="Inter, system-ui, sans-serif" font-size="11.5" text-anchor="middle">CRA fully applicable</text>
+
+  <!-- cartes -->
+  <g font-family="Inter, system-ui, sans-serif">
+    <rect x="70" y="214" width="240" height="150" rx="10" fill="#0B1A33" stroke="#1E3A5F"/>
+    <text x="90" y="242" fill="#E2E8F0" font-size="13" font-weight="600">Already in force</text>
+    <text x="90" y="268" fill="#94A3B8" font-size="12">Switching charge capped</text>
+    <text x="90" y="288" fill="#94A3B8" font-size="12">at what it actually costs</text>
+    <text x="90" y="314" fill="#94A3B8" font-size="12">2-month notice ceiling,</text>
+    <text x="90" y="334" fill="#94A3B8" font-size="12">30-day transition window</text>
+
+    <rect x="330" y="214" width="240" height="150" rx="10" fill="#0F2647" stroke="#2563EB" stroke-width="1.5"/>
+    <text x="350" y="242" fill="#E2E8F0" font-size="13" font-weight="600">The financial wall falls</text>
+    <text x="350" y="268" fill="#94A3B8" font-size="12">Exit egress becomes free</text>
+    <text x="350" y="288" fill="#94A3B8" font-size="12">for EU customers</text>
+    <text x="350" y="314" fill="#F87171" font-size="12">Ordinary egress stays</text>
+    <text x="350" y="334" fill="#F87171" font-size="12">billable — read the scope</text>
+
+    <rect x="590" y="214" width="240" height="150" rx="10" fill="#0B1A33" stroke="#1E3A5F"/>
+    <text x="610" y="242" fill="#E2E8F0" font-size="13" font-weight="600">The proof obligation</text>
+    <text x="610" y="268" fill="#94A3B8" font-size="12">CRA applies in full</text>
+    <text x="610" y="288" fill="#94A3B8" font-size="12">to products with a</text>
+    <text x="610" y="314" fill="#94A3B8" font-size="12">software component</text>
+    <text x="610" y="334" fill="#94A3B8" font-size="12">(reporting since 2026)</text>
+  </g>
+
+  <!-- ce qu'il faut savoir compter -->
+  <text x="70" y="404" fill="#E2E8F0" font-family="Inter, system-ui, sans-serif" font-size="13" font-weight="600">What a migration plan needs, and a console listing never shows</text>
+
+  <g font-family="JetBrains Mono, ui-monospace, Menlo, monospace" font-size="11.5">
+    <rect x="70" y="418" width="240" height="34" rx="7" fill="#111C2E" stroke="#1E3A5F"/>
+    <text x="86" y="439" fill="#93C5FD">list-multipart-uploads</text>
+
+    <rect x="330" y="418" width="240" height="34" rx="7" fill="#111C2E" stroke="#1E3A5F"/>
+    <text x="346" y="439" fill="#93C5FD">list-object-versions</text>
+
+    <rect x="590" y="418" width="240" height="34" rx="7" fill="#111C2E" stroke="#1E3A5F"/>
+    <text x="606" y="439" fill="#93C5FD">get-bucket-tagging</text>
+  </g>
+
+  <text x="70" y="478" fill="#64748B" font-family="Inter, system-ui, sans-serif" font-size="11">Source: Regulation (EU) 2023/2854, Article 29; European Commission, Data Act.</text>
+</svg>
