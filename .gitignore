@@ -24,3 +24,7 @@ t_*.png
 
 # fichiers temporaires du générateur d'images Open Graph
 .og-tmp
+
+# Python bytecode
+__pycache__/
+*.pyc
