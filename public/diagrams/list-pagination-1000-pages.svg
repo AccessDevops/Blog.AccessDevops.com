@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="940" height="560" viewBox="0 0 940 560" role="img" aria-label="Three ListObjectsV2 pages of 1,000, 1,000 and 501 entries, then a page where 990 objects and 10 folders share the same 1,000-entry budget">
+<rect x="0" y="0" width="940" height="560" rx="0" fill="#FFFFFF" stroke="none" stroke-width="1"/>
+<text x="40" y="40" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12" fill="#64748B" font-weight="400" text-anchor="start">GET /?list-type=2&amp;prefix=flat/ &#160;— 2,501 keys, default max-keys</text>
+<text x="40" y="105" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11.5" fill="#64748B" font-weight="400" text-anchor="start">request 1</text>
+<rect x="122" y="88" width="40" height="26" rx="4" fill="#F1F5F9" stroke="#E2E8F0" stroke-width="1"/>
+<text x="142" y="105" font-family="Inter, system-ui, sans-serif" font-size="13" fill="#64748B" font-weight="400" text-anchor="middle">→</text>
+<rect x="180" y="88" width="600.0" height="26" rx="4" fill="#2563EB" stroke="none" stroke-width="1"/>
+<text x="190" y="105" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="10.5" fill="#FFFFFF" font-weight="400" text-anchor="start">1,000 entries · IsTruncated true · token flat/0999</text>
+<text x="40" y="161" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11.5" fill="#64748B" font-weight="400" text-anchor="start">request 2</text>
+<rect x="122" y="144" width="40" height="26" rx="4" fill="#F1F5F9" stroke="#E2E8F0" stroke-width="1"/>
+<text x="142" y="161" font-family="Inter, system-ui, sans-serif" font-size="13" fill="#64748B" font-weight="400" text-anchor="middle">→</text>
+<rect x="180" y="144" width="600.0" height="26" rx="4" fill="#2563EB" stroke="none" stroke-width="1"/>
+<text x="190" y="161" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="10.5" fill="#FFFFFF" font-weight="400" text-anchor="start">1,000 entries · IsTruncated true · token flat/1999</text>
+<text x="40" y="217" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11.5" fill="#64748B" font-weight="400" text-anchor="start">request 3</text>
+<rect x="122" y="200" width="40" height="26" rx="4" fill="#F1F5F9" stroke="#E2E8F0" stroke-width="1"/>
+<text x="142" y="217" font-family="Inter, system-ui, sans-serif" font-size="13" fill="#64748B" font-weight="400" text-anchor="middle">→</text>
+<rect x="180" y="200" width="300.6" height="26" rx="4" fill="#93B4F7" stroke="none" stroke-width="1"/>
+<text x="190" y="217" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="10.5" fill="#020817" font-weight="400" text-anchor="start">501 entries · IsTruncated false</text>
+<rect x="480.6" y="200" width="299.4" height="26" rx="4" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1"/>
+<text x="630.3" y="217" font-family="Inter, system-ui, sans-serif" font-size="10.5" fill="#64748B" font-weight="400" text-anchor="middle">remaining capacity</text>
+<text x="796" y="66" font-family="Inter, system-ui, sans-serif" font-size="11" fill="#64748B" font-weight="400" text-anchor="start">one page = 1,000</text>
+<text x="796" y="82" font-family="Inter, system-ui, sans-serif" font-size="11" fill="#64748B" font-weight="400" text-anchor="start">entries, never more</text>
+<line x1="40" y1="256" x2="900" y2="256" stroke="#E2E8F0" stroke-width="1"/>
+<text x="40" y="286" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12" fill="#64748B" font-weight="400" text-anchor="start">GET /?list-type=2&amp;prefix=mixed/&amp;delimiter=/ &#160;— 990 objects + 50 folders in total</text>
+<rect x="40" y="302" width="594.0" height="40" rx="4" fill="#F1F5F9" stroke="#E2E8F0" stroke-width="1"/>
+<rect x="634.0" y="302" width="6.0" height="40" fill="#2563EB" rx="3"/>
+<text x="52" y="327" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11.5" fill="#020817" font-weight="400" text-anchor="start">990 &lt;Contents&gt;</text>
+<line x1="648" y1="322" x2="680" y2="322" stroke="#64748B" stroke-width="1"/>
+<text x="686" y="319" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" fill="#020817" font-weight="400" text-anchor="start">10 &lt;CommonPrefixes&gt;</text>
+<text x="686" y="335" font-family="Inter, system-ui, sans-serif" font-size="11" fill="#64748B" font-weight="400" text-anchor="start">one entry each, same budget</text>
+<text x="40" y="362" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11.5" fill="#020817" font-weight="400" text-anchor="start">KeyCount 1,000 &#160;·&#160; IsTruncated true &#160;·&#160; NextContinuationToken present</text>
+<rect x="40" y="392" width="400" height="116" rx="10" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1"/>
+<text x="60" y="418" font-family="Inter, system-ui, sans-serif" font-size="12" fill="#020817" font-weight="600" text-anchor="start">The loop most code contains</text>
+<text x="60" y="444" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11.5" fill="#64748B" font-weight="400" text-anchor="start">if len(Contents) &lt; MaxKeys:</text>
+<text x="60" y="462" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11.5" fill="#64748B" font-weight="400" text-anchor="start">&#160;&#160;&#160;&#160;break</text>
+<text x="60" y="488" font-family="Inter, system-ui, sans-serif" font-size="11.5" fill="#020817" font-weight="400" text-anchor="start">990 &lt; 1,000 → exits after one page</text>
+<rect x="470" y="392" width="430" height="116" rx="10" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1"/>
+<text x="490" y="418" font-family="Inter, system-ui, sans-serif" font-size="12" fill="#020817" font-weight="600" text-anchor="start">What was never listed</text>
+<text x="490" y="444" font-family="Inter, system-ui, sans-serif" font-size="11.5" fill="#64748B" font-weight="400" text-anchor="start">40 folders and every object in them:</text>
+<text x="490" y="462" font-family="Inter, system-ui, sans-serif" font-size="11.5" fill="#64748B" font-weight="400" text-anchor="start">2,000 keys in this layout</text>
+<text x="490" y="488" font-family="Inter, system-ui, sans-serif" font-size="11.5" fill="#020817" font-weight="600" text-anchor="start">the script reports success</text>
+<text x="40" y="540" font-family="Inter, system-ui, sans-serif" font-size="10.5" fill="#64748B" font-weight="400" text-anchor="start">Measured 11 November 2026 on SeaweedFS 4.50 and moto 5.2.5 — both returned 990 Contents + 10 CommonPrefixes, KeyCount 1,000, IsTruncated true.</text>
+</svg>

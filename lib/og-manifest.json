@@ -3,6 +3,7 @@
   "assumerole-chaining-one-hour-ceiling": true,
   "bucket-policy-allow-still-denied": true,
   "crc64nvme-new-integrity-default": true,
+  "list-pagination-1000-pages": true,
   "multipart-5mb-floor-10000-parts": true,
   "presigned-post-enforce-size-content-type": true,
   "presigned-url-leakage": true,

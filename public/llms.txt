@@ -14,6 +14,7 @@
 - DevOps practices, automation and CI/CD
 
 ## Articles
+- [S3 LIST returns 1,000 entries a page, folders included](https://blog.accessdevops.com/blog/list-pagination-1000-pages): measures the listing ceiling on two endpoints — the 990-objects-plus-10-folders page that stops a naive loop, the mock server that ignores `max-keys`, and the byte-order sort that breaks resumable jobs.
 - [CRC64NVME is now the S3 default, your SDK sends CRC32](https://blog.accessdevops.com/blog/crc64nvme-new-integrity-default): measures what a live endpoint does with each checksum case — the SDK sending CRC32 unasked, the `BadDigest` whose message still names Content-MD5, the six retries before it surfaces, and the read that returns nothing without checksum mode.
 - [Multipart upload: the 5 MiB floor and the 10,000-part ceiling](https://blog.accessdevops.com/blog/multipart-5mb-floor-10000-parts): measures both limits on a running S3 endpoint — the 5 MiB part floor is refused at CompleteMultipartUpload after every byte is sent, part 10 001 fails during the upload — and shows the part-size arithmetic that caps objects at 48.8 TiB.
 - [Presigned URLs leak into logs, referrers and chat](https://blog.accessdevops.com/blog/presigned-url-leakage): measures what a presigned URL actually contains (334 characters, 1 009 with a session token), then traces the copies in access logs, CDN logs, TLS proxies and link previews, and shows that the standard signature redaction leaves the key id, date and expiry readable.
