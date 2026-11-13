@@ -8,6 +8,7 @@
   "presigned-post-enforce-size-content-type": true,
   "presigned-url-leakage": true,
   "presigned-url-seven-day-ceiling": true,
+  "resume-interrupted-multipart-upload": true,
   "s3-explorer-walkthrough": true,
   "s3-in-2027-egress-bill-changes": true,
   "s3-total-cost-of-ownership": true,
