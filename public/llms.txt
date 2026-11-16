@@ -14,6 +14,7 @@
 - DevOps practices, automation and CI/CD
 
 ## Articles
+- [Parallel parts beat one stream, until the client is the limit](https://blog.accessdevops.com/blog/parallel-parts-vs-single-stream): measures the same 256 MiB upload at ten part-size and concurrency settings on one endpoint — the knee at four parts in flight, one thread with 32 parts slower than a single `PUT` at 26.6 against 59.2 MiB/s, and the client CPU (0.41 to 1.39 cores) that ends the climb.
 - [Resuming a multipart upload you never meant to abandon](https://blog.accessdevops.com/blog/resume-interrupted-multipart-upload): measures what survives a crashed upload on two endpoints — the upload ID never expires, `ListParts` rebuilds the ETag map, and on SeaweedFS 4.50 re-sending a part number kept the previous ETag in 15 of 30 trials while the completed object stored the older bytes.
 - [S3 LIST returns 1,000 entries a page, folders included](https://blog.accessdevops.com/blog/list-pagination-1000-pages): measures the listing ceiling on two endpoints — the 990-objects-plus-10-folders page that stops a naive loop, the mock server that ignores `max-keys`, and the byte-order sort that breaks resumable jobs.
 - [CRC64NVME is now the S3 default, your SDK sends CRC32](https://blog.accessdevops.com/blog/crc64nvme-new-integrity-default): measures what a live endpoint does with each checksum case — the SDK sending CRC32 unasked, the `BadDigest` whose message still names Content-MD5, the six retries before it surfaces, and the read that returns nothing without checksum mode.

@@ -5,6 +5,7 @@
   "crc64nvme-new-integrity-default": true,
   "list-pagination-1000-pages": true,
   "multipart-5mb-floor-10000-parts": true,
+  "parallel-parts-vs-single-stream": true,
   "presigned-post-enforce-size-content-type": true,
   "presigned-url-leakage": true,
   "presigned-url-seven-day-ceiling": true,
