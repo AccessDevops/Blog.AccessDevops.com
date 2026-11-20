@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="940" height="520" viewBox="0 0 940 520" role="img" aria-labelledby="t d">
+  <title id="t">Anonymous access follows the scope of the grant: object grants expose the file, bucket grants expose the listing</title>
+  <desc id="d">Two groups of grants sit on the left. Grants on the object — an object ACL set to public-read, or a bucket policy granting s3:GetObject to Principal star — let an unsigned GET return the object. Grants on the bucket — a bucket ACL set to public-read, whose READ permission means list objects — let an unsigned LIST return the bucket contents. Neither group authorises a PUT, which stays 403. Block Public Access, shown at the bottom as four switches, overrides all of these when the request is evaluated without deleting them, so removing a switch makes the bucket public again.</desc>
+
+  <rect width="940" height="520" fill="#FFFFFF"/>
+
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#64748B"/>
+    </marker>
+    <marker id="arrowAccent" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#2563EB"/>
+    </marker>
+  </defs>
+
+  <text x="40" y="40" font-family="Inter, system-ui, sans-serif" font-size="10" letter-spacing="0.08em" fill="#64748B">WHERE THE GRANT SITS DECIDES WHAT THE INTERNET CAN DO</text>
+
+  <!-- group: grants on the object -->
+  <rect x="40" y="60" width="262" height="148" rx="10" fill="#FFFFFF" stroke="#E2E8F0"/>
+  <text x="60" y="84" font-family="Inter, system-ui, sans-serif" font-size="10" letter-spacing="0.06em" fill="#64748B">GRANTS ON THE OBJECT</text>
+  <text x="60" y="112" font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="600" fill="#020817">Object ACL</text>
+  <text x="60" y="130" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="10.5" fill="#2563EB">public-read</text>
+  <line x1="60" y1="142" x2="282" y2="142" stroke="#E2E8F0" stroke-width="1"/>
+  <text x="60" y="166" font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="600" fill="#020817">Bucket policy</text>
+  <text x="60" y="184" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="10.5" fill="#2563EB">Principal: * · s3:GetObject</text>
+
+  <!-- group: grants on the bucket -->
+  <rect x="40" y="232" width="262" height="124" rx="10" fill="#FFFFFF" stroke="#E2E8F0"/>
+  <text x="60" y="256" font-family="Inter, system-ui, sans-serif" font-size="10" letter-spacing="0.06em" fill="#64748B">GRANTS ON THE BUCKET</text>
+  <text x="60" y="284" font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="600" fill="#020817">Bucket ACL</text>
+  <text x="60" y="302" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="10.5" fill="#2563EB">public-read</text>
+  <text x="60" y="324" font-family="Inter, system-ui, sans-serif" font-size="11" fill="#64748B">READ on a bucket means list —</text>
+  <text x="60" y="340" font-family="Inter, system-ui, sans-serif" font-size="11" fill="#64748B">not read the objects</text>
+
+  <!-- outcomes -->
+  <rect x="612" y="60" width="288" height="148" rx="10" fill="#FFFFFF" stroke="#2563EB"/>
+  <text x="632" y="84" font-family="Inter, system-ui, sans-serif" font-size="10" letter-spacing="0.06em" fill="#64748B">NO CREDENTIALS SENT</text>
+  <text x="632" y="112" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" fill="#020817">GET /bucket/payroll.csv</text>
+  <text x="632" y="142" font-family="Inter, system-ui, sans-serif" font-size="20" font-weight="600" fill="#2563EB">200</text>
+  <text x="676" y="142" font-family="Inter, system-ui, sans-serif" font-size="11" fill="#64748B">the bytes, to anyone</text>
+  <text x="632" y="172" font-family="Inter, system-ui, sans-serif" font-size="11" fill="#64748B">without a grant: 403 AccessDenied</text>
+
+  <rect x="612" y="232" width="288" height="124" rx="10" fill="#FFFFFF" stroke="#2563EB"/>
+  <text x="632" y="256" font-family="Inter, system-ui, sans-serif" font-size="10" letter-spacing="0.06em" fill="#64748B">NO CREDENTIALS SENT</text>
+  <text x="632" y="284" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" fill="#020817">GET /bucket?list-type=2</text>
+  <text x="632" y="314" font-family="Inter, system-ui, sans-serif" font-size="20" font-weight="600" fill="#2563EB">200</text>
+  <text x="676" y="314" font-family="Inter, system-ui, sans-serif" font-size="11" fill="#64748B">every key, with sizes</text>
+  <text x="632" y="344" font-family="Inter, system-ui, sans-serif" font-size="11" fill="#64748B">a public object ACL does not allow this</text>
+
+  <!-- links -->
+  <line x1="304" y1="134" x2="609" y2="134" stroke="#2563EB" stroke-width="1" marker-end="url(#arrowAccent)"/>
+  <line x1="304" y1="294" x2="609" y2="294" stroke="#2563EB" stroke-width="1" marker-end="url(#arrowAccent)"/>
+
+  <!-- write outcome -->
+  <text x="40" y="382" font-family="Inter, system-ui, sans-serif" font-size="11" fill="#020817">PUT returns 403 whatever the combination above:</text>
+  <text x="40" y="397" font-family="Inter, system-ui, sans-serif" font-size="11" fill="#64748B">none of these grants carries WRITE. public-read-write does.</text>
+  <line x1="470" y1="388" x2="609" y2="388" stroke="#64748B" stroke-width="1" stroke-dasharray="3 3" marker-end="url(#arrow)"/>
+  <rect x="612" y="364" width="288" height="48" rx="10" fill="#FFFFFF" stroke="#E2E8F0"/>
+  <text x="632" y="384" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" fill="#020817">PUT /bucket/x.txt</text>
+  <text x="632" y="402" font-family="Inter, system-ui, sans-serif" font-size="11" fill="#64748B">403 — no grant here carries WRITE</text>
+
+  <!-- block public access band -->
+  <rect x="40" y="428" width="860" height="72" rx="10" fill="#FFFFFF" stroke="#E2E8F0"/>
+  <text x="60" y="450" font-family="Inter, system-ui, sans-serif" font-size="10" letter-spacing="0.06em" fill="#64748B">BLOCK PUBLIC ACCESS — OVERRIDES BOTH OUTCOMES WHEN THE REQUEST IS EVALUATED, DELETES NOTHING</text>
+  <rect x="60" y="460" width="196" height="26" rx="6" fill="#FFFFFF" stroke="#E2E8F0"/>
+  <text x="72" y="477" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="10" fill="#020817">BlockPublicAcls</text>
+  <rect x="270" y="460" width="196" height="26" rx="6" fill="#FFFFFF" stroke="#E2E8F0"/>
+  <text x="282" y="477" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="10" fill="#020817">IgnorePublicAcls</text>
+  <rect x="480" y="460" width="196" height="26" rx="6" fill="#FFFFFF" stroke="#E2E8F0"/>
+  <text x="492" y="477" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="10" fill="#020817">BlockPublicPolicy</text>
+  <rect x="690" y="460" width="196" height="26" rx="6" fill="#FFFFFF" stroke="#E2E8F0"/>
+  <text x="702" y="477" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="10" fill="#020817">RestrictPublicBuckets</text>
+</svg>
