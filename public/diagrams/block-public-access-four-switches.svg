@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="940" height="684" viewBox="0 0 940 684" role="img" aria-labelledby="bt bd">
+<title id="bt">Block Public Access is four independent switches that act at different moments, and the most restrictive level wins</title>
+<desc id="bd">Four switches on the left. BlockPublicAcls refuses a public ACL at write time. IgnorePublicAcls accepts the write and ignores the grant when a request is evaluated, while the ACL stays stored. BlockPublicPolicy refuses a PutBucketPolicy whose document allows public access. RestrictPublicBuckets removes all cross-account access from a bucket whose policy is public, including access granted to a named account. On the right, an unsigned GET is evaluated against organisation, account, bucket and access point settings, and S3 applies the most restrictive combination. At the bottom, the stored public grant survives every switch: turning a switch off restores the public response.</desc>
+<rect width="940" height="684" fill="#FFFFFF"/>
+<text x="34" y="46" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" letter-spacing="-0.02em" fill="#020817">Four switches, four different jobs</text>
+<text x="34" y="70" font-family="Inter, system-ui, sans-serif" font-size="12.5" fill="#64748B">Each one blocks at a different moment. Removing one restores whatever it was hiding.</text>
+<rect x="34" y="92" width="556" height="440" rx="10" fill="#FFFFFF" stroke="#E2E8F0"/>
+<text x="54" y="118" font-family="Inter, system-ui, sans-serif" font-size="10" letter-spacing="0.08em" fill="#64748B">THE BUCKET-LEVEL SETTINGS, AND WHAT EACH ONE STOPS</text>
+<rect x="50" y="132" width="524" height="84" rx="8" fill="#F8FAFC" stroke="#E2E8F0"/>
+<text x="66" y="154" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12.5" font-weight="600" fill="#2563EB">BlockPublicAcls</text>
+<rect x="495.0" y="141" width="71.0" height="18" rx="4" fill="#FFFFFF" stroke="#E2E8F0"/>
+<text x="530.5" y="154" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="9.5" fill="#64748B">write time</text>
+<text x="66" y="174" font-family="Inter, system-ui, sans-serif" font-size="11.5" fill="#020817">PutObjectAcl and PutObject carrying a public ACL fail.</text>
+<text x="66" y="190" font-family="Inter, system-ui, sans-serif" font-size="11.5" fill="#020817">ACLs already stored keep working: not retroactive.</text>
+<text x="66" y="204" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="10.5" fill="#64748B">403 on the write</text>
+<rect x="50" y="228" width="524" height="84" rx="8" fill="#F8FAFC" stroke="#E2E8F0"/>
+<text x="66" y="250" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12.5" font-weight="600" fill="#2563EB">IgnorePublicAcls</text>
+<rect x="495.0" y="237" width="71.0" height="18" rx="4" fill="#FFFFFF" stroke="#E2E8F0"/>
+<text x="530.5" y="250" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="9.5" fill="#64748B">evaluation</text>
+<text x="66" y="270" font-family="Inter, system-ui, sans-serif" font-size="11.5" fill="#020817">The public ACL is accepted, then ignored when a request</text>
+<text x="66" y="286" font-family="Inter, system-ui, sans-serif" font-size="11.5" fill="#020817">is evaluated. It stays stored and reads as public.</text>
+<text x="66" y="300" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="10.5" fill="#64748B">200 stored, 403 served</text>
+<rect x="50" y="324" width="524" height="100" rx="8" fill="#F8FAFC" stroke="#E2E8F0"/>
+<text x="66" y="346" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12.5" font-weight="600" fill="#2563EB">BlockPublicPolicy</text>
+<rect x="495.0" y="333" width="71.0" height="18" rx="4" fill="#FFFFFF" stroke="#E2E8F0"/>
+<text x="530.5" y="346" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="9.5" fill="#64748B">write time</text>
+<text x="66" y="366" font-family="Inter, system-ui, sans-serif" font-size="11.5" fill="#020817">PutBucketPolicy is rejected when the document allows</text>
+<text x="66" y="382" font-family="Inter, system-ui, sans-serif" font-size="11.5" fill="#020817">public access. Existing policies are untouched, and a</text>
+<text x="66" y="398" font-family="Inter, system-ui, sans-serif" font-size="11.5" fill="#020817">policy can grant the right to switch this one off.</text>
+<text x="66" y="412" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="10.5" fill="#64748B">holds at account level only</text>
+<rect x="50" y="436" width="524" height="84" rx="8" fill="#F8FAFC" stroke="#E2E8F0"/>
+<text x="66" y="458" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12.5" font-weight="600" fill="#2563EB">RestrictPublicBuckets</text>
+<rect x="495.0" y="445" width="71.0" height="18" rx="4" fill="#FFFFFF" stroke="#E2E8F0"/>
+<text x="530.5" y="458" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="9.5" fill="#64748B">evaluation</text>
+<text x="66" y="478" font-family="Inter, system-ui, sans-serif" font-size="11.5" fill="#020817">Once any statement makes the policy public, every</text>
+<text x="66" y="494" font-family="Inter, system-ui, sans-serif" font-size="11.5" fill="#020817">cross-account use goes, named accounts included.</text>
+<text x="66" y="508" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="10.5" fill="#64748B">collateral damage</text>
+<rect x="606" y="92" width="300" height="440" rx="10" fill="#FFFFFF" stroke="#E2E8F0"/>
+<text x="626" y="116" font-family="Inter, system-ui, sans-serif" font-size="10" letter-spacing="0.08em" fill="#64748B">WHAT AN UNSIGNED GET IS CHECKED AGAINST</text>
+<rect x="626" y="130" width="260" height="52" rx="7" fill="#F8FAFC" stroke="#E2E8F0"/>
+<text x="640" y="151" font-family="Inter, system-ui, sans-serif" font-size="12.5" font-weight="600" fill="#020817">Organisation</text>
+<text x="640" y="168" font-family="Inter, system-ui, sans-serif" font-size="10.5" fill="#64748B">all four, on or off together</text>
+<rect x="626" y="188" width="260" height="52" rx="7" fill="#F8FAFC" stroke="#E2E8F0"/>
+<text x="640" y="209" font-family="Inter, system-ui, sans-serif" font-size="12.5" font-weight="600" fill="#020817">Account</text>
+<text x="640" y="226" font-family="Inter, system-ui, sans-serif" font-size="10.5" fill="#64748B">every bucket, every region, eventually</text>
+<rect x="626" y="246" width="260" height="52" rx="7" fill="#F8FAFC" stroke="#E2E8F0"/>
+<text x="640" y="267" font-family="Inter, system-ui, sans-serif" font-size="12.5" font-weight="600" fill="#020817">Bucket</text>
+<text x="640" y="284" font-family="Inter, system-ui, sans-serif" font-size="10.5" fill="#64748B">strict only if the account agrees</text>
+<rect x="626" y="304" width="260" height="52" rx="7" fill="#F8FAFC" stroke="#E2E8F0"/>
+<text x="640" y="325" font-family="Inter, system-ui, sans-serif" font-size="12.5" font-weight="600" fill="#020817">Access point</text>
+<text x="640" y="342" font-family="Inter, system-ui, sans-serif" font-size="10.5" fill="#64748B">passthrough to its bucket ACLs</text>
+<text x="626" y="372" font-family="Inter, system-ui, sans-serif" font-size="11" fill="#020817">The most restrictive of the four wins.</text>
+<rect x="626" y="382" width="260" height="50" rx="7" fill="#FFFFFF" stroke="#2563EB"/>
+<text x="640" y="402" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11.5" fill="#2563EB">403 AccessDenied</text>
+<text x="640" y="419" font-family="Inter, system-ui, sans-serif" font-size="10.5" fill="#64748B">or 200 with the bytes, if nothing holds</text>
+<rect x="34" y="552" width="872" height="102" rx="10" fill="#F8FAFC" stroke="#E2E8F0"/>
+<text x="54" y="576" font-family="Inter, system-ui, sans-serif" font-size="10" letter-spacing="0.08em" fill="#64748B">THE SWITCHES NEVER DELETE THE GRANT</text>
+<text x="54" y="604" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11.5" fill="#020817">object ACL public-read</text>
+<text x="54" y="624" font-family="Inter, system-ui, sans-serif" font-size="10.5" fill="#64748B">still stored, still public on paper</text>
+<line x1="262" y1="612" x2="322" y2="612" stroke="#2563EB" stroke-width="1"/>
+<path d="M 322 607 L 332 612 L 322 617 z" fill="#2563EB"/>
+<text x="262" y="600" font-family="Inter, system-ui, sans-serif" font-size="10.5" fill="#64748B">switch on</text>
+<rect x="336" y="586" width="200" height="52" rx="7" fill="#FFFFFF" stroke="#E2E8F0"/>
+<text x="352" y="608" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11.5" fill="#020817">GET → 403</text>
+<text x="352" y="626" font-family="Inter, system-ui, sans-serif" font-size="10.5" fill="#64748B">the bytes do not leave</text>
+<line x1="544" y1="612" x2="604" y2="612" stroke="#64748B" stroke-width="1"/>
+<path d="M 604 607 L 614 612 L 604 617 z" fill="#64748B"/>
+<text x="544" y="600" font-family="Inter, system-ui, sans-serif" font-size="10.5" fill="#64748B">switch off</text>
+<rect x="618" y="586" width="270" height="52" rx="7" fill="#FFFFFF" stroke="#2563EB"/>
+<text x="634" y="608" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11.5" fill="#2563EB">GET → 200</text>
+<text x="634" y="626" font-family="Inter, system-ui, sans-serif" font-size="10.5" fill="#64748B">the 2019 exposure comes back</text>
+</svg>

@@ -2,6 +2,7 @@
   "abac-object-tags-vs-prefix-policies": true,
   "anonymous-read-exact-leak-path": true,
   "assumerole-chaining-one-hour-ceiling": true,
+  "block-public-access-four-switches": true,
   "bucket-policy-allow-still-denied": true,
   "crc64nvme-new-integrity-default": true,
   "etag-is-not-md5-on-multipart": true,
