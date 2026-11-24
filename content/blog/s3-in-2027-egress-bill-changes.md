@@ -4,7 +4,7 @@ description: "The EU Data Act removes switching fees in January 2027 — but not
 date: 2026-11-08
 author: "Clement Baranger"
 tags: ["s3", "pricing", "governance", "cloud"]
-guide: s3-storage-pricing-comparison
+guide: s3-in-2027-readiness
 related: [s3-total-cost-of-ownership, multipart-5mb-floor-10000-parts]
 ---
 
@@ -149,6 +149,8 @@ than a configurable threshold with the key, age and size of each, **object
 metadata and version tabs**, and a **per-request metrics panel** so the traffic
 you are paying for is visible while you work. Connections are per profile, which
 is what makes a second provider a two-minute test rather than a project.
+
+The [S3-in-2027 readiness guide](https://s3explorer.accessdevops.com/guides/s3-in-2027-readiness/?utm_source=blog&utm_medium=in_article&utm_campaign=s3-in-2027-egress-bill-changes) covers the same deadline provider by provider: what it removes, what it leaves in place, and which settings a client still has to expose.
 
 It is a desktop client for Windows, macOS and Linux, and it is built by the
 publisher of this blog. That is the disclosure; the checklist above stands on its
