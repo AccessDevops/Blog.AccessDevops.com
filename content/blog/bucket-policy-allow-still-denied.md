@@ -101,7 +101,7 @@ A habit that pays for itself: write access tests as a small matrix — one row p
 
 ## How S3 Explorer fits
 
-The client cannot see your SCPs, but it can remove the cheapest source of confusion: the connection itself. Each profile in [S3 Explorer](https://s3explorer.accessdevops.com) stores its own endpoint, region, addressing style and credentials, and the **Test connection** button reports the bucket count the credentials can actually see before you save anything.
+The client cannot see your SCPs, but it can remove the cheapest source of confusion: the connection itself. Each profile in [S3 Explorer](https://s3explorer.accessdevops.com/guides/s3-error-codes/?utm_source=blog&utm_medium=in_article&utm_campaign=bucket-policy-allow-still-denied) stores its own endpoint, region, addressing style and credentials, and the **Test connection** button reports the bucket count the credentials can actually see before you save anything.
 
 That matters when you are debugging a permission chain: if the test returns zero buckets where you expect three, the credentials are wrong or under-scoped, and you have eliminated gates 1 to 3 for the listing API in ten seconds without touching a CLI. The per-request metrics dashboard then shows which calls your browsing generated, so a `LIST` that silently returned nothing is visible as a count rather than an empty pane.
 

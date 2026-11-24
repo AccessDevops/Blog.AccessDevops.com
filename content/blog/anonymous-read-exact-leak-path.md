@@ -116,7 +116,7 @@ python3 -m venv /tmp/s3probe && /tmp/s3probe/bin/pip install boto3
 
 ## How S3 Explorer fits
 
-Every connection profile in [S3 Explorer](https://s3explorer.accessdevops.com) keeps its own endpoint, region, addressing style and credentials, and the **Test connection** button reports how many buckets those credentials can actually see before the profile is saved — so the key you suspect of being over-scoped gets its own profile and an immediate count, without disturbing the admin profile you were using. Browsing that profile also drives the per-request metrics dashboard, which counts the `LIST` and `GET` calls the session generated: opening a bucket you believe is closed and watching the listing come back is more convincing than reading a policy document.
+Every connection profile in [S3 Explorer](https://s3explorer.accessdevops.com/guides/s3-error-codes/?utm_source=blog&utm_medium=in_article&utm_campaign=anonymous-read-exact-leak-path) keeps its own endpoint, region, addressing style and credentials, and the **Test connection** button reports how many buckets those credentials can actually see before the profile is saved — so the key you suspect of being over-scoped gets its own profile and an immediate count, without disturbing the admin profile you were using. Browsing that profile also drives the per-request metrics dashboard, which counts the `LIST` and `GET` calls the session generated: opening a bucket you believe is closed and watching the listing come back is more convincing than reading a policy document.
 
 ## Checklist
 

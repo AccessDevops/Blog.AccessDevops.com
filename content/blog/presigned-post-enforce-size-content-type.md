@@ -129,7 +129,7 @@ aws s3api head-object --bucket uploads-prod --key incoming/logo.png \
 
 A policy states what a client may send; the object records what it sent, and the two disagree more often than expected — a `Content-Type` that is quietly `application/octet-stream` because the browser omitted it.
 
-S3 Explorer shows both sides. Bucket and folder browsing reaches the uploaded key, the **Content** and **Metadata** tabs show the stored content type, size and user metadata exactly as S3 holds them, and the image preview shows whether that stored type is the one a browser will render. **Multiple connection profiles** let you post the same form to AWS and to a compatible endpoint, and compare the results. [S3 Explorer](https://s3explorer.accessdevops.com) runs on Windows, macOS and Linux.
+S3 Explorer shows both sides. Bucket and folder browsing reaches the uploaded key, the **Content** and **Metadata** tabs show the stored content type, size and user metadata exactly as S3 holds them, and the image preview shows whether that stored type is the one a browser will render. **Multiple connection profiles** let you post the same form to AWS and to a compatible endpoint, and compare the results. [S3 Explorer](https://s3explorer.accessdevops.com/guides/share-s3-file-presigned-url/?utm_source=blog&utm_medium=in_article&utm_campaign=presigned-post-enforce-size-content-type) runs on Windows, macOS and Linux.
 
 The other half of the same problem — how long the permission lasts — is covered in [presigned URLs expire at seven days](/blog/presigned-url-seven-day-ceiling).
 

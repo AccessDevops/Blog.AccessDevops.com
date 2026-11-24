@@ -19,10 +19,10 @@
 export const PRODUCT_SITE = 'https://s3explorer.accessdevops.com';
 export const PRODUCT_HOST = 's3explorer.accessdevops.com';
 
-export function productUrl(path = '/', campaign = 'blog'): string {
+export function productUrl(path = '/', campaign = 'blog', medium = 'referral'): string {
   const url = new URL(path, PRODUCT_SITE);
   url.searchParams.set('utm_source', 'blog');
-  url.searchParams.set('utm_medium', 'referral');
+  url.searchParams.set('utm_medium', medium);
   url.searchParams.set('utm_campaign', campaign);
   return url.toString();
 }

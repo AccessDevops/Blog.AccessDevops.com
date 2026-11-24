@@ -36,6 +36,23 @@ STOP = {"the", "a", "an", "of", "to", "in", "on", "and", "or", "for", "with", "y
         "how", "why", "what", "when", "is", "are", "do", "does", "it", "its", "you",
         "from", "by", "at", "as", "that", "this", "be", "not", "no", "de", "la", "le"}
 
+# Mots présents dans presque toutes les pages : ils ne désignent aucun sujet et font
+# gagner une page au hasard. « cloud » rapproche un article de Clever Cloud par accident.
+GENERIC = {"cloud", "s3", "storage", "file", "files", "object", "objects", "data",
+           "client", "desktop", "bucket", "buckets", "api", "browser", "guide", "guides"}
+
+# Vocabulaire du produit : l'article dit « coût », la page dit « pricing ». Sans cette
+# table, un article sur le coût total ne rejoint jamais la page des prix.
+SYNONYMS = {
+    "cost": "pricing", "costs": "pricing", "price": "pricing", "prices": "pricing",
+    "tco": "pricing", "bill": "pricing", "billing": "pricing", "egress": "pricing",
+    "preview": "preview", "previews": "preview", "viewer": "viewer", "view": "viewer",
+    "uploads": "multipart", "upload": "multipart", "etag": "multipart", "parts": "multipart",
+    "presign": "presigned", "presigned": "presigned", "signed": "presigned",
+    "errors": "error", "signaturedoesnotmatch": "error", "denied": "error",
+    "thumbs": "preview", "thumbnail": "preview", "thumbnails": "preview",
+}
+
 
 def tokens(text: str) -> set[str]:
     raw = re.findall(r"[a-z0-9]+", text.lower())
@@ -85,22 +102,39 @@ def guide_keys() -> dict[str, str]:
     return out
 
 
+EXCLUDE = {"/", "/about/", "/buy/", "/privacy/", "/terms/",
+           "/guides/", "/providers/", "/news/", "/security/"}
+
+
 def rank(pages: dict[str, dict], keys: dict[str, str], query: str, top: int) -> list[tuple]:
-    want = tokens(query)
+    want = {SYNONYMS.get(t, t) for t in tokens(query) if t not in GENERIC}
+    candidates = {p: m for p, m in pages.items() if p not in EXCLUDE}
+    # Un mot présent dans presque toutes les pages ne distingue rien : « s3 » est dans
+    # tous les chemins, « cloud » dans la moitié des descriptions. Les garder fait
+    # gagner une page fournisseur sur un mot de tag, ce qui est un faux rapprochement.
+    df: dict[str, int] = {}
+    for path, meta in candidates.items():
+        for t in tokens(path + " " + meta.get("title", "")):
+            df[t] = df.get(t, 0) + 1
+    cutoff = max(2, len(candidates) // 2)
+    want = {t for t in want if df.get(t, 0) <= cutoff}
+
     scored = []
-    for path, meta in pages.items():
-        if path in ("/", "/about/", "/buy/", "/privacy/", "/terms/"):
-            continue  # jamais un lien contextuel : ce sont des pages de site, pas de réponse
-        have = tokens(path + " " + meta.get("title", "") + " " + meta.get("description", ""))
-        if not have:
+    for path, meta in candidates.items():
+        path_hits = want & tokens(path)
+        title_hits = want & tokens(meta.get("title", ""))
+        desc_hits = want & tokens(meta.get("description", ""))
+        # Le chemin décrit le sujet de la page ; un titre le précise ; une description
+        # parle souvent du voisin et produit des rapprochements faux. Un mot commun dans
+        # une description ne suffit donc pas : sans recoupement de chemin ni de titre,
+        # la page est écartée.
+        score = 3 * len(path_hits) + 2 * len(title_hits) + len(desc_hits)
+        if not path_hits and not title_hits:
             continue
-        overlap = want & have
-        if not overlap:
+        if score < 4:
             continue
-        # Un mot présent dans le chemin pèse plus qu'un mot présent dans une description :
-        # le chemin décrit le sujet de la page, la description parle souvent au voisin.
-        score = 2 * len(want & tokens(path)) + len(overlap)
-        scored.append((score, path, keys.get(path), meta.get("title", ""), overlap))
+        scored.append((score, path, keys.get(path), meta.get("title", ""),
+                       path_hits | title_hits | desc_hits))
     scored.sort(key=lambda r: (-r[0], r[1]))
     return scored[:top]
 

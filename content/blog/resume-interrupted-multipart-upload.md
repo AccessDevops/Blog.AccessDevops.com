@@ -104,7 +104,7 @@ def resume(s3, bucket, key, uid, parts_have, total_parts, body_of):
 
 ## How S3 Explorer fits
 
-A resume needs three things from the endpoint before any code path is worth debugging: credentials that can list, the right bucket, and the number of calls the recovery cost. S3 Explorer's **test connection** reports how many buckets those credentials actually see before a profile is saved, **bucket list and folder navigation** open the target key without a CLI guess, and the **per-request metrics** view counts the `LIST`, `GET` and `PUT` calls a session generated — the number that shows whether a recovery loop is paging or hammering. Its **provider picker** carries 25 presets plus a Custom tile, so AWS and a self-hosted endpoint can be compared in one window. [S3 Explorer](https://s3explorer.accessdevops.com) runs on Windows, macOS and Linux.
+A resume needs three things from the endpoint before any code path is worth debugging: credentials that can list, the right bucket, and the number of calls the recovery cost. S3 Explorer's **test connection** reports how many buckets those credentials actually see before a profile is saved, **bucket list and folder navigation** open the target key without a CLI guess, and the **per-request metrics** view counts the `LIST`, `GET` and `PUT` calls a session generated — the number that shows whether a recovery loop is paging or hammering. Its **provider picker** carries 25 presets plus a Custom tile, so AWS and a self-hosted endpoint can be compared in one window. [S3 Explorer](https://s3explorer.accessdevops.com/guides/incomplete-multipart-uploads/?utm_source=blog&utm_medium=in_article&utm_campaign=resume-interrupted-multipart-upload) runs on Windows, macOS and Linux.
 
 ## Checklist
 

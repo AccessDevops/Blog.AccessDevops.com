@@ -138,7 +138,7 @@ None of this explains the neighbouring failure — a request that should be allo
 
 ## How S3 Explorer fits
 
-The shortest path to "which credentials can still see this bucket" is a profile carrying exactly those credentials. [S3 Explorer](https://s3explorer.accessdevops.com) keeps several connection profiles side by side, and **Test connection** reports how many buckets a set of credentials can actually see before the profile is saved — a count that drops as soon as `RestrictPublicBuckets` or a scoped policy takes effect. The per-request metrics dashboard then shows the `LIST` and `GET` calls the session generated, so "the console says blocked" and "the client is served" sit in one window.
+The shortest path to "which credentials can still see this bucket" is a profile carrying exactly those credentials. [S3 Explorer](https://s3explorer.accessdevops.com/guides/s3-error-codes/?utm_source=blog&utm_medium=in_article&utm_campaign=block-public-access-four-switches) keeps several connection profiles side by side, and **Test connection** reports how many buckets a set of credentials can actually see before the profile is saved — a count that drops as soon as `RestrictPublicBuckets` or a scoped policy takes effect. The per-request metrics dashboard then shows the `LIST` and `GET` calls the session generated, so "the console says blocked" and "the client is served" sit in one window.
 
 ## Checklist
 

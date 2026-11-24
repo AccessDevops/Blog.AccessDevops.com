@@ -86,7 +86,7 @@ aws s3api list-objects-v2 --bucket backups-prod --prefix db/ --max-keys 1000 --s
 
 ## How S3 Explorer fits
 
-Folder navigation in a desktop client is the same `delimiter` mechanism — each click is another LIST, and a folder holding more than 1,000 entries needs more than one. S3 Explorer's **per-request metrics** dashboard counts the API calls a session generated (`LIST`, `GET` and the rest), computed locally, so a browse that looks like one click can be read as the number of requests it really was. The **test connection** step reports how many buckets the credentials can see before a profile is saved, and **multiple connection profiles** let the same folder be opened on AWS and on a self-hosted endpoint from one window. [S3 Explorer](https://s3explorer.accessdevops.com) runs on Windows, macOS and Linux.
+Folder navigation in a desktop client is the same `delimiter` mechanism — each click is another LIST, and a folder holding more than 1,000 entries needs more than one. S3 Explorer's **per-request metrics** dashboard counts the API calls a session generated (`LIST`, `GET` and the rest), computed locally, so a browse that looks like one click can be read as the number of requests it really was. The **test connection** step reports how many buckets the credentials can see before a profile is saved, and **multiple connection profiles** let the same folder be opened on AWS and on a self-hosted endpoint from one window. [S3 Explorer](https://s3explorer.accessdevops.com/guides/s3-compatible-storage-desktop-client/?utm_source=blog&utm_medium=in_article&utm_campaign=list-pagination-1000-pages) runs on Windows, macOS and Linux.
 
 ## Checklist
 

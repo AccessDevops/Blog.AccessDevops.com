@@ -124,7 +124,7 @@ aws sts assume-role \
 
 Tag-based authorisation produces exactly the confusion this article describes: a key that is listed and then refuses to open. S3 Explorer lets you look at both halves of that from one window — the **folder navigation** shows the prefix tree a principal actually sees, and the object's **Metadata** tab shows what the bucket stores for that key, so you can tell a mis-tagged object from a mis-scoped policy before you edit anything. The **connection test** on the connection form reports how many buckets the credentials can see before you save the profile, which is the fastest way to check that a support role has the namespace you think it has. It connects to 25 S3-compatible providers; a read-only key is enough for everything above.
 
-**[S3 Explorer](https://s3explorer.accessdevops.com)** — desktop client for Windows, macOS and Linux.
+**[S3 Explorer](https://s3explorer.accessdevops.com/guides/s3-error-codes/?utm_source=blog&utm_medium=in_article&utm_campaign=abac-object-tags-vs-prefix-policies)** — desktop client for Windows, macOS and Linux.
 
 ## Checklist
 

@@ -4,7 +4,7 @@ description: "A role that assumes another role gets 3600 seconds, whatever its M
 date: 2026-11-02
 author: "Clement Baranger"
 tags: ["s3", "iam", "sts", "aws"]
-guide: s3-error-codes
+guide: provider-aws
 related: [presigned-url-seven-day-ceiling, bucket-policy-allow-still-denied]
 ---
 
@@ -134,7 +134,7 @@ One day is aggressive on purpose: an upload that legitimately spans a day is a d
 
 ## How S3 Explorer fits
 
-The credentials a long job receives are worth inspecting before the job runs, and S3 Explorer's **Test connection** validates them and reports how many buckets they actually see before the profile is saved — a chained set that cannot list anything is caught in seconds rather than at 01:00. The **per-request metrics dashboard** counts the session's calls by category with an error rate computed locally, so four thousand `200`s followed by a `400` reads as a change in the series instead of a line buried in a log. Multiple connection profiles let you sit on the parent role and the child role without leaving the window, and the Metadata and Versions tabs show which key and version a half-finished batch left behind. [S3 Explorer](https://s3explorer.accessdevops.com) runs on Windows, macOS and Linux.
+The credentials a long job receives are worth inspecting before the job runs, and S3 Explorer's **Test connection** validates them and reports how many buckets they actually see before the profile is saved — a chained set that cannot list anything is caught in seconds rather than at 01:00. The **per-request metrics dashboard** counts the session's calls by category with an error rate computed locally, so four thousand `200`s followed by a `400` reads as a change in the series instead of a line buried in a log. Multiple connection profiles let you sit on the parent role and the child role without leaving the window, and the Metadata and Versions tabs show which key and version a half-finished batch left behind. [S3 Explorer](https://s3explorer.accessdevops.com/providers/aws/?utm_source=blog&utm_medium=in_article&utm_campaign=assumerole-chaining-one-hour-ceiling) runs on Windows, macOS and Linux.
 
 ## Checklist
 

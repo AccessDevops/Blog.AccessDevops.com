@@ -4,7 +4,7 @@ description: "Ten settings, one 256 MiB file, one endpoint: parts in flight rais
 date: 2026-11-16
 author: "Clement Baranger"
 tags: ["s3", "performance", "uploads"]
-guide: s3-compatible-storage-desktop-client
+guide: incomplete-multipart-uploads
 related: [multipart-5mb-floor-10000-parts, resume-interrupted-multipart-upload]
 ---
 
@@ -99,7 +99,7 @@ s3.upload_file(path, "backups-prod", key, Config=cfg)
 
 ## How S3 Explorer fits
 
-A concurrency number only means something against a named endpoint, so the useful workflow compares two of them from one window. S3 Explorer's **provider picker** carries 25 presets across Cloud, Specialist, Self-hosted and Enterprise plus a Custom tile for endpoint, region and addressing style; **test connection** reports how many buckets those credentials can see before a profile is saved; the **per-request metrics** panel counts the `LIST`, `GET` and other calls a session generated, where a runaway retry loop becomes visible. Several profiles stay open at once. [S3 Explorer](https://s3explorer.accessdevops.com) runs on Windows, macOS and Linux.
+A concurrency number only means something against a named endpoint, so the useful workflow compares two of them from one window. S3 Explorer's **provider picker** carries 25 presets across Cloud, Specialist, Self-hosted and Enterprise plus a Custom tile for endpoint, region and addressing style; **test connection** reports how many buckets those credentials can see before a profile is saved; the **per-request metrics** panel counts the `LIST`, `GET` and other calls a session generated, where a runaway retry loop becomes visible. Several profiles stay open at once. [S3 Explorer](https://s3explorer.accessdevops.com/guides/incomplete-multipart-uploads/?utm_source=blog&utm_medium=in_article&utm_campaign=parallel-parts-vs-single-stream) runs on Windows, macOS and Linux.
 
 ## Checklist
 

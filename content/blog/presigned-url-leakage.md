@@ -165,7 +165,7 @@ That `grep` is the audit: every file it prints holds live credentials for the le
 
 ## How S3 Explorer fits
 
-When a link fails, the question is which credential signed it, against which endpoint, and whether that key still sees the bucket. S3 Explorer's connection form takes a display name, endpoint, region, path-style toggle and credentials, and **Test connection** reports how many buckets those credentials can actually see before you save the profile — the difference between an expired link and a key that lost its permission. The **per-request metrics dashboard** counts the session's API calls by category, turning a wall of 403s into a number, and switching between connection profiles puts production and staging side by side. [S3 Explorer](https://s3explorer.accessdevops.com) runs on Windows, macOS and Linux.
+When a link fails, the question is which credential signed it, against which endpoint, and whether that key still sees the bucket. S3 Explorer's connection form takes a display name, endpoint, region, path-style toggle and credentials, and **Test connection** reports how many buckets those credentials can actually see before you save the profile — the difference between an expired link and a key that lost its permission. The **per-request metrics dashboard** counts the session's API calls by category, turning a wall of 403s into a number, and switching between connection profiles puts production and staging side by side. [S3 Explorer](https://s3explorer.accessdevops.com/guides/share-s3-file-presigned-url/?utm_source=blog&utm_medium=in_article&utm_campaign=presigned-url-leakage) runs on Windows, macOS and Linux.
 
 ## Checklist
 

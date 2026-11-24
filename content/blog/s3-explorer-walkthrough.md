@@ -140,4 +140,4 @@ Two honest caveats. This session ran against SeaweedFS on `127.0.0.1`, so latenc
 
 Everything else — the presets, the pre-filled form, the test step, the tabs, the metrics — behaves exactly as it would against AWS.
 
-> **Try it against your own buckets.** 25 providers, a read-only key is enough for everything shown above. [Download S3 Explorer →](https://s3explorer.accessdevops.com/)
+> **Try it against your own buckets.** 25 providers, a read-only key is enough for everything shown above. [Download S3 Explorer →](https://s3explorer.accessdevops.com/buy/?utm_source=blog&utm_medium=in_article&utm_campaign=s3-explorer-walkthrough)

@@ -4,7 +4,7 @@ description: "An ETag identifies the upload, not the bytes: the same file sent i
 date: 2026-11-18
 author: "Clement Baranger"
 tags: ["s3", "uploads", "integrity"]
-guide: s3-compatible-storage-desktop-client
+guide: incomplete-multipart-uploads
 related: [crc64nvme-new-integrity-default, resume-interrupted-multipart-upload]
 ---
 
@@ -93,7 +93,7 @@ def composite_etag(path: str, chunk: int) -> str:
 
 ## How S3 Explorer fits
 
-Reading an ETag is a browsing problem before it is a code problem: the value depends on the upload path and the provider, so the useful move is to look at it on the object being argued about. S3 Explorer shows the ETag as the server returned it in each object's **Metadata** tab, beside the **Versions** tab, and its **provider picker** holds 25 presets across Cloud, Specialist, Self-hosted and Enterprise plus a Custom tile, so the same key opens on AWS and on a self-hosted server from one window. The **test connection** step reports how many buckets the credentials actually see before a profile is saved. [S3 Explorer](https://s3explorer.accessdevops.com) runs on Windows, macOS and Linux.
+Reading an ETag is a browsing problem before it is a code problem: the value depends on the upload path and the provider, so the useful move is to look at it on the object being argued about. S3 Explorer shows the ETag as the server returned it in each object's **Metadata** tab, beside the **Versions** tab, and its **provider picker** holds 25 presets across Cloud, Specialist, Self-hosted and Enterprise plus a Custom tile, so the same key opens on AWS and on a self-hosted server from one window. The **test connection** step reports how many buckets the credentials actually see before a profile is saved. [S3 Explorer](https://s3explorer.accessdevops.com/guides/incomplete-multipart-uploads/?utm_source=blog&utm_medium=in_article&utm_campaign=etag-is-not-md5-on-multipart) runs on Windows, macOS and Linux.
 
 ## Checklist
 

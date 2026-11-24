@@ -197,5 +197,7 @@ export function guideFor(
   if (!slug) return null;
   const g = GUIDES[slug];
   if (!g) return null;
-  return { ...g, url: productUrl(g.path ?? `/guides/${g.slug}/`, campaign) };
+  // Le placement distingue le lien de la carte de celui du corps de l'article :
+  // sans cela les deux arrivent en 'referral' et l'attribution ne dit rien.
+  return { ...g, url: productUrl(g.path ?? `/guides/${g.slug}/`, campaign, 'guide_card') };
 }

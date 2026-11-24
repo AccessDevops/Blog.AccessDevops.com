@@ -109,7 +109,7 @@ A provider that answers `200` while storing nothing is what the table is for. Th
 
 ## How S3 Explorer fits
 
-Which checksum an object carries, and which one the endpoint will return, differ per provider, so the useful check is a read against the real endpoint. S3 Explorer's **provider picker** holds 25 presets across Cloud, Specialist, Self-hosted and Enterprise plus a Custom tile, so an R2 bucket and an S3 bucket open from the same window. Its **Metadata** tab shows the headers the server returned, which is where a stored checksum appears when the endpoint sends one, and **test connection** reports how many buckets the credentials can see. [S3 Explorer](https://s3explorer.accessdevops.com) runs on Windows, macOS and Linux.
+Which checksum an object carries, and which one the endpoint will return, differ per provider, so the useful check is a read against the real endpoint. S3 Explorer's **provider picker** holds 25 presets across Cloud, Specialist, Self-hosted and Enterprise plus a Custom tile, so an R2 bucket and an S3 bucket open from the same window. Its **Metadata** tab shows the headers the server returned, which is where a stored checksum appears when the endpoint sends one, and **test connection** reports how many buckets the credentials can see. [S3 Explorer](https://s3explorer.accessdevops.com/guides/s3-error-codes/?utm_source=blog&utm_medium=in_article&utm_campaign=crc64nvme-new-integrity-default) runs on Windows, macOS and Linux.
 
 ## Checklist
 

@@ -136,7 +136,7 @@ assert s3.head_object(Bucket=b, Key=k)["ETag"] == expected
 
 ## How S3 Explorer fits
 
-These limits are protocol-level, so the useful check runs on the endpoint you actually use, often not the one in the ticket. S3 Explorer's **provider picker** offers 25 presets across Cloud, Specialist, Self-hosted and Enterprise plus a Custom tile for any endpoint, region and addressing style, so one bucket can be opened on AWS and on a self-hosted server from the same window. The **test connection** step reports how many buckets the credentials can see before a profile is saved, and the **per-request metrics** view counts the `LIST`, `GET` and other calls a session generated. [S3 Explorer](https://s3explorer.accessdevops.com) runs on Windows, macOS and Linux.
+These limits are protocol-level, so the useful check runs on the endpoint you actually use, often not the one in the ticket. S3 Explorer's **provider picker** offers 25 presets across Cloud, Specialist, Self-hosted and Enterprise plus a Custom tile for any endpoint, region and addressing style, so one bucket can be opened on AWS and on a self-hosted server from the same window. The **test connection** step reports how many buckets the credentials can see before a profile is saved, and the **per-request metrics** view counts the `LIST`, `GET` and other calls a session generated. [S3 Explorer](https://s3explorer.accessdevops.com/guides/incomplete-multipart-uploads/?utm_source=blog&utm_medium=in_article&utm_campaign=multipart-5mb-floor-10000-parts) runs on Windows, macOS and Linux.
 
 ## Checklist
 
