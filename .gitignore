@@ -28,3 +28,4 @@ t_*.png
 # Python bytecode
 __pycache__/
 *.pyc
+.cache/
