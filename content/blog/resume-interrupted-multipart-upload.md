@@ -5,7 +5,7 @@ date: 2026-11-13
 author: "Clement Baranger"
 tags: ["s3", "uploads", "multipart"]
 guide: incomplete-multipart-uploads
-related: [multipart-5mb-floor-10000-parts, list-pagination-1000-pages]
+related: [multipart-5mb-floor-10000-parts, incomplete-multipart-storage-leak]
 ---
 
 A 400 GB upload dies at 03:40 when the machine reboots, and the temporary file holding the part ETags goes with it. The obvious conclusion is that the transfer restarts from zero. It does not: the parts are on the server, the upload ID has no expiry, and the only thing lost was a list the server hands back in two calls.
