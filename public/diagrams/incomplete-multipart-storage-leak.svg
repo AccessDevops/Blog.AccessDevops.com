@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="940" height="530" viewBox="0 0 940 530" role="img" aria-labelledby="t d">
+<title id="t">Orphaned multipart parts accumulate with every failed upload until something aborts them</title>
+<desc id="d">Cumulative storage held by incomplete multipart uploads from one 40 GB nightly dump that dies at 85 percent, leaving 34 GB of parts each night. Without a lifecycle rule the line climbs 34 GB a night to 1,020 GB after 30 nights, billed at 0.023 dollars per gigabyte-month, about 23.46 dollars a month and still rising. With an AbortIncompleteMultipartUpload rule at one day, only the two most recent nights sit on the bill, 68 GB, about 1.56 dollars. No object exists in either case: ListObjectsV2 returns zero keys while the parts are stored.</desc>
+<rect width="940" height="530" fill="#FFFFFF"/>
+<text x="34" y="46" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" letter-spacing="-0.02em" fill="#020817">One failed job a night, an accidental archive in a month</text>
+<text x="34" y="70" font-family="Inter, system-ui, sans-serif" font-size="12.5" fill="#64748B">Orphaned parts from a 40 GB dump that dies at 85%, priced at $0.023/GB-month (S3 Standard, us-east-1, 2026-11-21)</text>
+<rect x="104" y="116" width="756" height="288" fill="#F8FAFC" stroke="#E2E8F0"/>
+<line x1="104" y1="404.0" x2="860" y2="404.0" stroke="#E2E8F0" stroke-width="1"/>
+<text x="92" y="408.0" text-anchor="end" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="10.5" fill="#64748B">0 GB</text>
+<text x="872" y="408.0" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="10.5" fill="#64748B">$0.00</text>
+<line x1="104" y1="338.5" x2="860" y2="338.5" stroke="#E2E8F0" stroke-width="1"/>
+<text x="92" y="342.5" text-anchor="end" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="10.5" fill="#64748B">250 GB</text>
+<text x="872" y="342.5" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="10.5" fill="#64748B">$5.75</text>
+<line x1="104" y1="273.1" x2="860" y2="273.1" stroke="#E2E8F0" stroke-width="1"/>
+<text x="92" y="277.1" text-anchor="end" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="10.5" fill="#64748B">500 GB</text>
+<text x="872" y="277.1" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="10.5" fill="#64748B">$11.50</text>
+<line x1="104" y1="207.6" x2="860" y2="207.6" stroke="#E2E8F0" stroke-width="1"/>
+<text x="92" y="211.6" text-anchor="end" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="10.5" fill="#64748B">750 GB</text>
+<text x="872" y="211.6" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="10.5" fill="#64748B">$17.25</text>
+<line x1="104" y1="142.2" x2="860" y2="142.2" stroke="#E2E8F0" stroke-width="1"/>
+<text x="92" y="146.2" text-anchor="end" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="10.5" fill="#64748B">1,000 GB</text>
+<text x="872" y="146.2" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="10.5" fill="#64748B">$23.00</text>
+<text x="104.0" y="424" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="10.5" fill="#64748B">day 0</text>
+<text x="230.0" y="424" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="10.5" fill="#64748B">day 5</text>
+<text x="356.0" y="424" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="10.5" fill="#64748B">day 10</text>
+<text x="482.0" y="424" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="10.5" fill="#64748B">day 15</text>
+<text x="608.0" y="424" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="10.5" fill="#64748B">day 20</text>
+<text x="734.0" y="424" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="10.5" fill="#64748B">day 25</text>
+<text x="860.0" y="424" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="10.5" fill="#64748B">day 30</text>
+<polyline points="104.0,404.0 154.4,386.2 204.8,368.4 255.2,350.6 305.6,332.8 356.0,315.0 406.4,297.2 456.8,279.4 507.2,261.6 557.6,243.8 608.0,226.0 658.4,208.2 708.8,190.4 759.2,172.6 809.6,154.7 860.0,136.9" fill="none" stroke="#2563EB" stroke-width="2.5" stroke-linejoin="round"/>
+<circle cx="860.0" cy="136.9" r="4" fill="#2563EB"/>
+<text x="844.0" y="110.9" text-anchor="end" font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="600" fill="#020817">1,020 GB — $23.46/month</text>
+<text x="844.0" y="126.9" text-anchor="end" font-family="Inter, system-ui, sans-serif" font-size="11" fill="#64748B">no rule, still growing 34 GB a night</text>
+<line x1="104" y1="386.2" x2="860" y2="386.2" stroke="#020817" stroke-width="2" stroke-dasharray="6 4"/>
+<text x="850" y="358.2" text-anchor="end" font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="600" fill="#020817">68 GB — $1.56/month</text>
+<text x="850" y="374.2" text-anchor="end" font-family="Inter, system-ui, sans-serif" font-size="11" fill="#64748B">AbortIncompleteMultipartUpload, DaysAfterInitiation=1: two nights at most</text>
+<rect x="104" y="116" width="756" height="288" fill="none" stroke="#E2E8F0"/>
+<text x="120" y="140" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="10.5" fill="#64748B">ListObjectsV2 on this bucket: 0 keys, every day of the month</text>
+<line x1="34" y1="452" x2="58" y2="452" stroke="#2563EB" stroke-width="2.5"/>
+<text x="66" y="456" font-family="Inter, system-ui, sans-serif" font-size="11.5" fill="#020817">parts kept because nothing completes or aborts the upload</text>
+<line x1="470" y1="452" x2="494" y2="452" stroke="#020817" stroke-width="2" stroke-dasharray="6 4"/>
+<text x="502" y="456" font-family="Inter, system-ui, sans-serif" font-size="11.5" fill="#020817">the same uploads after the abort rule fires</text>
+<text x="34" y="492" font-family="Inter, system-ui, sans-serif" font-size="11" fill="#64748B">Measured on SeaweedFS 4.50: three 5 MiB parts left 15,728,640 bytes while ListObjectsV2 reported zero keys, and a refused completion left 1,049,600 more.</text>
+</svg>
